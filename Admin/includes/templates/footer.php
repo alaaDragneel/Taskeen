@@ -11,9 +11,10 @@
     <?php endif; ?>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="layouts/js/jquery.js"></script>
     <!-- jQuery UI -->
-    <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <!-- <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script> -->
+    <script src="layouts/js/jquery-ui-1.10.4.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="layouts/bootstrap/js/bootstrap.min.js"></script>
 
@@ -37,8 +38,7 @@
 
      <script src="layouts/vendors/datatables/dataTables.bootstrap.js"></script>
 
-    <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+    <script src="layouts/js/bootstrap-editable.min.js"></script>
 
     <script src="layouts/js/custom.js"></script>
     <script src="layouts/js/forms.js"></script>

@@ -6,15 +6,30 @@
           <li><a href="index.php"><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
           <li class="submenu">
                <a href="#">
-                  <i class="glyphicon glyphicon-list"></i> Users
+                  <i class="fa fa-users"></i> Users
                   <span class="caret pull-right"></span>
+                  <div class="clearfix"></div>
                </a>
                <!-- Sub menu -->
                <ul>
-                  <li><a href="members.php">Manage Users</a></li>
+                  <li><a href="members.php"><i class="fa fa-dashboard"></i> Manage Users</a></li>
               </ul>
                <ul>
-                  <li><a href="members.php?do=Add">Create User</a></li>
+                  <li><a href="members.php?do=Add"><i class="fa fa-plus"></i> Add User</a></li>
+              </ul>
+          </li>
+          <li class="submenu">
+               <a href="#">
+                  <i class="fa fa-location-arrow"></i> Cities
+                  <span class="caret pull-right"></span>
+                  <div class="clearfix"></div>
+               </a>
+               <!-- Sub menu -->
+               <ul>
+                  <li><a href="members.php"><i class="fa fa-dashboard"></i> Manage Cities</a></li>
+              </ul>
+               <ul>
+                  <li><a href="members.php?do=Add"><i class="fa fa-plus"></i> Add Cities</a></li>
               </ul>
           </li>
           <li><a href="tables.php"><i class="glyphicon glyphicon-list"></i> Tables</a></li>

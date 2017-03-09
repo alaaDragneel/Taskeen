@@ -5,27 +5,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
+    <!-- bootstrap stylesheet -->
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.css" />
-    <link rel="stylesheet" href="assets/style.css"/>
-
-
+    <!-- bootstrap stylesheet -->
 
     <!-- Owl stylesheet -->
     <link rel="stylesheet" href="assets/owl-carousel/owl.carousel.css">
     <link rel="stylesheet" href="assets/owl-carousel/owl.theme.css">
     <!-- Owl stylesheet -->
 
-
     <!-- slitslider -->
     <link rel="stylesheet" type="text/css" href="assets/slitslider/css/style.css" />
     <link rel="stylesheet" type="text/css" href="assets/slitslider/css/custom.css" />
     <!-- slitslider -->
 
+    <!-- main stylesheet -->
+    <link rel="stylesheet" href="assets/css/style.css"/>
+    <!-- main stylesheet -->
 </head>
 
 <body>
-
-
     <!-- Header Starts -->
     <div class="navbar-wrapper">
 
