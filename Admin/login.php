@@ -1,14 +1,18 @@
 <?php
-
-    
+    session_start();
     $pageTitle = 'Login';
     $loginPage = "";
     include "init.php";
+
+    if(isset($_SESSION["admin_mail"])){
+        header("Location: index.php");//Redirect the user to the dashboard
+        exit();
+	}
+
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $email = $_POST["email"];
         $password = $_POST["password"];
-
-
+        $hashedpass = sha1($password);
         $errors = [];
         if (empty($email)) {
             $errors[] = "Email Feild IS Required";
@@ -19,13 +23,19 @@
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $errors[] = "Invalid email format";
         }
+
         if (empty($errors)) {
             $stmt = $conn->prepare("SELECT * FROM `users` WHERE email = ? AND password = ? AND isadmin = 1 LIMIT 1");
-            $stmt->execute([$email, $password]);
+            $stmt->execute([$email, $hashedpass]);
             $row   = $stmt->fetch();
             $count = $stmt->rowCount();
             // if count > 0 means database contains information
-            echo $count;
+            if ($count > 0) {
+                $_SESSION["admin_mail"] = $row['email']; //Register the sission name
+                $_SESSION["id"] = $row["id"]; //Register the sission ID
+                header("Location: index.php");//Redirect the user to the dashboard
+                exit();
+            }
         }
     }
 ?>
