@@ -26,9 +26,47 @@ $(document).ready(function () {
       }).done(function(msg){
          $('#area').html(msg);
       });
-
    });
 
 
+   // bulding
+   $('#city_id_bulding').on('change click', function() {
+
+      var cityID = $(this).val();
+      $.ajax({
+         method: 'POST',
+         url: 'ajaxfiles/buldings/getarea.php',
+         data: { cityID: cityID },
+      }).done(function(msg){
+         $('#area_id_bulding').html("");
+         $('#area_id_bulding').append(msg);
+      });
+   });
+
+   $('#area_id_bulding').on('change click', function() {
+      var area_id = $(this).val();
+      $.ajax({
+         method: 'POST',
+         url: 'ajaxfiles/buldings/getSubArea.php',
+         data: { area_id: area_id },
+      }).done(function(msg){
+         $('#subarea_id_bulding').html("");
+         $('#subarea_id_bulding').append(msg);
+      });
+   });
+
+   $('#cat_id_bulding').on('change click', function() {
+      var cat_id = $(this).val();
+      $.ajax({
+         method: 'POST',
+         url: 'ajaxfiles/buldings/getSubCat.php',
+         data: { cat_id: cat_id },
+      }).done(function(msg){
+         $('#subcat_id_bulding').html("");
+         $('#subcat_id_bulding').append(msg);
+      });
+   });
+
+   // end bulding
 
 });

@@ -88,6 +88,21 @@
                   <li><a href="sub_categouries.php?do=Add"><i class="fa fa-plus"></i> Add sub categouries</a></li>
               </ul>
           </li>
+          <!-- Buldings -->
+          <li class="submenu">
+               <a href="#">
+                  <i class="fa fa-tags"></i> Buldings
+                  <span class="caret pull-right"></span>
+                  <div class="clearfix"></div>
+               </a>
+               <!-- Sub menu -->
+               <ul>
+                  <li><a href="buldings.php"><i class="fa fa-dashboard"></i> Manage Buldings</a></li>
+              </ul>
+               <ul>
+                  <li><a href="#"><i class="fa fa-plus"></i> Add Buldings</a></li>
+              </ul>
+          </li>
           <li><a href="tables.php"><i class="glyphicon glyphicon-list"></i> Tables</a></li>
           <li><a href="buttons.php"><i class="glyphicon glyphicon-record"></i> Buttons</a></li>
           <li><a href="forms.php"><i class="glyphicon glyphicon-tasks"></i> Forms</a></li>

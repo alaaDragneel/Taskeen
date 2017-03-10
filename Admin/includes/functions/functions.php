@@ -91,4 +91,19 @@
 	}
 
 	/*end latest record function V1.0*/
+
+    /* Start Get All From */
+
+    function getAllFrom($field, $table, $where = null, $and = null, $orderField, $ordering = 'ASC')
+    {
+        global $conn;
+        $stmt = $conn->prepare("SELECT $field FROM $table $where $and ORDER BY $orderField $ordering");
+        $stmt->execute();
+        $all = $stmt->fetchAll();
+        return $all;
+    }
+
+    /* End Get All From */
+
+
 ?>
