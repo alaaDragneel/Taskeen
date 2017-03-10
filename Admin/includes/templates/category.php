@@ -62,30 +62,16 @@
           </li>
           <li class="submenu">
                <a href="#">
-                  <i class="fa fa-tag"></i> categouries
+                  <i class="fa fa-tasks"></i> category
                   <span class="caret pull-right"></span>
                   <div class="clearfix"></div>
                </a>
                <!-- Sub menu -->
                <ul>
-                  <li><a href="categouries.php"><i class="fa fa-dashboard"></i> Manage categouries</a></li>
+                  <li><a href="sub_area.php"><i class="fa fa-dashboard"></i> Manage category</a></li>
               </ul>
                <ul>
-                  <li><a href="categouries.php?do=Add"><i class="fa fa-plus"></i> Add categouries</a></li>
-              </ul>
-          </li>
-          <li class="submenu">
-               <a href="#">
-                  <i class="fa fa-tags"></i> sub categouries
-                  <span class="caret pull-right"></span>
-                  <div class="clearfix"></div>
-               </a>
-               <!-- Sub menu -->
-               <ul>
-                  <li><a href="sub_categouries.php"><i class="fa fa-dashboard"></i> Manage sub categouries</a></li>
-              </ul>
-               <ul>
-                  <li><a href="sub_categouries.php?do=Add"><i class="fa fa-plus"></i> Add sub categouries</a></li>
+                  <li><a href="sub_area.php?do=Add"><i class="fa fa-plus"></i> Add category</a></li>
               </ul>
           </li>
           <li><a href="tables.php"><i class="glyphicon glyphicon-list"></i> Tables</a></li>
