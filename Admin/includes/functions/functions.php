@@ -46,4 +46,49 @@
          return $validInt;
       }
    }
+
+   /* start check item count function V1.0 */
+
+	/*
+	**function use to count the items rows
+	** function use parameter
+	** $item = use item to count about it [ users | items ]
+	** $table = the required table to count from [ users | product ]
+	*/
+
+	function countItem($item, $table) {
+		global $conn;
+
+		$stmt2 = $conn->prepare("SELECT COUNT($item) FROM $table ");
+
+		$stmt2->execute();
+
+		return $stmt2->fetchColumn();
+	}
+
+	/* end check item count function V1.0 */
+
+   /*start latest record function V1.0*/
+
+	/*
+	** function to get the latest items from database [ User | Items | Comments ]
+	** $select = the selected field
+	** $table = the table to choose from
+	** $order = the order way of the data
+	** $limit =  the limit of the select defult = 5
+	*/
+
+	function getLatest($select, $table, $order, $limit = 5) {
+		global $conn;
+
+		$getstmt = $conn->prepare("SELECT $select FROM $table ORDER BY $order DESC LIMIT $limit");
+
+		$getstmt->execute();
+
+		$rows = $getstmt->fetchAll();
+
+		return $rows;
+	}
+
+	/*end latest record function V1.0*/
 ?>
