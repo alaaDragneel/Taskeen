@@ -23,17 +23,16 @@
             <div class="content-box-large">
                 <div class="panel-heading">
                     <div class="panel-title">
-                        Manage Members
+                        Manage Cities
                     </div>
                 </div>
                 <?php
-                    $stmt = $conn->prepare("SELECT * FROM users WHERE id != 1 ORDER BY id DESC");
+                    $stmt = $conn->prepare("SELECT * FROM city ORDER BY id DESC");
                     $stmt->execute();
                     $rows = $stmt->fetchAll();
                     $count = $stmt->rowCount();
                 ?>
                 <div class="panel-body">
-                    <h4>there <?php echo $count === 1 ? 'is ' . $count :  'are ' . $count; ?> Member/s</h4>
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -41,15 +40,6 @@
                                     <th>ID#</th>
 
                                     <th>name</th>
-
-                                    <th>email</th>
-
-                                    <th>phone</th>
-                                    <th>address</th>
-
-                                    <th>facebook</th>
-
-                                    <th>Role</th>
 
                                     <th>Action</th>
                                 </tr>
@@ -62,26 +52,15 @@
                                         <tr>
                                             <td><?php echo $row['id']; ?></td>
                                             <td><?php echo $row['name']; ?></td>
-                                            <td><?php echo $row['email']; ?></td>
-                                            <td><?php echo $row['phone']; ?></td>
-                                            <td><?php echo $row['address']; ?></td>
-                                            <td><?php echo $row['facebook']; ?></td>
                                             <td>
-                                                <?php if ($row['isadmin'] == 1): ?>
-                                                    <span class="badge">Admin</span>
-                                                <?php else: ?>
-                                                    <span class="badge">User</span>
-                                                <?php endif; ?>
-                                            </td>
-                                            <td>
-                                                <a href="#" class="btn btn-info">edit</a>
-                                                <a href="#" class="btn btn-danger">delete</a>
+                                               <a href="city.php?do=Edit&cityId=<?php echo $row['id']; ?>" class="btn btn-info">edit</a>
+                                               <a href="city.php?do=Delete&cityId=<?php echo $row['id']; ?>" class="btn btn-danger">delete</a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
                                 <?php else: ?>
                                     <tr>
-                                        <div class="alert alert-success">Add Members Please</div>
+                                        <div class="alert alert-success">Add cities Please</div>
                                     </tr>
                                 <?php endif; ?>
                             </tbody>
@@ -92,36 +71,29 @@
             </div>
         </div>
         <?php endif; ?>
-        
+
         <!-- add section -->
         <?php if ($do == 'Add'): ?>
             <?php
 
-                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addCity'])) {
 
                     // set the values in variables
-                    $name           =   $_POST['name'];
-                    $email          =   $_POST['email'];
-                    $phone          =   $_POST['phone'];
-                    $address        =   $_POST['address'];
-                    $facebook       =   $_POST['facebook'];
-                    $password       =   sha1($_POST['password']);
-                    $isadmin        =   $_POST['isadmin'];
+                    $name  =  strValidation($_POST['name']);
+
+                    $formError = array();
+                    if(empty($name)){
+                        $formError[] = "Name Filed Can't be Empty";
+                    }
 
                     // Insert Into database
-
-                    $stmt= $conn->prepare("INSERT INTO users(name, email, phone, address, facebook, password, isadmin) VALUES(:name, :email, :phone, :address, :facebook, :password, :isadmin)");
-                    $stmt->execute(array(
-                        'name' 		=> $name,
-                        'email' 	=> $email,
-                        'phone' 	=> $phone,
-                        'address' 	=> $address,
-                        'facebook' 	=> $facebook,
-                        'password' 	=> $password,
-                        'isadmin' 	=> $isadmin
-                    ));
-                    $theMsg = 'The User Added Successfully';
-
+                    if (empty($formError)) {
+                       $stmt= $conn->prepare("INSERT INTO city(name) VALUES(:name)");
+                       $stmt->execute(array(
+                           'name' 		=> $name,
+                       ));
+                       $theMsg = 'The City Added Successfully';
+                     }
                 }
 
             ?>
@@ -129,63 +101,36 @@
                 <div class="content-box-large">
                     <div class="panel-heading">
                         <div class="panel-title">
-                            Add Members
+                            Add City
                         </div>
                     </div>
                     <div class="panel-body">
+                       <?php
+                          if(!empty($formError)): // if not he array empty
+                             foreach($formError as $err):
+                       ?>
+                                <div class='alert alert-danger'><?php echo $err; ?></div>
+                       <?php
+                             endforeach;
+                          endif;
+                       ?>
+
                         <?php if (isset($theMsg)): ?>
                             <div class="alert alert-success"><?php echo $theMsg; ?></div>
                         <?php endif; ?>
                         <!-- `id`, `name`, `email`, `phone`, `address`, `facebook`, `password`, `isadmin` -->
-                        <form class="form-horizontal" role="form" action="members.php?do=Add" method="post">
+                        <form class="form-horizontal" role="form" action="city.php?do=Add" method="post">
+                           <!-- City name -->
                             <div class="form-group">
-                                <label for="name" class="col-sm-2 control-label">name</label>
+                                <label for="name" class="col-sm-2 control-label">City Name</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="name" class="form-control" placeholder="name">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="email" class="col-sm-2 control-label">email</label>
-                                <div class="col-sm-10">
-                                    <input type="email" name="email"class="form-control" placeholder="email">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="phone" class="col-sm-2 control-label">phone</label>
-                                <div class="col-sm-10">
-                                    <input type="number" name="phone"class="form-control" placeholder="phone">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="address" class="col-sm-2 control-label">address</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="address"class="form-control" placeholder="address">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="facebook" class="col-sm-2 control-label">facebook</label>
-                                <div class="col-sm-10">
-                                    <input type="url" name="facebook"class="form-control" placeholder="facebook">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="password" class="col-sm-2 control-label">Password Field</label>
-                                <div class="col-sm-10">
-                                    <input type="password" name="password"class="form-control" placeholder="Password">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="password" class="col-sm-2 control-label">Role</label>
-                                <div class="col-sm-10">
-                                    <select class="selectpicker" name="isadmin">
-                                        <option value="0" selected>User</option>
-                                        <option value="1">Admin</option>
-                                    </select>
-                                </div>
-                            </div>
+                            <!-- submit -->
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-primary">Add Member</button>
+                                    <button type="submit" class="btn btn-primary" name="addCity">Add City</button>
                                 </div>
                             </div>
                         </form>
@@ -193,7 +138,185 @@
                 </div>
             </div>
         <?php endif; ?>
-    </div>
+        <?php
+           if ($do == 'Edit'):
+             // get the user id
+
+             $cityId = isset($_GET['cityId']) && is_numeric($_GET['cityId']) ? intval($_GET['cityId']) : 0;
+
+             if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['editCity'])) {
+                 // set the values in variables
+
+                 $name =   strValidation($_POST['name']);
+
+                  /*Start Check the Fileds */
+                  $formError = array();
+                  if(empty($name)){
+                      $formError[] = "City Name Filed Can't be Empty";
+                  }
+                  // update the data if there are not errors
+                  if (empty($formError)) {
+                     // select to see the unique email
+                     $cityInfoSelect = $conn->prepare("SELECT id, name FROM city WHERE name = ? && id != ?");
+
+                     //execute
+                     $cityInfoSelect->execute([$name, $cityId]);
+
+                     // count the data
+                     $citysCount = $cityInfoSelect->rowCount();
+                     if ($citysCount === 1) {
+                        $formError[] = 'This City Already Added';
+                     } else {
+                       // Update TO database
+                       $cityInfoUpdate = $conn->prepare("UPDATE city SET name = ? WHERE id = ?");
+
+                       $cityInfoUpdate->execute([$name, $cityId]);
+                       $theMsg = 'The City Name Updated Successfully';
+                     }
+                  }
+             }
+
+             // get the user information
+
+             $getCityInfo = $conn->prepare("SELECT * FROM city WHERE id = ? LIMIT 1");
+
+             // execute the data
+
+             $getCityInfo->execute([$cityId]);
+
+             // Count the rows
+
+             $count = $getCityInfo->rowCount();
+
+             // if there is such id show the form
+
+             if ($count > 0) {
+
+                 $cityInfo = $getCityInfo->fetch();
+
+             } else{
+
+                 $invalidCityInfo = 'This id is not exesist';
+             }
+
+        ?>
+           <div class="col-md-10">
+               <div class="content-box-large">
+                   <div class="panel-heading">
+                       <div class="panel-title">
+
+                          <?php if (!isset($invalidCityInfo)): ?>
+                             Edit Information For The City <?php echo $cityInfo['name'];?>
+                          <?php endif; ?>
+
+                       </div>
+                   </div>
+                   <div class="panel-body">
+
+                       <?php if (isset($invalidCityInfo)): // appear when the id is incorrect ?>
+                           <div class="alert alert-danger"><?php echo $invalidCityInfo; ?></div>
+                       <?php exit(); endif; ?>
+
+
+                       <?php
+                             if(!empty($formError)): // if not he array empty
+                                foreach($formError as $err):
+                       ?>
+                                   <div class='alert alert-danger'><?php echo $err; ?></div>
+                       <?php
+                                endforeach;
+                             endif;
+                       ?>
+
+
+                       <?php if (isset($theMsg)): // success message?>
+                           <div class="alert alert-success"><?php echo $theMsg; ?></div>
+                       <?php endif; ?>
+
+                       <!-- `id`, `name`, `email`, `phone`, `address`, `facebook`, `password`, `isadmin` -->
+                       <form class="form-horizontal" role="form" action="city.php?do=Edit&cityId=<?php echo $cityInfo['id'];?>" method="post">
+                          <input type="hidden" name="cityId" value="<?php echo $cityInfo['id'];?>">
+                           <div class="form-group">
+                              <label for="name" class="col-sm-2 control-label">name</label>
+                              <div class="col-sm-10">
+                                   <input type="text" name="name" class="form-control" placeholder="name" value="<?php echo $cityInfo['name'];?>" >
+                              </div>
+                           </div>
+                           <div class="form-group">
+                              <div class="col-sm-offset-2 col-sm-10">
+                                   <button type="submit" class="btn btn-primary" name="editCity">Edit City Name</button>
+                              </div>
+                           </div>
+                       </form>
+                   </div>
+               </div>
+           </div>
+      <?php endif; ?>
+
+      <?php
+           if ($do == 'Delete'):
+             // get the user id
+
+             $cityId = isset($_GET['cityId']) && is_numeric($_GET['cityId']) ? intval($_GET['cityId']) : 0;
+
+             // get the user information
+
+             $getCityInfo = $conn->prepare("SELECT * FROM city WHERE id = ? LIMIT 1");
+
+             // execute the data
+
+             $getCityInfo->execute([$cityId]);
+
+             // Count the rows
+
+             $count = $getCityInfo->rowCount();
+
+             // if there is such id show the form
+
+             if ($count > 0) {
+                 // prepare to delete
+                 $cityDelete = $conn->prepare("DELETE FROM city WHERE id = :id");
+                 // pind the parameters
+                 $cityDelete->bindParam('id', $cityId);
+                 // execute the query
+                 $cityDelete->execute();
+                 // Successfully message
+                 $theMsg = 'the city Deleted Successfully please Wait 3 seconds To reairect back';
+                 header("refresh: 3;url=city.php");
+             } else {
+                 // error message
+                 $formError[] = 'This id is not exist Wait please 3 seconds To reairect back';
+                 header("refresh: 3;url=city.php");
+             }?>
+             <div class="col-md-10">
+                  <div class="content-box-large">
+                      <div class="panel-heading">
+                          <div class="panel-title">
+                              Delete City
+                          </div>
+                      </div>
+                      <div class="panel-body">
+
+                        <?php
+                           if(!empty($formError)): // if not he array empty
+                              foreach($formError as $err):
+                        ?>
+                                  <div class='alert alert-danger'><?php echo $err; ?></div>
+                        <?php
+                              endforeach;
+                           exit(); endif;
+                        ?>
+
+                        <?php if (isset($theMsg)): ?>
+                           <div class="alert alert-success"><?php echo $theMsg; ?></div>
+                        <?php exit(); endif; ?>
+
+
+                      </div>
+                  </div>
+             </div>
+        <?php endif;?>
+  </div>
 </div>
 <?php
         include "includes/templates/footer.php";

@@ -20,7 +20,7 @@
           </li>
           <li class="submenu">
                <a href="#">
-                  <i class="fa fa-location-arrow"></i> Cities
+                  <i class="fa fa-globe"></i> Cities
                   <span class="caret pull-right"></span>
                   <div class="clearfix"></div>
                </a>
@@ -30,6 +30,34 @@
               </ul>
                <ul>
                   <li><a href="city.php?do=Add"><i class="fa fa-plus"></i> Add Cities</a></li>
+              </ul>
+          </li>
+          <li class="submenu">
+               <a href="#">
+                  <i class="fa fa-location-arrow"></i> Area
+                  <span class="caret pull-right"></span>
+                  <div class="clearfix"></div>
+               </a>
+               <!-- Sub menu -->
+               <ul>
+                  <li><a href="area.php"><i class="fa fa-dashboard"></i> Manage Areas</a></li>
+              </ul>
+               <ul>
+                  <li><a href="area.php?do=Add"><i class="fa fa-plus"></i> Add Areas</a></li>
+              </ul>
+          </li>
+          <li class="submenu">
+               <a href="#">
+                  <i class="fa fa-tasks"></i> Sub Area
+                  <span class="caret pull-right"></span>
+                  <div class="clearfix"></div>
+               </a>
+               <!-- Sub menu -->
+               <ul>
+                  <li><a href="sub_area.php"><i class="fa fa-dashboard"></i> Manage sub Areas</a></li>
+              </ul>
+               <ul>
+                  <li><a href="sub_area.php?do=Add"><i class="fa fa-plus"></i> Add sub Areas</a></li>
               </ul>
           </li>
           <li><a href="tables.php"><i class="glyphicon glyphicon-list"></i> Tables</a></li>

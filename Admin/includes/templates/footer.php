@@ -39,9 +39,9 @@
      <script src="layouts/vendors/datatables/dataTables.bootstrap.js"></script>
 
     <script src="layouts/js/bootstrap-editable.min.js"></script>
-
-    <script src="layouts/js/custom.js"></script>
     <script src="layouts/js/forms.js"></script>
     <script src="layouts/js/tables.js"></script>
+
+    <script src="layouts/js/custom.js"></script>
   </body>
 </html>

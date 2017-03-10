@@ -1,7 +1,4 @@
-/*global $, document*/
 $(document).ready(function () {
-
-   'use strict';
 
    $(".submenu > a").click(function (e) {
       e.preventDefault();
@@ -18,5 +15,20 @@ $(document).ready(function () {
          $li.addClass("open");
       }
    });
+
+   $('#city').on('change', function() {
+
+      var cityID = $(this).val();
+      $.ajax({
+         method: 'POST',
+         url: 'areaAjax.php',
+         data: { cityID: cityID },
+      }).done(function(msg){
+         $('#area').html(msg);
+      });
+
+   });
+
+
 
 });
