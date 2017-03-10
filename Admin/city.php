@@ -17,6 +17,7 @@
         <?php
         include "includes/templates/sidebar.php";
         ?>
+        <!-- manage section -->
         <?php if ($do == 'Manage'): ?>
         <div class="col-md-10">
             <div class="content-box-large">
@@ -91,6 +92,8 @@
             </div>
         </div>
         <?php endif; ?>
+        
+        <!-- add section -->
         <?php if ($do == 'Add'): ?>
             <?php
 
