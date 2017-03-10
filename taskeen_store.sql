@@ -3,11 +3,12 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 09, 2017 at 11:09 PM
--- Server version: 10.1.19-MariaDB
--- PHP Version: 5.6.28
+-- Generation Time: Mar 10, 2017 at 07:15 AM
+-- Server version: 10.1.13-MariaDB
+-- PHP Version: 5.6.23
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -32,6 +33,16 @@ CREATE TABLE `area` (
   `name` varchar(255) NOT NULL,
   `city_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `area`
+--
+
+INSERT INTO `area` (`id`, `name`, `city_id`) VALUES
+(1, 'imbaba', 2),
+(2, 'nasr city', 1),
+(7, 'test area cairo', 2),
+(8, 'test area giza', 1);
 
 -- --------------------------------------------------------
 
@@ -68,6 +79,14 @@ CREATE TABLE `categouries` (
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `categouries`
+--
+
+INSERT INTO `categouries` (`id`, `name`) VALUES
+(1, 'Shaleh'),
+(3, 'howe');
+
 -- --------------------------------------------------------
 
 --
@@ -78,6 +97,14 @@ CREATE TABLE `city` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `city`
+--
+
+INSERT INTO `city` (`id`, `name`) VALUES
+(2, 'Cairo'),
+(1, 'Giza');
 
 -- --------------------------------------------------------
 
@@ -134,6 +161,14 @@ CREATE TABLE `sub_area` (
   `area_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `sub_area`
+--
+
+INSERT INTO `sub_area` (`id`, `name`, `city_id`, `area_id`) VALUES
+(2, 'elkhlfawy', 1, 8),
+(4, 'test2', 2, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -145,6 +180,13 @@ CREATE TABLE `sub_categouries` (
   `name` varchar(255) NOT NULL,
   `categoury_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `sub_categouries`
+--
+
+INSERT INTO `sub_categouries` (`id`, `name`, `categoury_id`) VALUES
+(1, 'test Shaleh', 1);
 
 -- --------------------------------------------------------
 
@@ -168,9 +210,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `phone`, `address`, `facebook`, `password`, `isadmin`) VALUES
-(1, 'Mohamed Zayed Mohamed', 'mohamedzayed709@yahoo.com', '01127946754', 'AinShams', 'https://www.facebook.com/', '601f1889667efaebb33b8c12572835da3f027f78', 1),
-(4, 'mohamed', 'mohamedzayed7889@yahoo.com', '01121', '65456', 'http://sergrtshsrtu', '601f1889667efaebb33b8c12572835da3f027f78', 0),
-(5, '34ww4', 'mohamed@mohamed.com', '645656', 'mamed', 'http://sergrtshsrtu', '601f1889667efaebb33b8c12572835da3f027f78', 0);
+(1, 'Mohamed Zayed Mohamed', 'mohamedzayed709@yahoo.com', '01127946754', 'AinShams', 'https://www.facebook.com/', '601f1889667efaebb33b8c12572835da3f027f78', 1);
 
 --
 -- Indexes for dumped tables
@@ -206,7 +246,8 @@ ALTER TABLE `categouries`
 -- Indexes for table `city`
 --
 ALTER TABLE `city`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`);
 
 --
 -- Indexes for table `lands`
@@ -251,7 +292,8 @@ ALTER TABLE `sub_categouries`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -261,7 +303,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `area`
 --
 ALTER TABLE `area`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `buldings`
 --
@@ -271,12 +313,12 @@ ALTER TABLE `buldings`
 -- AUTO_INCREMENT for table `categouries`
 --
 ALTER TABLE `categouries`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `city`
 --
 ALTER TABLE `city`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `lands`
 --
@@ -291,17 +333,17 @@ ALTER TABLE `shops`
 -- AUTO_INCREMENT for table `sub_area`
 --
 ALTER TABLE `sub_area`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `sub_categouries`
 --
 ALTER TABLE `sub_categouries`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
 -- Constraints for dumped tables
 --
