@@ -31,7 +31,7 @@
                   <hr>
                       <a href="buldings.php?do=Add" class="btn btn-default">Add Buldings</a>
                       <a href="buldings.php?do=Manage&viewType=Tables" class="btn btn-default"><i class="fa fa-table" aria-hidden="true"></i> Tables</a>
-                      <a href="buldings.php?do=Manage&viewType=Cards" class="btn btn-default"><i class="fa fa-square-o" aria-hidden="true"></i> Cards</a>
+                      <a href="buldings.php?do=Manage&viewType=Cards" class="btn btn-default"><i class="fa fa-credit-card-alt" aria-hidden="true"></i> Cards</a>
                   <hr>
                   <?php $viewType = isset($_GET['viewType']) ? $_GET['viewType'] : 'Tables'; // Check if the $viewType is Exixets ?>
                   <?php if ($viewType == 'Tables'): ?>
@@ -62,8 +62,8 @@
                                           <td><?php echo $bu['num_rooms'] ?></td>
                                           <td>
                                               <a href="#" class="btn btn-primary">View</a>
-                                              <a href="#" class="btn btn-success">Edit</a>
-                                              <a href="#" class="btn btn-danger">Delete</a>
+                                              <a href="buldings.php?do=Edit&bu_id=<?php echo $bu['id'] ?>" class="btn btn-success">Edit</a>
+                                              <a href="buldings.php?do=Delete&bu_id=<?php echo $bu['id'] ?>" class="btn btn-danger">Delete</a>
                                           </td>
                                       </tr>
                                   <?php endforeach; ?>
@@ -78,15 +78,15 @@
                           $bus = getAllFrom('*', 'buldings', null, null, 'id', 'DESC');
                           ?>
                           <?php foreach ($bus as $key): ?>
-                              <div class="col-md-3 col-sm-1">
-                                  <div class="card">
+                              <div class="col-md-3 col-sm-1" style="padding: 5px; box-shadow: 5px 5px 19px #999;border-radius: 5px;">
+                                  <div class="card" style="padding: 2px 4px;">
                                       <img class="card-img-top img-responsive" src="http://placehold.it/318x180" alt="Card image cap">
                                       <div class="card-block">
                                           <h4 class="card-title"><?php echo $key['title'] ?></h4>
                                           <p class="card-text"><?php echo $key['description'] ?></p>
                                           <a href="#" class="btn btn-primary">View</a>
-                                          <a href="#" class="btn btn-success">Edit</a>
-                                          <a href="#" class="btn btn-danger">Delete</a>
+                                          <a href="buldings.php?do=Edit&bu_id=<?php echo $key['id'] ?>" class="btn btn-success">Edit</a>
+                                          <a href="buldings.php?do=Delete&bu_id=<?php echo $key['id'] ?>" class="btn btn-danger">Delete</a>
                                       </div>
                                   </div>
                               </div>
@@ -307,24 +307,237 @@
             </div>
         <?php endif; ?>
 
-        <?php if ($do == 'Edit'): ?>
-            <div class="col-md-10">
-                <div class="content-box-large">
-                    <div class="panel-heading">
-                        <div class="panel-title">
-                            Edit
-                        </div>
-                    </div>
-                    <div class="panel-body">
+        <?php if ($do == 'Edit'):
 
-                    </div>
-                </div>
-            </div>
+           $bu_id = isset($_GET['bu_id']) && is_numeric($_GET['bu_id']) ? intval($_GET['bu_id']) : 0;
+
+           $bus = getOneFrom('*', 'buldings', 'WHERE id = '.$bu_id, null, 'id', 'ASC');
+           $areas = getAllFrom('area.*, city.id AS CITY_ID', 'area', 'INNER JOIN city ON area.city_id = city.id WHERE area.city_id ='.$bus['city_id'], null, 'name', 'ASC');
+           $s_areas = getAllFrom('sub_area.*, area.id AS AREA_ID', 'sub_area', 'INNER JOIN area ON sub_area.area_id = area.id WHERE sub_area.area_id ='.$bus['area_id'], null, 'name', 'ASC');
+           $s_cats = getAllFrom('sub_categouries.*, categouries.id AS CAT_ID', 'sub_categouries', 'INNER JOIN categouries ON sub_categouries.categoury_id = categouries.id WHERE sub_categouries.categoury_id ='.$bus['categoury_id'], null, 'name', 'ASC');
+
+           if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+               // `id`, `title`, `description`, `address`, `price`, `num_pr`, `num_kit`, `num_rooms`, `status`, `type`, `city_id`, `area_id`,
+               // `subarea_id`, `user_id`, `categoury_id`, `subcategoury_id`
+               // set the values in variables
+               $title              =   strValidation($_POST['title']);
+               $description        =   strValidation($_POST['description']);
+               $address            =   strValidation($_POST['address']);
+               $price              =   strValidation($_POST['price']);
+               $num_pr             =   strValidation($_POST['num_pr'], 'int');
+               $num_kit            =   strValidation($_POST['num_kit'], 'int');
+               $num_rooms          =   strValidation($_POST['num_rooms'], 'int');
+               $status             =   strValidation($_POST['status'], 'int');
+               $type               =   strValidation($_POST['type'], 'int');
+               $city_id            =   strValidation($_POST['city_id'], 'int');
+               $area_id            =   strValidation($_POST['area_id'], 'int');
+               $subarea_id         =   strValidation($_POST['subarea_id'], 'int');
+               $categoury_id       =   strValidation($_POST['categoury_id'], 'int');
+               $subcategoury_id    =   strValidation($_POST['subcategoury_id'], 'int');
+
+               $formError = array();
+               foreach ($_POST as $key => $value) {
+                   if (empty($value)) {
+
+                       $formError[] = 'The ' . $key . ' Field Can\'t be Empty';
+                   }
+               }
+
+               if (empty($formError)) {
+                   $stmt = $conn->prepare("UPDATE `buldings` SET `title`= ?,`description`= ?,`address`= ?,`price`= ?,`num_pr`= ?,`num_kit`= ?, `num_rooms`= ?,`status`= ?,`type`= ?,`city_id`= ?,`area_id`= ?,`subarea_id`= ?,`categoury_id`= ?,`subcategoury_id`= ? WHERE id = ?");
+                   $stmt->execute([$title, $description,$address,$price,$num_pr,$num_kit,$num_rooms,$status,$type,$city_id, $area_id,$subarea_id,$categoury_id, $subcategoury_id, $bu_id]);
+                   $theMsg = 'Updated Successfully';
+                   $bus = getOneFrom('*', 'buldings', 'WHERE id = '.$bu_id, null, 'id', 'ASC');
+                   $areas = getAllFrom('area.*, city.id AS CITY_ID', 'area', 'INNER JOIN city ON area.city_id = city.id WHERE area.city_id ='.$bus['city_id'], null, 'name', 'ASC');
+                   $s_areas = getAllFrom('sub_area.*, area.id AS AREA_ID', 'sub_area', 'INNER JOIN area ON sub_area.area_id = area.id WHERE sub_area.area_id ='.$bus['area_id'], null, 'name', 'ASC');
+                   $s_cats = getAllFrom('sub_categouries.*, categouries.id AS CAT_ID', 'sub_categouries', 'INNER JOIN categouries ON sub_categouries.categoury_id = categouries.id WHERE sub_categouries.categoury_id ='.$bus['categoury_id'], null, 'name', 'ASC');
+               }
+
+
+           }
+
+      ?>
+           <div class="col-md-10">
+               <div class="content-box-large">
+                   <div class="panel-heading">
+                       <div class="panel-title">
+                           <h2>Add Buldings</h2>
+                       </div>
+                   </div>
+                   <div class="panel-body">
+                       <?php if (isset($theMsg)): ?>
+                           <div class="alert alert-success"><?php echo $theMsg ?></div>
+                       <?php endif; ?>
+                       <?php if (!empty($formError)): ?>
+                           <hr>
+                           <div class="alert alert-danger">
+                              <ul>
+                                   <?php foreach ($formError as $value): ?>
+                                       <li><?php echo $value ?></li>
+                                   <?php endforeach; ?>
+                              </ul>
+                           </div>
+                           <hr>
+                       <?php endif; ?>
+                       <form class="form-horizontal" role="form" action="buldings.php?do=Edit&bu_id=<?php echo $bus['id'] ?>" method="post">
+                           <div class="form-group">
+                              <label for="title" class="col-sm-2 control-label">title</label>
+                              <div class="col-sm-10">
+                                   <input type="text" name="title" id="title" class="form-control" placeholder="title" value="<?php echo $bus['title'] ?>">
+                              </div>
+                           </div>
+                           <div class="form-group">
+                              <label for="description" class="col-sm-2 control-label">description</label>
+                              <div class="col-sm-10">
+                                   <textarea name="description" id="description" class="form-control" placeholder="description" rows="4" cols="80"><?php echo $bus['description'] ?></textarea>
+                              </div>
+                           </div>
+                           <div class="form-group">
+                              <label for="address" class="col-sm-2 control-label">address</label>
+                              <div class="col-sm-10">
+                                   <input type="text" name="address" id="address" class="form-control" placeholder="address" value="<?php echo $bus['address'] ?>">
+                              </div>
+                           </div>
+                           <div class="form-group">
+                              <label for="price" class="col-sm-2 control-label">price</label>
+                              <div class="col-sm-10">
+                                   <input type="number" name="price" id="price" class="form-control" placeholder="price" value="<?php echo $bus['price'] ?>">
+                              </div>
+                           </div>
+                           <div class="form-group">
+                              <label for="num_pr" class="col-sm-2 control-label">num_pr</label>
+                              <div class="col-sm-10">
+                                   <input type="number" name="num_pr" id="num_pr" class="form-control" placeholder="num_pr" value="<?php echo $bus['num_pr'] ?>">
+                              </div>
+                           </div>
+                           <div class="form-group">
+                              <label for="num_kit" class="col-sm-2 control-label">num_kit</label>
+                              <div class="col-sm-10">
+                                   <input type="number" name="num_kit" id="num_kit" class="form-control" placeholder="num_kit" value="<?php echo $bus['num_kit'] ?>">
+                              </div>
+                           </div>
+                           <div class="form-group">
+                              <label for="num_rooms" class="col-sm-2 control-label">num_rooms</label>
+                              <div class="col-sm-10">
+                                   <input type="text" name="num_rooms" id="num_rooms" class="form-control" placeholder="num_rooms" value="<?php echo $bus['num_rooms'] ?>">
+                              </div>
+                           </div>
+                           <div class="form-group">
+                              <label for="status" class="col-sm-2 control-label">status</label>
+                              <div class="col-sm-10">
+                                   <select class="form-control" name="status">
+                                       <option value="">Select Status</option>
+                                       <option value="1" <?php echo $bus['status'] == 1 ? 'selected' : '' ?>>Rent</option>
+                                       <option value="2" <?php echo $bus['status'] == 2 ? 'selected' : '' ?>>Sell</option>
+                                   </select>
+                              </div>
+                           </div>
+                           <div class="form-group">
+                              <label for="type" class="col-sm-2 control-label">type</label>
+                              <div class="col-sm-10">
+                                   <select class="form-control" name="type">
+                                       <option value="0" <?php echo $bus['type'] == 0 ? 'selected' : '' ?>>Flat</option>
+                                       <option value="1" <?php echo $bus['type'] == 1 ? 'selected' : '' ?>>Villa</option>
+                                       <option value="2" <?php echo $bus['type'] == 2 ? 'selected' : '' ?>>Shops</option>
+                                       <option value="3" <?php echo $bus['type'] == 3 ? 'selected' : '' ?>>Lands</option>
+                                       <option value="4" <?php echo $bus['type'] == 4 ? 'selected' : '' ?>>Chalet</option>
+                                       <option value="5" <?php echo $bus['type'] == 5 ? 'selected' : '' ?>>Buldings</option>
+                                   </select>
+                              </div>
+                           </div>
+                           <div class="form-group">
+                              <label for="city_id" class="col-sm-2 control-label">city_id</label>
+                              <div class="col-sm-10">
+                                   <select class="form-control" name="city_id" id="city_id_bulding">
+                                       <?php
+                                           $cities = getAllFrom('*', 'city', null, null, 'id', 'ASC');
+                                       ?>
+                                       <?php foreach ($cities as $city): ?>
+                                           <option value="<?php echo $city['id'] ?>" <?php echo $bus['city_id'] == $city['id'] ? 'selected' : '' ?>><?php echo $city['name'] ?></option>
+                                       <?php endforeach; ?>
+                                   </select>
+                              </div>
+                           </div>
+                           <div class="form-group">
+                              <label for="area_id" class="col-sm-2 control-label">area_id</label>
+                              <div class="col-sm-10">
+                                   <select class="form-control" name="area_id" id="area_id_bulding">
+                                       <option value=""> Select City Frist </option>
+                                       <?php foreach ($areas as $key): ?>
+                                          <option value="<?php echo $key['id'] ?>" <?php echo $bus['area_id'] == $key['id'] ? 'selected' : '' ?>><?php echo $key['name'] ?></option>
+                                       <?php endforeach; ?>
+                                   </select>
+                              </div>
+                           </div>
+                           <div class="form-group">
+                              <label for="subarea_id" class="col-sm-2 control-label">subarea_id</label>
+                              <div class="col-sm-10">
+                                   <select class="form-control" name="subarea_id" id="subarea_id_bulding">
+                                       <option value=""> Select Area Frist </option>$s_areas
+                                       <?php foreach ($s_areas as $key): ?>
+                                          <option value="<?php echo $key['id'] ?>" <?php echo $bus['subarea_id'] == $key['id'] ? 'selected' : '' ?>><?php echo $key['name'] ?></option>
+                                       <?php endforeach; ?>
+                                   </select>
+                              </div>
+                           </div>
+                           <div class="form-group">
+                              <label for="categoury_id" class="col-sm-2 control-label">categoury_id</label>
+                              <div class="col-sm-10">
+                                   <select class="form-control" name="categoury_id" id="cat_id_bulding">
+                                       <?php
+                                           $cats = getAllFrom('*', 'categouries', null, null, 'id', 'ASC');
+                                       ?>
+                                       <?php foreach ($cats as $cat): ?>
+                                           <option value="<?php echo $cat['id'] ?>" <?php echo $bus['categoury_id'] == $cat['id'] ? 'selected' : '' ?>><?php echo $cat['name'] ?></option>
+                                       <?php endforeach; ?>
+                                   </select>
+                              </div>
+                           </div>
+                           <div class="form-group">
+                              <label for="subcategoury_id" class="col-sm-2 control-label">subcategoury_id</label>
+                              <div class="col-sm-10">
+                                   <select class="form-control" name="subcategoury_id" id="subcat_id_bulding">
+                                       <option value=""> Select Categoury Frist </option>$s_cats
+                                       <?php foreach ($s_cats as $key): ?>
+                                          <option value="<?php echo $key['id'] ?>" <?php echo $bus['subcategoury_id'] == $key['id'] ? 'selected' : '' ?>><?php echo $key['name'] ?></option>
+                                       <?php endforeach; ?>
+                                   </select>
+                              </div>
+                           </div>
+                           <div class="form-group">
+                              <div class="col-sm-offset-2 col-sm-10">
+                                   <button type="submit" class="btn btn-primary">Update Bulding</button>
+                              </div>
+                           </div>
+                       </form>
+                   </div>
+               </div>
+           </div>
         <?php endif; ?>
 
-        <?php if ($do == 'Delete'): ?>
+        <?php if ($do == 'Delete'):
+           $bu_id = isset($_GET['bu_id']) && is_numeric($_GET['bu_id']) ? intval($_GET['bu_id']) : 0;
+           $delete = deleteItem('buldings', $bu_id);
+         ?>
+         <div class="col-md-10">
+             <div class="content-box-large">
+                 <div class="panel-heading">
+                     <div class="panel-title">
+                         Delete Buldings
+                     </div>
+                 </div>
 
+                 <div class="panel-body">
+                    <div class="alert alert-<?php echo $delete == true ? 'success' : 'danger' ?>">
+                       <?php echo $delete == true ? 'Deleted Successfully' : 'there was a proplem deleting this product or id not existing' ?>
+                    </div>
+                    <?php RedirectFunc('Succrss Deleted', 'back', 5) ?>
+                 </div>
+             </div>
+         </div>
         <?php endif; ?>
+
     </div>
 </div>
 <?php

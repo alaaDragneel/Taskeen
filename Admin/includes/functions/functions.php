@@ -103,6 +103,60 @@
         return $all;
     }
 
+    function getOneFrom($field, $table, $where = null, $and = null, $orderField, $ordering = 'ASC')
+    {
+        global $conn;
+        $stmt = $conn->prepare("SELECT $field FROM $table $where $and ORDER BY $orderField $ordering");
+        $stmt->execute();
+        $all = $stmt->fetch();
+        return $all;
+    }
+
+    function dd($value)
+    {
+       echo "<pre>";
+         print_r($value);
+       echo "</pre>";
+       exit();
+    }
+
+    function deleteItem($table, $id)
+    {
+      global $conn;
+
+      $count = countItem($id, $table);
+      if ($count > 0) {
+         $stmt = $conn->prepare("DELETE FROM $table WHERE id = :id");
+         $stmt->bindParam('id', $id);
+         $stmt->execute();
+         $var = true;
+      }else {
+         $var = false;
+      }
+      return $var;
+    }
+
+
+
+
+    function RedirectFunc($theMsg, $url = null, $Seconds = 3)
+		{
+			if($url === null){
+				$url = 'index.php';
+				$link = "Home Page";
+			} else {
+				if(isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] !== ''){
+					$url = $_SERVER['HTTP_REFERER'];
+					$link = "Prevuios Page";
+				}else{
+					$url = 'index.php';
+					$link = "Home Page";
+				}
+			}
+			echo $theMsg;
+			echo "<div class='alert alert-info'>You Will Redirected To $link After $Seconds Seconds</div>";
+			header("refresh:$Seconds;url=$url");
+		}
     /* End Get All From */
 
 
