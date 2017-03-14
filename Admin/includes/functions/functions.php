@@ -18,7 +18,7 @@
       } elseif ($type === 'email') {
          // if the type email
          if (filter_var($string, FILTER_VALIDATE_EMAIL) &&
-             filter_var($string, FILTER_SANITIZE_EMAIL)) { // validate and sinitize the email
+         filter_var($string, FILTER_SANITIZE_EMAIL)) { // validate and sinitize the email
             $validEmail = $string;
             // return the valid data
             return $validEmail;
@@ -30,7 +30,7 @@
       } elseif ($type === 'url') {
          // if the type email
          if (filter_var($string, FILTER_VALIDATE_URL) &&
-             filter_var($string, FILTER_SANITIZE_URL)) { // validate and sinitize the email
+         filter_var($string, FILTER_SANITIZE_URL)) { // validate and sinitize the email
             $validUrl = $string;
             // return the valid data
             return $validUrl;
@@ -49,79 +49,79 @@
 
    /* start check item count function V1.0 */
 
-	/*
-	**function use to count the items rows
-	** function use parameter
-	** $item = use item to count about it [ users | items ]
-	** $table = the required table to count from [ users | product ]
-	*/
+   /*
+   **function use to count the items rows
+   ** function use parameter
+   ** $item = use item to count about it [ users | items ]
+   ** $table = the required table to count from [ users | product ]
+   */
 
-	function countItem($item, $table) {
-		global $conn;
+   function countItem($item, $table) {
+      global $conn;
 
-		$stmt2 = $conn->prepare("SELECT COUNT($item) FROM $table ");
+      $stmt2 = $conn->prepare("SELECT COUNT($item) FROM $table ");
 
-		$stmt2->execute();
+      $stmt2->execute();
 
-		return $stmt2->fetchColumn();
-	}
+      return $stmt2->fetchColumn();
+   }
 
-	/* end check item count function V1.0 */
+   /* end check item count function V1.0 */
 
    /*start latest record function V1.0*/
 
-	/*
-	** function to get the latest items from database [ User | Items | Comments ]
-	** $select = the selected field
-	** $table = the table to choose from
-	** $order = the order way of the data
-	** $limit =  the limit of the select defult = 5
-	*/
+   /*
+   ** function to get the latest items from database [ User | Items | Comments ]
+   ** $select = the selected field
+   ** $table = the table to choose from
+   ** $order = the order way of the data
+   ** $limit =  the limit of the select defult = 5
+   */
 
-	function getLatest($select, $table, $order, $limit = 5) {
-		global $conn;
+   function getLatest($select, $table, $order, $limit = 5) {
+      global $conn;
 
-		$getstmt = $conn->prepare("SELECT $select FROM $table ORDER BY $order DESC LIMIT $limit");
+      $getstmt = $conn->prepare("SELECT $select FROM $table ORDER BY $order DESC LIMIT $limit");
 
-		$getstmt->execute();
+      $getstmt->execute();
 
-		$rows = $getstmt->fetchAll();
+      $rows = $getstmt->fetchAll();
 
-		return $rows;
-	}
+      return $rows;
+   }
 
-	/*end latest record function V1.0*/
+   /*end latest record function V1.0*/
 
-    /* Start Get All From */
+   /* Start Get All From */
 
-    function getAllFrom($field, $table, $where = null, $and = null, $orderField, $ordering = 'ASC')
-    {
-        global $conn;
-        $stmt = $conn->prepare("SELECT $field FROM $table $where $and ORDER BY $orderField $ordering");
-        $stmt->execute();
-        $all = $stmt->fetchAll();
-        return $all;
-    }
+   function getAllFrom($field, $table, $where = null, $and = null, $orderField, $ordering = 'ASC')
+   {
+      global $conn;
+      $stmt = $conn->prepare("SELECT $field FROM $table $where $and ORDER BY $orderField $ordering");
+      $stmt->execute();
+      $all = $stmt->fetchAll();
+      return $all;
+   }
 
-    function getOneFrom($field, $table, $where = null, $and = null, $orderField, $ordering = 'ASC')
-    {
-        global $conn;
-        $stmt = $conn->prepare("SELECT $field FROM $table $where $and ORDER BY $orderField $ordering");
-        $stmt->execute();
-        $all = $stmt->fetch();
-        return $all;
-    }
+   function getOneFrom($field, $table, $where = null, $and = null, $orderField, $ordering = 'ASC')
+   {
+      global $conn;
+      $stmt = $conn->prepare("SELECT $field FROM $table $where $and ORDER BY $orderField $ordering");
+      $stmt->execute();
+      $all = $stmt->fetch();
+      return $all;
+   }
 
-    function dd($value)
-    {
-       echo "<pre>";
+   function dd($value)
+   {
+      echo "<pre>";
          print_r($value);
-       echo "</pre>";
-       exit();
-    }
+      echo "</pre>";
+      exit();
+   }
 
-    function deleteItem($table, $id)
-    {
+   function deleteItem($table, $id)
+   {
       global $conn;
 
       $count = countItem($id, $table);
@@ -134,30 +134,56 @@
          $var = false;
       }
       return $var;
-    }
+   }
 
 
 
 
-    function RedirectFunc($theMsg, $url = null, $Seconds = 3)
-		{
-			if($url === null){
-				$url = 'index.php';
-				$link = "Home Page";
-			} else {
-				if(isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] !== ''){
-					$url = $_SERVER['HTTP_REFERER'];
-					$link = "Prevuios Page";
-				}else{
-					$url = 'index.php';
-					$link = "Home Page";
-				}
-			}
-			echo $theMsg;
-			echo "<div class='alert alert-info'>You Will Redirected To $link After $Seconds Seconds</div>";
-			header("refresh:$Seconds;url=$url");
-		}
-    /* End Get All From */
+   function RedirectFunc($theMsg, $url = null, $Seconds = 3)
+   {
+      if($url === null){
+         $url = 'index.php';
+         $link = "Home Page";
+      } else {
+         if(isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] !== ''){
+            $url = $_SERVER['HTTP_REFERER'];
+            $link = "Prevuios Page";
+         }else{
+            $url = 'index.php';
+            $link = "Home Page";
+         }
+      }
+      echo $theMsg;
+      echo "<div class='alert alert-info'>You Will Redirected To $link After $Seconds Seconds</div>";
+      header("refresh:$Seconds;url=$url");
+   }
+   /* End Get All From */
 
+   /* start image validate function */
+   function imageValidation($image)
+   {
+      $dir_name        = "layouts/images/bullding_image/";
+      $path            = $image['tmp_name'];//temporary path
+      $name            = $image['name'];
+      $size            = $image['size'];
+      $type            = $image['type']; //image/png
+      $error           = $image['error'];
+      $mimeTypes = ['image/png', 'image/gif', 'image/jpeg', 'image/jpg', 'image/pjpeg', 'image/x-png', 'image/png'];
+      /*Start Check the Image Type&Size*/
+
+      if (!$error && is_uploaded_file($path) && in_array($type, $mimeTypes) && $size < 200000){
+         $ext = pathinfo($name, PATHINFO_EXTENSION);
+         $sha1 = sha1($name);
+         $fileName = date("y-m-d-h-i-s") . "_" . $sha1 . '.' . $ext;
+               move_uploaded_file($path, $dir_name . $fileName);
+
+         return $dir_name . $fileName;
+      } else {
+         return false;
+      }
+
+   }
+
+   /* end image validate function */
 
 ?>

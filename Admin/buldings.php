@@ -3,6 +3,7 @@
     ob_start();
     session_start();
 
+    $yield = '<link href="layouts/css/AdminLTE.min.css" rel="stylesheet">';
 
     $pageTitle = 'Buldings';
 
@@ -45,6 +46,8 @@
                                       <th>address</th>
                                       <th>price</th>
                                       <th>rooms</th>
+                                      <th>Type</th>
+                                      <th>Status</th>
                                       <th>actions</th>
                                   </tr>
                               </thead>
@@ -60,8 +63,8 @@
                                           <td><?php echo $bu['address'] ?></td>
                                           <td><?php echo $bu['price'] ?></td>
                                           <td><?php echo $bu['num_rooms'] ?></td>
+                                          <td><span class="label label-<?php echo $bu['isApproved'] == 0 ? 'danger' : 'success' ?>"><?php echo $bu['isApproved'] == 0 ? 'unapproved' : 'published' ?></span></td>
                                           <td>
-                                              <a href="#" class="btn btn-primary">View</a>
                                               <a href="buldings.php?do=Edit&bu_id=<?php echo $bu['id'] ?>" class="btn btn-success">Edit</a>
                                               <a href="buldings.php?do=Delete&bu_id=<?php echo $bu['id'] ?>" class="btn btn-danger">Delete</a>
                                           </td>
@@ -78,15 +81,15 @@
                           $bus = getAllFrom('*', 'buldings', null, null, 'id', 'DESC');
                           ?>
                           <?php foreach ($bus as $key): ?>
-                              <div class="col-md-3 col-sm-1" style="padding: 5px; box-shadow: 5px 5px 19px #999;border-radius: 5px;">
+                              <div class="col-md-4 col-sm-1" style="padding: 5px; box-shadow: 5px 5px 19px #999;border-radius: 5px;">
                                   <div class="card" style="padding: 2px 4px;">
-                                      <img class="card-img-top img-responsive" src="http://placehold.it/318x180" alt="Card image cap">
+                                      <img class="card-img-top img-responsive" style="height: 300px; width: 400px;" src="<?php echo $key['image'] ?>" alt="<?php echo $key['title'] ?>">
                                       <div class="card-block">
                                           <h4 class="card-title"><?php echo $key['title'] ?></h4>
                                           <p class="card-text"><?php echo $key['description'] ?></p>
-                                          <a href="#" class="btn btn-primary">View</a>
                                           <a href="buldings.php?do=Edit&bu_id=<?php echo $key['id'] ?>" class="btn btn-success">Edit</a>
                                           <a href="buldings.php?do=Delete&bu_id=<?php echo $key['id'] ?>" class="btn btn-danger">Delete</a>
+                                          <span class="label label-<?php echo $key['isApproved'] == 0 ? 'danger' : 'success' ?>"><?php echo $key['isApproved'] == 0 ? 'unapproved' : 'published' ?></span>
                                       </div>
                                   </div>
                               </div>
@@ -119,6 +122,8 @@
                 $user_id            =   $_SESSION['id'];
                 $categoury_id       =   strValidation($_POST['categoury_id'], 'int');
                 $subcategoury_id    =   strValidation($_POST['subcategoury_id'], 'int');
+                $image              =   imageValidation($_FILES['image']);
+                $isApproved    =   strValidation($_POST['isApproved'], 'int');
 
                 $formError = array();
                 foreach ($_POST as $key => $value) {
@@ -129,10 +134,9 @@
                 }
 
                 if (empty($formError)) {
-                    $stmt = $conn->prepare("INSERT INTO `buldings`(`title`, `description`, `address`, `price`, `num_pr`, `num_kit`, `num_rooms`, `status`,
-                                                                   `type`, `city_id`, `area_id`, `subarea_id`, `user_id`, `categoury_id`, `subcategoury_id`)
+                    $stmt = $conn->prepare("INSERT INTO `buldings`(`title`, `description`, `address`, `price`, `num_pr`, `num_kit`, `num_rooms`, `status`, `type`, `city_id`, `area_id`, `subarea_id`, `user_id`, `categoury_id`, `subcategoury_id`, `image`, `month`, `year`, `isApproved`)
                                             VALUES (:title, :des, :address, :price, :num_pr, :num_kit, :num_rooms, :stauts, :type, :city_id, :areaid,
-                                                    :said, :userid, :catid, :scatid)");
+                                                    :said, :userid, :catid, :scatid, :image, :month, :year, :isApproved)");
                     $stmt->execute([
                         'title'     => $title,
                         'des'       => $description,
@@ -149,7 +153,10 @@
                         'userid'    => $user_id,
                         'catid'     => $categoury_id,
                         'scatid'    => $subcategoury_id,
-
+                        'image'    => $image,
+                        'month'    => date('m'),
+                        'year'    => date('Y'),
+                        'isApproved' => 1,
                     ]);
                     $theMsg = 'The Bulding Added Successfully';
                 }
@@ -180,7 +187,7 @@
                             </div>
                             <hr>
                         <?php endif; ?>
-                        <form class="form-horizontal" role="form" action="buldings.php?do=Add" method="post">
+                        <form class="form-horizontal" role="form" action="buldings.php?do=Add" method="post" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="title" class="col-sm-2 control-label">title</label>
                                 <div class="col-sm-10">
@@ -297,6 +304,22 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label for="isApproved" class="col-sm-2 control-label">Approve</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" name="isApproved" id="isApproved">
+                                        <option> Select the permision </option>
+                                        <option value="0"> unapprove </option>
+                                        <option value="1"> published </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="image" class="col-sm-2 control-label">image</label>
+                                <div class="col-sm-10">
+                                    <input type="file" id="image" class="form-control" name="image">
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
                                     <button type="submit" class="btn btn-primary">Add Bulding</button>
                                 </div>
@@ -317,6 +340,7 @@
            $s_cats = getAllFrom('sub_categouries.*, categouries.id AS CAT_ID', 'sub_categouries', 'INNER JOIN categouries ON sub_categouries.categoury_id = categouries.id WHERE sub_categouries.categoury_id ='.$bus['categoury_id'], null, 'name', 'ASC');
 
            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+             $busImage = getOneFrom('image', 'buldings', 'WHERE id = '.$bu_id, null, 'id', 'ASC');
 
                // `id`, `title`, `description`, `address`, `price`, `num_pr`, `num_kit`, `num_rooms`, `status`, `type`, `city_id`, `area_id`,
                // `subarea_id`, `user_id`, `categoury_id`, `subcategoury_id`
@@ -335,22 +359,47 @@
                $subarea_id         =   strValidation($_POST['subarea_id'], 'int');
                $categoury_id       =   strValidation($_POST['categoury_id'], 'int');
                $subcategoury_id    =   strValidation($_POST['subcategoury_id'], 'int');
+               $image              =   empty($_FILES['image']['name']) ? $busImage['image'] : imageValidation($_FILES['image']);
+               $isApproved         =   $_POST['isApproved'];
 
                $formError = array();
                foreach ($_POST as $key => $value) {
-                   if (empty($value)) {
-
+                   if (empty($value) && $value != 0) {
                        $formError[] = 'The ' . $key . ' Field Can\'t be Empty';
                    }
                }
 
                if (empty($formError)) {
-                   $stmt = $conn->prepare("UPDATE `buldings` SET `title`= ?,`description`= ?,`address`= ?,`price`= ?,`num_pr`= ?,`num_kit`= ?, `num_rooms`= ?,`status`= ?,`type`= ?,`city_id`= ?,`area_id`= ?,`subarea_id`= ?,`categoury_id`= ?,`subcategoury_id`= ? WHERE id = ?");
-                   $stmt->execute([$title, $description,$address,$price,$num_pr,$num_kit,$num_rooms,$status,$type,$city_id, $area_id,$subarea_id,$categoury_id, $subcategoury_id, $bu_id]);
+                   $stmt = $conn->prepare("UPDATE `buldings` SET `title`= ?,`description`= ?,`address`= ?,`price`= ?,`num_pr`= ?,`num_kit`= ?, `num_rooms`= ?,`status`= ?,`type`= ?,`city_id`= ?,`area_id`= ?,`subarea_id`= ?,`categoury_id`= ?,`subcategoury_id`= ?, image = ?, isApproved = ? WHERE id = ?");
+
+                   $stmt->execute([
+                      $title,
+                      $description,
+                      $address,
+                      $price,
+                      $num_pr,
+                      $num_kit,
+                      $num_rooms,
+                      $status,
+                      $type,
+                      $city_id,
+                      $area_id,
+                      $subarea_id,
+                      $categoury_id,
+                      $subcategoury_id,
+                      $image,
+                      $isApproved,
+                      $bu_id,
+                   ]);
+
                    $theMsg = 'Updated Successfully';
+
                    $bus = getOneFrom('*', 'buldings', 'WHERE id = '.$bu_id, null, 'id', 'ASC');
+
                    $areas = getAllFrom('area.*, city.id AS CITY_ID', 'area', 'INNER JOIN city ON area.city_id = city.id WHERE area.city_id ='.$bus['city_id'], null, 'name', 'ASC');
+
                    $s_areas = getAllFrom('sub_area.*, area.id AS AREA_ID', 'sub_area', 'INNER JOIN area ON sub_area.area_id = area.id WHERE sub_area.area_id ='.$bus['area_id'], null, 'name', 'ASC');
+
                    $s_cats = getAllFrom('sub_categouries.*, categouries.id AS CAT_ID', 'sub_categouries', 'INNER JOIN categouries ON sub_categouries.categoury_id = categouries.id WHERE sub_categouries.categoury_id ='.$bus['categoury_id'], null, 'name', 'ASC');
                }
 
@@ -362,7 +411,7 @@
                <div class="content-box-large">
                    <div class="panel-heading">
                        <div class="panel-title">
-                           <h2>Add Buldings</h2>
+                           <h2>Edit Buldings</h2>
                        </div>
                    </div>
                    <div class="panel-body">
@@ -380,7 +429,7 @@
                            </div>
                            <hr>
                        <?php endif; ?>
-                       <form class="form-horizontal" role="form" action="buldings.php?do=Edit&bu_id=<?php echo $bus['id'] ?>" method="post">
+                       <form class="form-horizontal" role="form" action="buldings.php?do=Edit&bu_id=<?php echo $bus['id'] ?>" method="post" enctype="multipart/form-data">
                            <div class="form-group">
                               <label for="title" class="col-sm-2 control-label">title</label>
                               <div class="col-sm-10">
@@ -503,6 +552,41 @@
                                           <option value="<?php echo $key['id'] ?>" <?php echo $bus['subcategoury_id'] == $key['id'] ? 'selected' : '' ?>><?php echo $key['name'] ?></option>
                                        <?php endforeach; ?>
                                    </select>
+                              </div>
+                           </div>
+                           <div class="form-group">
+                               <label for="isApproved" class="col-sm-2 control-label">Approve</label>
+                               <div class="col-sm-10">
+                                   <select class="form-control" name="isApproved" id="isApproved">
+                                       <option> Select the permision </option>
+                                       <option value="0" <?php echo $bus['isApproved'] == 0 ? 'selected' : '' ?> > unapprove </option>
+                                       <option value="1" <?php echo $bus['isApproved'] == 1 ? 'selected' : '' ?> > published </option>
+                                   </select>
+                               </div>
+                           </div>
+                           <div class="form-group">
+                              <label for="image" class="col-sm-2 control-label">image</label>
+                              <div class="col-sm-10">
+                                   <input type="file" id="image" class="form-control" name="image">
+                              </div>
+                           </div>
+                           <div class="form-group">
+                              <label for="image" class="col-sm-2 control-label">image</label>
+                              <div class="col-sm-10">
+                                   <div class="row">
+                                     <div class="col-sm-6">
+                                        <div style="padding: 5px; box-shadow: 5px 5px 19px #999;border-radius: 5px;">
+                                            <div class="card" style="padding: 2px 4px;">
+                                                <img class="card-img-top img-responsive" style="height: 300px; width: 400px;" src="<?php echo $bus['image'] ?>" alt="<?php echo $bus['title'] ?>">
+                                                <div class="card-block">
+                                                    <h4 class="card-title"><?php echo $bus['title'] ?></h4>
+                                                    <p class="card-text"><?php echo $bus['description'] ?></p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                     </div>
+                                   </div>
                               </div>
                            </div>
                            <div class="form-group">
