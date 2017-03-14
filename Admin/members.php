@@ -91,6 +91,80 @@
             </div>
         </div>
         <?php endif; ?>
+        <?php if ($do == 'admin'): ?>
+        <div class="col-md-10">
+            <div class="content-box-large">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        Manage Admins
+                    </div>
+                </div>
+                <?php
+                    $stmt = $conn->prepare("SELECT * FROM users WHERE isadmin = 1 ORDER BY id DESC");
+                    $stmt->execute();
+                    $rows = $stmt->fetchAll();
+                    $count = $stmt->rowCount();
+                ?>
+                <div class="panel-body">
+                  <h4>there <?php echo $count === 1 ? 'is ' . $count :  'are ' . $count; ?> admin/s</h4>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID#</th>
+
+                                    <th>name</th>
+
+                                    <th>email</th>
+
+                                    <th>phone</th>
+                                    <th>address</th>
+
+                                    <th>facebook</th>
+
+                                    <th>Role</th>
+
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+                                <?php if ($count > 0): ?>
+                                    <?php foreach ($rows as $row): ?>
+                                        <tr>
+                                            <td><?php echo $row['id']; ?></td>
+                                            <td><?php echo $row['name']; ?></td>
+                                            <td><?php echo $row['email']; ?></td>
+                                            <td><?php echo $row['phone']; ?></td>
+                                            <td><?php echo $row['address']; ?></td>
+                                            <td><?php echo $row['facebook']; ?></td>
+                                            <td>
+                                                <?php if ($row['isadmin'] == 1): ?>
+                                                    <span class="badge">Admin</span>
+                                                <?php else: ?>
+                                                    <span class="badge">User</span>
+                                                <?php endif; ?>
+                                            </td>
+                                            <td>
+                                                <a href="members.php?do=Edit&memberId=<?php echo $row['id']; ?>" class="btn btn-info">edit</a>
+                                                <a href="members.php?do=Delete&memberId=<?php echo $row['id']; ?>" class="btn btn-danger">delete</a>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <tr>
+                                        <div class="alert alert-success">Add Members Please</div>
+                                    </tr>
+                                <?php endif; ?>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
         <?php if ($do == 'Add'): ?>
             <?php
 

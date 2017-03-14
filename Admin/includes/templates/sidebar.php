@@ -103,6 +103,7 @@
                   <li><a href="#"><i class="fa fa-plus"></i> Add Buldings</a></li>
               </ul>
           </li>
+          <li><a href="statistics.php"><i class="fa fa-bar-chart-o"></i> statistics</a></li>
           <li><a href="tables.php"><i class="glyphicon glyphicon-list"></i> Tables</a></li>
           <li><a href="buttons.php"><i class="glyphicon glyphicon-record"></i> Buttons</a></li>
           <li><a href="forms.php"><i class="glyphicon glyphicon-tasks"></i> Forms</a></li>

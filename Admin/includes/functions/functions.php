@@ -56,10 +56,10 @@
    ** $table = the required table to count from [ users | product ]
    */
 
-   function countItem($item, $table) {
+   function countItem($item, $table, $options = null) {
       global $conn;
 
-      $stmt2 = $conn->prepare("SELECT COUNT($item) FROM $table ");
+      $stmt2 = $conn->prepare("SELECT COUNT($item) FROM $table $options");
 
       $stmt2->execute();
 
@@ -185,5 +185,36 @@
    }
 
    /* end image validate function */
+
+   function showBulldingStatistics($year = null)
+   {
+      global $conn;
+
+
+      if ($year == null) {
+
+         $year = date('Y');
+      }
+
+      $stmt = $conn->prepare("SELECT COUNT(*) AS counting, month FROM `buldings` WHERE `year` = ? GROUP BY `month` ORDER BY month ASC");
+
+      $stmt->execute([$year]);
+
+      $chartBuillding = $stmt->fetchAll();
+      // make the array that will have the empty nonth
+      $array = [];
+      if (isset($chartBuillding[0]['month'])) {
+         for($i = 1; $i < $chartBuillding[0]['month']; $i++){
+            // assain the array
+            $array[] = 0;
+         }
+      }
+      // merge the 2 arrays
+      $new = array_merge($array, $chartBuillding);
+
+      return $new;
+   }
+
+
 
 ?>

@@ -100,6 +100,170 @@
             </div>
         </div>
         <?php endif; ?>
+        <?php if ($do == 'published'): ?>
+        <div class="col-md-10">
+            <div class="content-box-large">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        Manage Approved Buldings
+                    </div>
+                </div>
+
+                <div class="panel-body">
+                  <h4>there  Buldings/s</h4>
+                  <hr>
+                      <a href="buldings.php?do=Add" class="btn btn-default">Add Buldings</a>
+                      <a href="buldings.php?do=published&viewType=Tables" class="btn btn-default"><i class="fa fa-table" aria-hidden="true"></i> Tables</a>
+                      <a href="buldings.php?do=published&viewType=Cards" class="btn btn-default"><i class="fa fa-credit-card-alt" aria-hidden="true"></i> Cards</a>
+                  <hr>
+                  <?php $viewType = isset($_GET['viewType']) ? $_GET['viewType'] : 'Tables'; // Check if the $viewType is Exixets ?>
+                  <?php if ($viewType == 'Tables'): ?>
+                      <div class="table-responsive">
+                          <table class="table">
+                              <thead>
+                                  <tr>
+                                      <th>ID#</th>
+                                      <th>Title</th>
+                                      <th>DESC</th>
+                                      <th>address</th>
+                                      <th>price</th>
+                                      <th>rooms</th>
+                                      <th>Type</th>
+                                      <th>Status</th>
+                                      <th>actions</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <?php
+                                  $bus = getAllFrom('*', 'buldings', 'WHERE isApproved = 1', null, 'id', 'DESC');
+                                  ?>
+                                  <?php foreach ($bus as $bu): ?>
+                                      <tr>
+                                          <td><?php echo $bu['id'] ?></td>
+                                          <td><?php echo $bu['title'] ?></td>
+                                          <td><?php echo $bu['description'] ?></td>
+                                          <td><?php echo $bu['address'] ?></td>
+                                          <td><?php echo $bu['price'] ?></td>
+                                          <td><?php echo $bu['num_rooms'] ?></td>
+                                          <td><span class="label label-<?php echo $bu['isApproved'] == 0 ? 'danger' : 'success' ?>"><?php echo $bu['isApproved'] == 0 ? 'unapproved' : 'published' ?></span></td>
+                                          <td>
+                                              <a href="buldings.php?do=Edit&bu_id=<?php echo $bu['id'] ?>" class="btn btn-success">Edit</a>
+                                              <a href="buldings.php?do=Delete&bu_id=<?php echo $bu['id'] ?>" class="btn btn-danger">Delete</a>
+                                          </td>
+                                      </tr>
+                                  <?php endforeach; ?>
+                              </tbody>
+
+                          </table>
+                      </div>
+                  <?php elseif ($viewType == 'Cards'): ?>
+                      <hr>
+                      <div class="row">
+                          <?php
+                          $bus = getAllFrom('*', 'buldings', 'WHERE isApproved = 1', null, 'id', 'DESC');
+                          ?>
+                          <?php foreach ($bus as $key): ?>
+                              <div class="col-md-4 col-sm-1" style="padding: 5px; box-shadow: 5px 5px 19px #999;border-radius: 5px;">
+                                  <div class="card" style="padding: 2px 4px;">
+                                      <img class="card-img-top img-responsive" style="height: 300px; width: 400px;" src="<?php echo $key['image'] ?>" alt="<?php echo $key['title'] ?>">
+                                      <div class="card-block">
+                                          <h4 class="card-title"><?php echo $key['title'] ?></h4>
+                                          <p class="card-text"><?php echo $key['description'] ?></p>
+                                          <a href="buldings.php?do=Edit&bu_id=<?php echo $key['id'] ?>" class="btn btn-success">Edit</a>
+                                          <a href="buldings.php?do=Delete&bu_id=<?php echo $key['id'] ?>" class="btn btn-danger">Delete</a>
+                                          <span class="label label-<?php echo $key['isApproved'] == 0 ? 'danger' : 'success' ?>"><?php echo $key['isApproved'] == 0 ? 'unapproved' : 'published' ?></span>
+                                      </div>
+                                  </div>
+                              </div>
+                          <?php endforeach; ?>
+                      </div>
+                  <?php endif; ?>
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
+        <?php if ($do == 'waiting'): ?>
+        <div class="col-md-10">
+            <div class="content-box-large">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        Manage waiting Buldings
+                    </div>
+                </div>
+
+                <div class="panel-body">
+                  <h4>there  Buldings/s</h4>
+                  <hr>
+                      <a href="buldings.php?do=Add" class="btn btn-default">Add Buldings</a>
+                      <a href="buldings.php?do=waiting&viewType=Tables" class="btn btn-default"><i class="fa fa-table" aria-hidden="true"></i> Tables</a>
+                      <a href="buldings.php?do=waiting&viewType=Cards" class="btn btn-default"><i class="fa fa-credit-card-alt" aria-hidden="true"></i> Cards</a>
+                  <hr>
+                  <?php $viewType = isset($_GET['viewType']) ? $_GET['viewType'] : 'Tables'; // Check if the $viewType is Exixets ?>
+                  <?php if ($viewType == 'Tables'): ?>
+                      <div class="table-responsive">
+                          <table class="table">
+                              <thead>
+                                  <tr>
+                                      <th>ID#</th>
+                                      <th>Title</th>
+                                      <th>DESC</th>
+                                      <th>address</th>
+                                      <th>price</th>
+                                      <th>rooms</th>
+                                      <th>Type</th>
+                                      <th>Status</th>
+                                      <th>actions</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <?php
+                                  $bus = getAllFrom('*', 'buldings', 'WHERE isApproved = 0', null, 'id', 'DESC');
+                                  ?>
+                                  <?php foreach ($bus as $bu): ?>
+                                      <tr>
+                                          <td><?php echo $bu['id'] ?></td>
+                                          <td><?php echo $bu['title'] ?></td>
+                                          <td><?php echo $bu['description'] ?></td>
+                                          <td><?php echo $bu['address'] ?></td>
+                                          <td><?php echo $bu['price'] ?></td>
+                                          <td><?php echo $bu['num_rooms'] ?></td>
+                                          <td><span class="label label-<?php echo $bu['isApproved'] == 0 ? 'danger' : 'success' ?>"><?php echo $bu['isApproved'] == 0 ? 'unapproved' : 'published' ?></span></td>
+                                          <td>
+                                              <a href="buldings.php?do=Edit&bu_id=<?php echo $bu['id'] ?>" class="btn btn-success">Edit</a>
+                                              <a href="buldings.php?do=Delete&bu_id=<?php echo $bu['id'] ?>" class="btn btn-danger">Delete</a>
+                                          </td>
+                                      </tr>
+                                  <?php endforeach; ?>
+                              </tbody>
+
+                          </table>
+                      </div>
+                  <?php elseif ($viewType == 'Cards'): ?>
+                      <hr>
+                      <div class="row">
+                          <?php
+                          $bus = getAllFrom('*', 'buldings', 'WHERE isApproved = 0', null, 'id', 'DESC');
+                          ?>
+                          <?php foreach ($bus as $key): ?>
+                              <div class="col-md-4 col-sm-1" style="padding: 5px; box-shadow: 5px 5px 19px #999;border-radius: 5px;">
+                                  <div class="card" style="padding: 2px 4px;">
+                                      <img class="card-img-top img-responsive" style="height: 300px; width: 400px;" src="<?php echo $key['image'] ?>" alt="<?php echo $key['title'] ?>">
+                                      <div class="card-block">
+                                          <h4 class="card-title"><?php echo $key['title'] ?></h4>
+                                          <p class="card-text"><?php echo $key['description'] ?></p>
+                                          <a href="buldings.php?do=Edit&bu_id=<?php echo $key['id'] ?>" class="btn btn-success">Edit</a>
+                                          <a href="buldings.php?do=Delete&bu_id=<?php echo $key['id'] ?>" class="btn btn-danger">Delete</a>
+                                          <span class="label label-<?php echo $key['isApproved'] == 0 ? 'danger' : 'success' ?>"><?php echo $key['isApproved'] == 0 ? 'unapproved' : 'published' ?></span>
+                                      </div>
+                                  </div>
+                              </div>
+                          <?php endforeach; ?>
+                      </div>
+                  <?php endif; ?>
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
 
         <?php if ($do == 'Add'):
 

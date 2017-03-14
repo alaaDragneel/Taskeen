@@ -30,11 +30,7 @@
 
     <link href="layouts/css/forms.css" rel="stylesheet">
 
-    <?php
-       if (isset($yield)) {
-           echo $yield;
-       }
-    ?>
+    <link href="layouts/css/AdminLTE.min.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
