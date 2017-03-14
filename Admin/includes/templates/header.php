@@ -31,9 +31,9 @@
     <link href="layouts/css/forms.css" rel="stylesheet">
 
     <?php
-    if (isset($yield)) {
-        echo $yield;
-    }
+       if (isset($yield)) {
+           echo $yield;
+       }
     ?>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
