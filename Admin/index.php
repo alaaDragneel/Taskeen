@@ -12,6 +12,9 @@
         $totalUnApprovedBullding = countItem('id', 'buldings', 'WHERE isApproved = 0');
         $totalApprovedBullding = countItem('id', 'buldings', 'WHERE isApproved = 1');
         $chartData = showBulldingStatistics();
+        $resentBulldingView = getAllFrom('*', 'buldings', null, null, 'id', 'DESC', 'LIMIT 5');
+        $resentPublishiedBulldingView = getAllFrom('*', 'buldings', 'WHERE isApproved = 1', null, 'id', 'DESC', 'LIMIT 5');
+        $resentWaitingBulldingView = getAllFrom('*', 'buldings', 'WHERE isApproved = 0', null, 'id', 'DESC', 'LIMIT 5');
 ?>
         <div class="page-content">
         	<div class="row">
@@ -46,7 +49,7 @@
                         <span class="info-box-icon"><i class="fa fa-home"></i></span>
 
                         <div class="info-box-content">
-                           <span class="info-box-text">Total Admins</span>
+                           <span class="info-box-text">bulldings</span>
                            <span class="info-box-number"><?php echo $totalBullding;?></span>
 
                            <div class="progress">
@@ -107,7 +110,7 @@
                <!-- start the chart -->
                <div class="row">
                   <div class="col-md-12">
-                     <div class="box">
+                     <div class="box box-info">
                         <div class="box-header with-border">
                            <h3 class="box-title">Yearly Bullding Report In Current Year</h3>
 
@@ -116,9 +119,6 @@
                               <button class="btn btn-box-tool" data-widget="collapse" type="button">
                                  <i class="fa fa-minus"></i>
                               </button>
-
-
-                              <button class="btn btn-box-tool" data-widget="remove" type="button"><i class="fa fa-times"></i></button>
                            </div>
                         </div>
                         <!-- /.box-header -->
@@ -152,82 +152,143 @@
                <!-- end the chart -->
 
                <div class="row">
-                  <div class="col-md-3">
-                     <div class="box box-info box-solid">
+                  <div class="col-md-4">
+                     <!-- PRODUCT LIST -->
+                     <div class="box box-primary">
                         <div class="box-header with-border">
-                           <h3 class="box-title">Collapsable</h3>
+                           <h3 class="box-title">Recently Added 5 Bullding</h3>
+
 
                            <div class="box-tools pull-right">
-                              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                              <button class="btn btn-box-tool" data-widget="collapse" type="button">
+                                 <i class="fa fa-minus"></i>
                               </button>
                            </div>
-                           <!-- /.box-tools -->
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
-                           The body of the box
+                           <ul class="products-list product-list-in-box">
+                              <?php foreach ($resentBulldingView as $bu): ?>
+                                 <li class="item">
+                                    <div class="product-img">
+                                       <img alt="<?php echo $bu['title']?>" src="<?php echo $bu['image']?>">
+                                    </div>
+
+                                    <div class="product-info">
+                                       <a class="product-title" href="buldings.php?do=Edit&bu_id=<?php echo $bu['id']?>">
+                                          <?php echo $bu['title']?>
+                                          <span class="label label-info pull-right">Cost: <?php echo $bu['price']?></span>
+                                             <span class="label label-<?php echo $bu['isApproved'] == 0 ? 'danger' : 'success'; ?> pull-right" style="margin-right: 5px;">
+                                                <?php echo $bu['isApproved'] == 0 ? 'Waiting' : 'Published';?>
+                                             </span>
+                                       </a>
+                                       <span class="product-description"><?php echo $bu['description']?></span>
+                                    </div>
+                                 </li>
+                                 <!-- /.item -->
+                              <?php endforeach; ?>
+
+                           </ul>
                         </div>
                         <!-- /.box-body -->
+                        <div class="box-footer text-center">
+                           <a class="uppercase" href="buldings.php">View All bulldings</a>
+                        </div>
+                        <!-- /.box-footer -->
                      </div>
                      <!-- /.box -->
                   </div>
                   <!-- /.col -->
-                  <div class="col-md-3">
-                     <div class="box box-primary box-solid">
+                  <div class="col-md-4">
+                     <!-- PRODUCT LIST -->
+                     <div class="box box-success">
                         <div class="box-header with-border">
-                           <h3 class="box-title">Collapsable</h3>
+                           <h3 class="box-title">Recently Added 5 Published Bullding</h3>
+
 
                            <div class="box-tools pull-right">
-                              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                              <button class="btn btn-box-tool" data-widget="collapse" type="button">
+                                 <i class="fa fa-minus"></i>
                               </button>
                            </div>
-                           <!-- /.box-tools -->
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
-                           The body of the box
+                           <ul class="products-list product-list-in-box">
+                              <?php foreach ($resentPublishiedBulldingView as $bu): ?>
+                                 <li class="item">
+                                    <div class="product-img">
+                                       <img alt="<?php echo $bu['title']?>" src="<?php echo $bu['image']?>">
+                                    </div>
+
+                                    <div class="product-info">
+                                       <a class="product-title" href="buldings.php?do=Edit&bu_id=<?php echo $bu['id']?>">
+                                          <?php echo $bu['title']?>
+                                          <span class="label label-info pull-right">Cost: <?php echo $bu['price']?></span>
+                                             <span class="label label-<?php echo $bu['isApproved'] == 0 ? 'danger' : 'success'; ?> pull-right" style="margin-right: 5px;">
+                                                <?php echo $bu['isApproved'] == 0 ? 'Waiting' : 'Published';?>
+                                             </span>
+                                       </a>
+                                       <span class="product-description"><?php echo $bu['description']?></span>
+                                    </div>
+                                 </li>
+                                 <!-- /.item -->
+                              <?php endforeach; ?>
+
+                           </ul>
                         </div>
                         <!-- /.box-body -->
+                        <div class="box-footer text-center">
+                           <a class="uppercase" href="buldings.php?do=published">View All published bulldings</a>
+                        </div>
+                        <!-- /.box-footer -->
                      </div>
                      <!-- /.box -->
                   </div>
                   <!-- /.col -->
-                  <div class="col-md-3">
-                     <div class="box box-success box-solid">
+                  <div class="col-md-4">
+                     <!-- PRODUCT LIST -->
+                     <div class="box box-danger">
                         <div class="box-header with-border">
-                           <h3 class="box-title">Collapsable</h3>
+                           <h3 class="box-title">Recently Added 5 Waiting Bullding</h3>
+
 
                            <div class="box-tools pull-right">
-                              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                              <button class="btn btn-box-tool" data-widget="collapse" type="button">
+                                 <i class="fa fa-minus"></i>
                               </button>
                            </div>
-                           <!-- /.box-tools -->
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
-                           The body of the box
-                        </div>
-                        <!-- /.box-body -->
-                     </div>
-                     <!-- /.box -->
-                  </div>
-                  <!-- /.col -->
-                  <div class="col-md-3">
-                     <div class="box box-danger box-solid">
-                        <div class="box-header with-border">
-                           <h3 class="box-title">Collapsable</h3>
+                           <ul class="products-list product-list-in-box">
+                              <?php foreach ($resentWaitingBulldingView as $bu): ?>
+                                 <li class="item">
+                                    <div class="product-img">
+                                       <img alt="<?php echo $bu['title']?>" src="<?php echo $bu['image']?>">
+                                    </div>
 
-                           <div class="box-tools pull-right">
-                              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                              </button>
-                           </div>
-                           <!-- /.box-tools -->
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                           The body of the box
+                                    <div class="product-info">
+                                       <a class="product-title" href="buldings.php?do=Edit&bu_id=<?php echo $bu['id']?>">
+                                          <?php echo $bu['title']?>
+                                          <span class="label label-info pull-right">Cost: <?php echo $bu['price']?></span>
+                                             <span class="label label-<?php echo $bu['isApproved'] == 0 ? 'danger' : 'success'; ?> pull-right" style="margin-right: 5px;">
+                                                <?php echo $bu['isApproved'] == 0 ? 'Waiting' : 'Published';?>
+                                             </span>
+                                       </a>
+                                       <span class="product-description"><?php echo $bu['description']?></span>
+                                    </div>
+                                 </li>
+                                 <!-- /.item -->
+                              <?php endforeach; ?>
+
+                           </ul>
                         </div>
                         <!-- /.box-body -->
+                        <div class="box-footer text-center">
+                           <a class="uppercase" href="buldings.php?do=waiting">View All waiting bulldings</a>
+                        </div>
+                        <!-- /.box-footer -->
                      </div>
                      <!-- /.box -->
                   </div>

@@ -286,15 +286,19 @@
                 $user_id            =   $_SESSION['id'];
                 $categoury_id       =   strValidation($_POST['categoury_id'], 'int');
                 $subcategoury_id    =   strValidation($_POST['subcategoury_id'], 'int');
-                $image              =   imageValidation($_FILES['image']);
-                $isApproved    =   strValidation($_POST['isApproved'], 'int');
+                $image              =   empty($_FILES['image']['name']) ? avatar() : imageValidation($_FILES['image']);
+                $isApproved         =   strValidation($_POST['isApproved'], 'int');
 
                 $formError = array();
                 foreach ($_POST as $key => $value) {
-                    if (empty($value)) {
+                    if (empty($value) && $value != 0) {
 
                         $formError[] = 'The ' . $key . ' Field Can\'t be Empty';
                     }
+                }
+
+                if ($image == false) {
+                   $formError[] = 'The image upload faild try another one';
                 }
 
                 if (empty($formError)) {
@@ -533,6 +537,10 @@
                    }
                }
 
+               if ($image == false) {
+                  $formError[] = 'The image upload faild try another one';
+               }
+
                if (empty($formError)) {
                    $stmt = $conn->prepare("UPDATE `buldings` SET `title`= ?,`description`= ?,`address`= ?,`price`= ?,`num_pr`= ?,`num_kit`= ?, `num_rooms`= ?,`status`= ?,`type`= ?,`city_id`= ?,`area_id`= ?,`subarea_id`= ?,`categoury_id`= ?,`subcategoury_id`= ?, image = ?, isApproved = ? WHERE id = ?");
 
@@ -766,7 +774,13 @@
 
         <?php if ($do == 'Delete'):
            $bu_id = isset($_GET['bu_id']) && is_numeric($_GET['bu_id']) ? intval($_GET['bu_id']) : 0;
+           $bu_image = getOneFrom('image', 'buldings', 'WHERE id ='.$bu_id);
            $delete = deleteItem('buldings', $bu_id);
+         if ($delete == true) {
+            if ($bu_image['image'] !== avatar()) {
+               unlink($bu_image['image']);
+            }
+         }
          ?>
          <div class="col-md-10">
              <div class="content-box-large">

@@ -94,19 +94,19 @@
 
    /* Start Get All From */
 
-   function getAllFrom($field, $table, $where = null, $and = null, $orderField, $ordering = 'ASC')
+   function getAllFrom($field, $table, $where = null, $and = null, $orderField = 'id', $ordering = 'ASC', $limit = null)
    {
       global $conn;
-      $stmt = $conn->prepare("SELECT $field FROM $table $where $and ORDER BY $orderField $ordering");
+      $stmt = $conn->prepare("SELECT $field FROM $table $where $and ORDER BY $orderField $ordering $limit");
       $stmt->execute();
       $all = $stmt->fetchAll();
       return $all;
    }
 
-   function getOneFrom($field, $table, $where = null, $and = null, $orderField, $ordering = 'ASC')
+   function getOneFrom($field, $table, $where = null, $and = null, $orderField = 'id', $ordering = 'ASC', $limit = null)
    {
       global $conn;
-      $stmt = $conn->prepare("SELECT $field FROM $table $where $and ORDER BY $orderField $ordering");
+      $stmt = $conn->prepare("SELECT $field FROM $table $where $and ORDER BY $orderField $ordering $limit");
       $stmt->execute();
       $all = $stmt->fetch();
       return $all;
@@ -171,7 +171,7 @@
       $mimeTypes = ['image/png', 'image/gif', 'image/jpeg', 'image/jpg', 'image/pjpeg', 'image/x-png', 'image/png'];
       /*Start Check the Image Type&Size*/
 
-      if (!$error && is_uploaded_file($path) && in_array($type, $mimeTypes) && $size < 200000){
+      if (!$error && is_uploaded_file($path) && in_array($type, $mimeTypes)){
          $ext = pathinfo($name, PATHINFO_EXTENSION);
          $sha1 = sha1($name);
          $fileName = date("y-m-d-h-i-s") . "_" . $sha1 . '.' . $ext;
@@ -182,6 +182,11 @@
          return false;
       }
 
+   }
+
+   function avatar()
+   {
+      return "layouts/images/bullding_image/avatar/avatar.jpg";
    }
 
    /* end image validate function */
