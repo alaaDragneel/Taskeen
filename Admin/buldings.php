@@ -40,7 +40,7 @@
                                   <tr>
                                       <th>ID#</th>
                                       <th>Title</th>
-                                      <th>DESC</th>
+                                      <th style="width: 300px">DESC</th>
                                       <th>address</th>
                                       <th>price</th>
                                       <th>rooms</th>
@@ -56,12 +56,15 @@
                                       <tr>
                                           <td><?php echo $bu['id'] ?></td>
                                           <td><?php echo $bu['title'] ?></td>
-                                          <td><?php echo $bu['description'] ?></td>
+                                          <?php $description = str_split($bu['description'], 100) ?>
+                                          <td><?php echo $description[0] . '...' ?></td>
                                           <td><?php echo $bu['address'] ?></td>
                                           <td><?php echo $bu['price'] ?></td>
                                           <td><?php echo $bu['num_rooms'] ?></td>
-                                          <td><span class="label label-<?php echo $bu['isApproved'] == 0 ? 'danger' : 'success' ?>">
-                                             <?php echo $bu['isApproved'] == 0 ? 'unapproved' : 'published' ?></span>
+                                          <td>
+                                              <span class="label label-<?php echo $bu['isApproved'] == 0 ? 'danger' : 'success' ?>">
+                                                  <?php echo $bu['isApproved'] == 0 ? 'unapproved' : 'published' ?>
+                                              </span>
                                           </td>
                                           <td>
                                               <a href="buldings.php?do=Edit&bu_id=<?php echo $bu['id'] ?>" class="btn btn-success">Edit</a>
@@ -362,10 +365,10 @@
                         'userid'    => $user_id,
                         'catid'     => $categoury_id,
                         'scatid'    => $subcategoury_id,
-                        'image'    => $image,
-                        'month'    => date('m'),
-                        'year'    => date('Y'),
-                        'isApproved' => 1,
+                        'image'     => $image,
+                        'month'     => date('m'),
+                        'year'      => date('Y'),
+                        'isApproved' => $isApproved,
                     ]);
                     $theMsg = 'The Bulding Added Successfully';
                 }
