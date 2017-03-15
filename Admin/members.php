@@ -105,8 +105,16 @@
                     $password       =   $_POST['password'] === '' ? '' : sha1($_POST['password']);
                     $isadmin        =   strValidation($_POST['isadmin'], 'int');
 
+                    $stmt = $conn->prepare("SELECT email FROM users WHERE email = ?");
+                    $stmt->execute([$email]);
+                    $all = $stmt->fetch();
+
                      /*Start Check the Fileds */
                      $formError = array();
+
+                     if($all > 0){
+                         $formError[] = "This Email Aready Taken";
+                     }
                      if(empty($name)){
                          $formError[] = "Name Filed Can't be Empty";
                      }
@@ -155,17 +163,15 @@
 
                        <?php
                           if(!empty($formError)): // if not he array empty
-                             foreach($formError as $err):
-                       ?>
-                                <div class='alert alert-danger'><?php echo $err; ?></div>
-                       <?php
-                             endforeach;
+                            echo alertStatus('error', null, $formError);
                           endif;
                        ?>
 
-                       <?php if (isset($theMsg)): ?>
-                          <div class="alert alert-success"><?php echo $theMsg; ?></div>
-                       <?php endif; ?>
+                       <?php
+                           if (isset($theMsg)):
+                              echo alertStatus('success', $theMsg);
+                           endif;
+                       ?>
                         <!-- `id`, `name`, `email`, `phone`, `address`, `facebook`, `password`, `isadmin` -->
                         <form class="form-horizontal" role="form" action="members.php?do=Add" method="post">
                             <div class="form-group">
@@ -327,24 +333,20 @@
                     <div class="panel-body">
 
                         <?php if (isset($invalidUserInfo)): // appear when the id is incorrect ?>
-                            <div class="alert alert-danger"><?php echo $invalidUserInfo; ?></div>
+                            <?php echo alertStatus('error', null, $invalidUserInfo);?>
                         <?php exit(); endif; ?>
 
-
                         <?php
-                              if(!empty($formError)): // if not he array empty
-                                 foreach($formError as $err):
-                        ?>
-                                    <div class='alert alert-danger'><?php echo $err; ?></div>
-                        <?php
-                                 endforeach;
-                              endif;
+                           if(!empty($formError)): // if not he array empty
+                              echo alertStatus('error', null, $formError);
+                           endif;
                         ?>
 
-
-                        <?php if (isset($theMsg)): // success message?>
-                            <div class="alert alert-success"><?php echo $theMsg; ?></div>
-                        <?php endif; ?>
+                        <?php
+                           if (isset($theMsg)):
+                              echo alertStatus('success', $theMsg);
+                           endif;
+                        ?>
 
                         <!-- `id`, `name`, `email`, `phone`, `address`, `facebook`, `password`, `isadmin` -->
                         <form class="form-horizontal" role="form" action="members.php?do=Edit&memberId=<?php echo $userInfo['id'];?>" method="post">
@@ -451,20 +453,17 @@
                        <div class="panel-body">
 
                           <?php
-                             if(!empty($formError)): // if not he array empty
-                                foreach($formError as $err):
-                          ?>
-                                   <div class='alert alert-danger'><?php echo $err; ?></div>
-                          <?php
-                                endforeach;
-                             exit(); endif;
-                          ?>
+                            if(!empty($formError)): // if not he array empty
+                               echo alertStatus('error', null, $formError);
+                            endif;
+                         ?>
 
-                          <?php if (isset($theMsg)): ?>
-                             <div class="alert alert-success"><?php echo $theMsg; ?></div>
-                          <?php exit(); endif; ?>
-                           <!-- `id`, `name`, `email`, `phone`, `address`, `facebook`, `password`, `isadmin` -->
-
+                         <?php
+                            if (isset($theMsg)):
+                               echo alertStatus('success', $theMsg);
+                            endif;
+                         ?>
+                         
                        </div>
                    </div>
                </div>

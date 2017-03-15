@@ -242,26 +242,23 @@ if (isset($_SESSION["admin_mail"])) {
                                        }
 
                                   ?>
-
-                                  <?php if (isset($invalidUserInfo)): // appear when the id is incorrect ?>
-                                     <div class="alert alert-danger"><?php echo $invalidUserInfo; ?></div>
-                                     <?php exit(); endif; ?>
-
-
                                      <?php
-                                     if(!empty($formError)): // if not he array empty
-                                        foreach($formError as $err):
-                                           ?>
-                                           <div class='alert alert-danger'><?php echo $err; ?></div>
-                                           <?php
-                                        endforeach;
-                                     endif;
+                                       if(!empty($invalidUserInfo)): // appear when the id is incorrect
+                                        echo alertStatus('error', null, $invalidUserInfo);
+                                       endif;
                                      ?>
 
+                                     <?php
+                                       if(!empty($formError)): // if not he array empty
+                                        echo alertStatus('error', null, $formError);
+                                       endif;
+                                     ?>
 
-                                     <?php if (isset($theMsg)): // success message?>
-                                        <div class="alert alert-success"><?php echo $theMsg; ?></div>
-                                     <?php endif; ?>
+                                     <?php
+                                       if (isset($theMsg)):
+                                          echo alertStatus('success', $theMsg);
+                                       endif;
+                                     ?>
 
                                   <form class="form-horizontal" role="form" action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
                                      <input type="hidden" name="memberId" value="<?php echo $userInfo['id'];?>">

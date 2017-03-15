@@ -107,17 +107,15 @@
                     <div class="panel-body">
                        <?php
                           if(!empty($formError)): // if not he array empty
-                             foreach($formError as $err):
-                       ?>
-                                <div class='alert alert-danger'><?php echo $err; ?></div>
-                       <?php
-                             endforeach;
+                           echo alertStatus('error', null, $formError);
                           endif;
                        ?>
 
-                        <?php if (isset($theMsg)): ?>
-                            <div class="alert alert-success"><?php echo $theMsg; ?></div>
-                        <?php endif; ?>
+                       <?php
+                          if (isset($theMsg)):
+                             echo alertStatus('success', $theMsg);
+                          endif;
+                       ?>
                         <!-- `id`, `name`, `email`, `phone`, `address`, `facebook`, `password`, `isadmin` -->
                         <form class="form-horizontal" role="form" action="city.php?do=Add" method="post">
                            <!-- City name -->
@@ -214,24 +212,20 @@
                    <div class="panel-body">
 
                        <?php if (isset($invalidCityInfo)): // appear when the id is incorrect ?>
-                           <div class="alert alert-danger"><?php echo $invalidCityInfo; ?></div>
+                           <?php echo alertStatus('error', null, $invalidCityInfo);?>
                        <?php exit(); endif; ?>
 
-
                        <?php
-                             if(!empty($formError)): // if not he array empty
-                                foreach($formError as $err):
-                       ?>
-                                   <div class='alert alert-danger'><?php echo $err; ?></div>
-                       <?php
-                                endforeach;
-                             endif;
+                         if(!empty($formError)): // if not he array empty
+                          echo alertStatus('error', null, $formError);
+                         endif;
                        ?>
 
-
-                       <?php if (isset($theMsg)): // success message?>
-                           <div class="alert alert-success"><?php echo $theMsg; ?></div>
-                       <?php endif; ?>
+                       <?php
+                         if (isset($theMsg)):
+                            echo alertStatus('success', $theMsg);
+                         endif;
+                       ?>
 
                        <!-- `id`, `name`, `email`, `phone`, `address`, `facebook`, `password`, `isadmin` -->
                        <form class="form-horizontal" role="form" action="city.php?do=Edit&cityId=<?php echo $cityInfo['id'];?>" method="post">
@@ -296,21 +290,17 @@
                           </div>
                       </div>
                       <div class="panel-body">
-
                         <?php
-                           if(!empty($formError)): // if not he array empty
-                              foreach($formError as $err):
-                        ?>
-                                  <div class='alert alert-danger'><?php echo $err; ?></div>
-                        <?php
-                              endforeach;
-                           exit(); endif;
+                          if(!empty($formError)): // if not he array empty
+                          echo alertStatus('error', null, $formError);
+                          endif;
                         ?>
 
-                        <?php if (isset($theMsg)): ?>
-                           <div class="alert alert-success"><?php echo $theMsg; ?></div>
-                        <?php exit(); endif; ?>
-
+                        <?php
+                          if (isset($theMsg)):
+                             echo alertStatus('success', $theMsg);
+                          endif;
+                        ?>
 
                       </div>
                   </div>

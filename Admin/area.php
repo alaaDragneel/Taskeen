@@ -125,19 +125,18 @@
                         </div>
                     </div>
                     <div class="panel-body">
-                       <?php
-                          if(!empty($formError)): // if not he array empty
-                             foreach($formError as $err):
-                       ?>
-                                <div class='alert alert-danger'><?php echo $err; ?></div>
-                       <?php
-                             endforeach;
+
+                      <?php
+                         if(!empty($formError)): // if not he array empty
+                           echo alertStatus('error', null, $formError);
+                         endif;
+                      ?>
+
+                      <?php
+                          if (isset($theMsg)):
+                             echo alertStatus('success', $theMsg);
                           endif;
-                       ?>
-                        <?php if (isset($theMsg)): ?>
-                            <div class="alert alert-success"><?php echo $theMsg; ?></div>
-                        <?php endif; ?>
-                        <!-- `id`, `name`, `email`, `phone`, `address`, `facebook`, `password`, `isadmin` -->
+                      ?>                        <!-- `id`, `name`, `email`, `phone`, `address`, `facebook`, `password`, `isadmin` -->
                         <form class="form-horizontal" role="form" action="area.php?do=Add" method="post">
                            <!-- Area name -->
                             <div class="form-group">
@@ -271,24 +270,20 @@
                    <div class="panel-body">
 
                        <?php if (isset($invalidAreaInfo)): // appear when the id is incorrect ?>
-                           <div class="alert alert-danger"><?php echo $invalidAreaInfo; ?></div>
+                           <?php echo alertStatus('error', null, $invalidAreaInfo);?>
                        <?php exit(); endif; ?>
 
+                      <?php
+                         if(!empty($formError)): // if not he array empty
+                           echo alertStatus('error', null, $formError);
+                         endif;
+                      ?>
 
-                       <?php
-                             if(!empty($formError)): // if not he array empty
-                                foreach($formError as $err):
-                       ?>
-                                   <div class='alert alert-danger'><?php echo $err; ?></div>
-                       <?php
-                                endforeach;
-                             endif;
-                       ?>
-
-
-                       <?php if (isset($theMsg)): // success message?>
-                           <div class="alert alert-success"><?php echo $theMsg; ?></div>
-                       <?php endif; ?>
+                      <?php
+                          if (isset($theMsg)):
+                             echo alertStatus('success', $theMsg);
+                          endif;
+                      ?>
 
                        <!-- `id`, `name`, `email`, `phone`, `address`, `facebook`, `password`, `isadmin` -->
                        <form class="form-horizontal" role="form" action="area.php?do=Edit&areaId=<?php echo $areaInfo['id'];?>" method="post">
@@ -377,19 +372,18 @@
                       </div>
                       <div class="panel-body">
 
-                        <?php
-                           if(!empty($formError)): // if not he array empty
-                              foreach($formError as $err):
-                        ?>
-                                  <div class='alert alert-danger'><?php echo $err; ?></div>
-                        <?php
-                              endforeach;
-                           exit(); endif;
-                        ?>
 
-                        <?php if (isset($theMsg)): ?>
-                           <div class="alert alert-success"><?php echo $theMsg; ?></div>
-                        <?php exit(); endif; ?>
+                         <?php
+                            if(!empty($formError)): // if not he array empty
+                              echo alertStatus('error', null, $formError);
+                            endif;
+                         ?>
+
+                         <?php
+                             if (isset($theMsg)):
+                                echo alertStatus('success', $theMsg);
+                             endif;
+                         ?>
 
 
                       </div>

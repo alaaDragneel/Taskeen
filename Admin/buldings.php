@@ -3,8 +3,6 @@
     ob_start();
     session_start();
 
-    $yield = '<link href="layouts/css/AdminLTE.min.css" rel="stylesheet">';
-
     $pageTitle = 'Buldings';
 
     if (isset($_SESSION["admin_mail"])) {
@@ -46,8 +44,7 @@
                                       <th>address</th>
                                       <th>price</th>
                                       <th>rooms</th>
-                                      <th>Type</th>
-                                      <th>Status</th>
+                                      <th>status</th>
                                       <th>actions</th>
                                   </tr>
                               </thead>
@@ -63,7 +60,9 @@
                                           <td><?php echo $bu['address'] ?></td>
                                           <td><?php echo $bu['price'] ?></td>
                                           <td><?php echo $bu['num_rooms'] ?></td>
-                                          <td><span class="label label-<?php echo $bu['isApproved'] == 0 ? 'danger' : 'success' ?>"><?php echo $bu['isApproved'] == 0 ? 'unapproved' : 'published' ?></span></td>
+                                          <td><span class="label label-<?php echo $bu['isApproved'] == 0 ? 'danger' : 'success' ?>">
+                                             <?php echo $bu['isApproved'] == 0 ? 'unapproved' : 'published' ?></span>
+                                          </td>
                                           <td>
                                               <a href="buldings.php?do=Edit&bu_id=<?php echo $bu['id'] ?>" class="btn btn-success">Edit</a>
                                               <a href="buldings.php?do=Delete&bu_id=<?php echo $bu['id'] ?>" class="btn btn-danger">Delete</a>
@@ -77,24 +76,38 @@
                   <?php elseif ($viewType == 'Cards'): ?>
                       <hr>
                       <div class="row">
-                          <?php
-                          $bus = getAllFrom('*', 'buldings', null, null, 'id', 'DESC');
-                          ?>
-                          <?php foreach ($bus as $key): ?>
-                              <div class="col-md-4 col-sm-1" style="padding: 5px; box-shadow: 5px 5px 19px #999;border-radius: 5px;">
-                                  <div class="card" style="padding: 2px 4px;">
-                                      <img class="card-img-top img-responsive" style="height: 300px; width: 400px;" src="<?php echo $key['image'] ?>" alt="<?php echo $key['title'] ?>">
-                                      <div class="card-block">
-                                          <h4 class="card-title"><?php echo $key['title'] ?></h4>
-                                          <p class="card-text"><?php echo $key['description'] ?></p>
-                                          <a href="buldings.php?do=Edit&bu_id=<?php echo $key['id'] ?>" class="btn btn-success">Edit</a>
-                                          <a href="buldings.php?do=Delete&bu_id=<?php echo $key['id'] ?>" class="btn btn-danger">Delete</a>
-                                          <span class="label label-<?php echo $key['isApproved'] == 0 ? 'danger' : 'success' ?>"><?php echo $key['isApproved'] == 0 ? 'unapproved' : 'published' ?></span>
-                                      </div>
-                                  </div>
-                              </div>
-                          <?php endforeach; ?>
-                      </div>
+                        <?php
+                           $bus = getAllFrom('*', 'buldings', null, null, 'id', 'DESC');
+                        ?>
+                        <ul class="cd-items cd-container">
+                           <?php foreach ($bus as $key): ?>
+                              <li class="cd-item">
+                                 <img src="<?php echo $key['image'] ?>" alt="<?php echo $key['title'] ?>" width="257" height="280">
+                                 <a href="#" class="cd-trigger" data-id="<?php echo $key['id'] ?>" title="Bullding <?php echo $key['title'] ?> Preview">Quick View</a>
+                              </li> <!-- cd-item -->
+                           <?php endforeach; ?>
+                        </ul> <!-- cd-items -->
+
+                        <div class="cd-quick-view">
+                           <div class="cd-slider-wrapper">
+                              <ul class="cd-slider">
+                                 <li><img src="layouts/images/bullding_image/avatar/cardAvatar.jpg" class="imgBox" alt="Product 1"></li>
+                              </ul> <!-- cd-slider -->
+                           </div> <!-- cd-slider-wrapper -->
+
+                           <div class="cd-item-info">
+                              <h2 class="title"></h2>
+                              <p class="disBox"></p>
+                                 <div class="btn-group" role="group" style="margin-left: 19%;">
+                                    <a href="#" class="moreBox btn btn-primary">Edit</a>
+                                    <a href="#" class="deleteBox btn btn-danger">Delete</a>
+                                    <span href="#" class="priceBox btn btn-warning"></span>
+                                    <span href="#" class="statusBox btn "></span>
+                                 </div> <!-- cd-item-action -->
+                           </div> <!-- cd-item-info -->
+                           <a href="#0" class="cd-close">Close</a>
+                        </div> <!-- cd-quick-view -->
+                     </div>
                   <?php endif; ?>
                 </div>
             </div>
@@ -128,8 +141,7 @@
                                       <th>address</th>
                                       <th>price</th>
                                       <th>rooms</th>
-                                      <th>Type</th>
-                                      <th>Status</th>
+                                      <th>status</th>
                                       <th>actions</th>
                                   </tr>
                               </thead>
@@ -145,7 +157,9 @@
                                           <td><?php echo $bu['address'] ?></td>
                                           <td><?php echo $bu['price'] ?></td>
                                           <td><?php echo $bu['num_rooms'] ?></td>
-                                          <td><span class="label label-<?php echo $bu['isApproved'] == 0 ? 'danger' : 'success' ?>"><?php echo $bu['isApproved'] == 0 ? 'unapproved' : 'published' ?></span></td>
+                                          <td><span class="label label-<?php echo $bu['isApproved'] == 0 ? 'danger' : 'success' ?>">
+                                             <?php echo $bu['isApproved'] == 0 ? 'unapproved' : 'published' ?></span>
+                                          </td>
                                           <td>
                                               <a href="buldings.php?do=Edit&bu_id=<?php echo $bu['id'] ?>" class="btn btn-success">Edit</a>
                                               <a href="buldings.php?do=Delete&bu_id=<?php echo $bu['id'] ?>" class="btn btn-danger">Delete</a>
@@ -157,30 +171,44 @@
                           </table>
                       </div>
                   <?php elseif ($viewType == 'Cards'): ?>
-                      <hr>
-                      <div class="row">
-                          <?php
-                          $bus = getAllFrom('*', 'buldings', 'WHERE isApproved = 1', null, 'id', 'DESC');
-                          ?>
+                     <hr>
+                     <div class="row">
+                       <?php
+                           $bus = getAllFrom('*', 'buldings', 'WHERE isApproved = 1', null, 'id', 'DESC');
+                       ?>
+                       <ul class="cd-items cd-container">
                           <?php foreach ($bus as $key): ?>
-                              <div class="col-md-4 col-sm-1" style="padding: 5px; box-shadow: 5px 5px 19px #999;border-radius: 5px;">
-                                  <div class="card" style="padding: 2px 4px;">
-                                      <img class="card-img-top img-responsive" style="height: 300px; width: 400px;" src="<?php echo $key['image'] ?>" alt="<?php echo $key['title'] ?>">
-                                      <div class="card-block">
-                                          <h4 class="card-title"><?php echo $key['title'] ?></h4>
-                                          <p class="card-text"><?php echo $key['description'] ?></p>
-                                          <a href="buldings.php?do=Edit&bu_id=<?php echo $key['id'] ?>" class="btn btn-success">Edit</a>
-                                          <a href="buldings.php?do=Delete&bu_id=<?php echo $key['id'] ?>" class="btn btn-danger">Delete</a>
-                                          <span class="label label-<?php echo $key['isApproved'] == 0 ? 'danger' : 'success' ?>"><?php echo $key['isApproved'] == 0 ? 'unapproved' : 'published' ?></span>
-                                      </div>
-                                  </div>
-                              </div>
+                             <li class="cd-item">
+                                <img src="<?php echo $key['image'] ?>" alt="<?php echo $key['title'] ?>" width="257" height="280">
+                                <a href="#" class="cd-trigger" data-id="<?php echo $key['id'] ?>" title="Bullding <?php echo $key['title'] ?> Preview">Quick View</a>
+                             </li> <!-- cd-item -->
                           <?php endforeach; ?>
-                      </div>
-                  <?php endif; ?>
-                </div>
-            </div>
-        </div>
+                       </ul> <!-- cd-items -->
+
+                       <div class="cd-quick-view">
+                          <div class="cd-slider-wrapper">
+                             <ul class="cd-slider">
+                                <li><img src="layouts/images/bullding_image/avatar/cardAvatar.jpg" class="imgBox" alt="Product 1"></li>
+                             </ul> <!-- cd-slider -->
+                          </div> <!-- cd-slider-wrapper -->
+
+                          <div class="cd-item-info">
+                             <h2 class="title"></h2>
+                             <p class="disBox"></p>
+                                <div class="btn-group" role="group" style="margin-left: 19%;">
+                                   <a href="#" class="moreBox btn btn-primary">Edit</a>
+                                   <a href="#" class="deleteBox btn btn-danger">Delete</a>
+                                   <span href="#" class="priceBox btn btn-warning"></span>
+                                   <span href="#" class="statusBox btn "></span>
+                                </div> <!-- cd-item-action -->
+                          </div> <!-- cd-item-info -->
+                          <a href="#0" class="cd-close">Close</a>
+                       </div> <!-- cd-quick-view -->
+                    </div>
+                 <?php endif; ?>
+               </div>
+           </div>
+       </div>
         <?php endif; ?>
         <?php if ($do == 'waiting'): ?>
         <div class="col-md-10">
@@ -211,7 +239,6 @@
                                       <th>price</th>
                                       <th>rooms</th>
                                       <th>Type</th>
-                                      <th>Status</th>
                                       <th>actions</th>
                                   </tr>
                               </thead>
@@ -239,30 +266,44 @@
                           </table>
                       </div>
                   <?php elseif ($viewType == 'Cards'): ?>
-                      <hr>
-                      <div class="row">
-                          <?php
-                          $bus = getAllFrom('*', 'buldings', 'WHERE isApproved = 0', null, 'id', 'DESC');
-                          ?>
+                     <hr>
+                     <div class="row">
+                       <?php
+                           $bus = getAllFrom('*', 'buldings', 'WHERE isApproved = 0', null, 'id', 'DESC');
+                       ?>
+                       <ul class="cd-items cd-container">
                           <?php foreach ($bus as $key): ?>
-                              <div class="col-md-4 col-sm-1" style="padding: 5px; box-shadow: 5px 5px 19px #999;border-radius: 5px;">
-                                  <div class="card" style="padding: 2px 4px;">
-                                      <img class="card-img-top img-responsive" style="height: 300px; width: 400px;" src="<?php echo $key['image'] ?>" alt="<?php echo $key['title'] ?>">
-                                      <div class="card-block">
-                                          <h4 class="card-title"><?php echo $key['title'] ?></h4>
-                                          <p class="card-text"><?php echo $key['description'] ?></p>
-                                          <a href="buldings.php?do=Edit&bu_id=<?php echo $key['id'] ?>" class="btn btn-success">Edit</a>
-                                          <a href="buldings.php?do=Delete&bu_id=<?php echo $key['id'] ?>" class="btn btn-danger">Delete</a>
-                                          <span class="label label-<?php echo $key['isApproved'] == 0 ? 'danger' : 'success' ?>"><?php echo $key['isApproved'] == 0 ? 'unapproved' : 'published' ?></span>
-                                      </div>
-                                  </div>
-                              </div>
+                             <li class="cd-item">
+                                <img src="<?php echo $key['image'] ?>" alt="<?php echo $key['title'] ?>" width="257" height="280">
+                                <a href="#" class="cd-trigger" data-id="<?php echo $key['id'] ?>" title="Bullding <?php echo $key['title'] ?> Preview">Quick View</a>
+                             </li> <!-- cd-item -->
                           <?php endforeach; ?>
-                      </div>
-                  <?php endif; ?>
-                </div>
-            </div>
-        </div>
+                       </ul> <!-- cd-items -->
+
+                       <div class="cd-quick-view">
+                          <div class="cd-slider-wrapper">
+                             <ul class="cd-slider">
+                                <li><img src="layouts/images/bullding_image/avatar/cardAvatar.jpg" class="imgBox" alt="Product 1"></li>
+                             </ul> <!-- cd-slider -->
+                          </div> <!-- cd-slider-wrapper -->
+
+                          <div class="cd-item-info">
+                             <h2 class="title"></h2>
+                             <p class="disBox"></p>
+                                <div class="btn-group" role="group" style="margin-left: 19%;">
+                                   <a href="#" class="moreBox btn btn-primary">Edit</a>
+                                   <a href="#" class="deleteBox btn btn-danger">Delete</a>
+                                   <span href="#" class="priceBox btn btn-warning"></span>
+                                   <span href="#" class="statusBox btn "></span>
+                                </div> <!-- cd-item-action -->
+                          </div> <!-- cd-item-info -->
+                          <a href="#0" class="cd-close">Close</a>
+                       </div> <!-- cd-quick-view -->
+                    </div>
+                 <?php endif; ?>
+               </div>
+           </div>
+       </div>
         <?php endif; ?>
 
         <?php if ($do == 'Add'):
@@ -341,20 +382,17 @@
                         </div>
                     </div>
                     <div class="panel-body">
-                        <?php if (isset($theMsg)): ?>
-                            <div class="alert alert-success"><?php echo $theMsg ?></div>
-                        <?php endif; ?>
-                        <?php if (!empty($formError)): ?>
-                            <hr>
-                            <div class="alert alert-danger">
-                                <ul>
-                                    <?php foreach ($formError as $value): ?>
-                                        <li><?php echo $value ?></li>
-                                    <?php endforeach; ?>
-                                </ul>
-                            </div>
-                            <hr>
-                        <?php endif; ?>
+                       <?php
+                          if(!empty($formError)): // if not he array empty
+                             echo alertStatus('error', null, $formError);
+                          endif;
+                          ?>
+
+                          <?php
+                          if (isset($theMsg)):
+                             echo alertStatus('success', $theMsg);
+                          endif;
+                          ?>
                         <form class="form-horizontal" role="form" action="buldings.php?do=Add" method="post" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="title" class="col-sm-2 control-label">title</label>
@@ -587,21 +625,18 @@
                        </div>
                    </div>
                    <div class="panel-body">
-                       <?php if (isset($theMsg)): ?>
-                           <div class="alert alert-success"><?php echo $theMsg ?></div>
-                       <?php endif; ?>
-                       <?php if (!empty($formError)): ?>
-                           <hr>
-                           <div class="alert alert-danger">
-                              <ul>
-                                   <?php foreach ($formError as $value): ?>
-                                       <li><?php echo $value ?></li>
-                                   <?php endforeach; ?>
-                              </ul>
-                           </div>
-                           <hr>
-                       <?php endif; ?>
-                       <form class="form-horizontal" role="form" action="buldings.php?do=Edit&bu_id=<?php echo $bus['id'] ?>" method="post" enctype="multipart/form-data">
+                      <?php
+                         if(!empty($formError)): // if not he array empty
+                            echo alertStatus('error', null, $formError);
+                         endif;
+                      ?>
+
+                      <?php
+                         if (isset($theMsg)):
+                            echo alertStatus('success', $theMsg);
+                         endif;
+                      ?>
+                        <form class="form-horizontal" role="form" action="buldings.php?do=Edit&bu_id=<?php echo $bus['id'] ?>" method="post" enctype="multipart/form-data">
                            <div class="form-group">
                               <label for="title" class="col-sm-2 control-label">title</label>
                               <div class="col-sm-10">
@@ -777,6 +812,7 @@
            $bu_image = getOneFrom('image', 'buldings', 'WHERE id ='.$bu_id);
            $delete = deleteItem('buldings', $bu_id);
          if ($delete == true) {
+            $theMsg = "deleted Successfully";
             if ($bu_image['image'] !== avatar()) {
                unlink($bu_image['image']);
             }
@@ -791,15 +827,16 @@
                  </div>
 
                  <div class="panel-body">
-                    <div class="alert alert-<?php echo $delete == true ? 'success' : 'danger' ?>">
-                       <?php echo $delete == true ? 'Deleted Successfully' : 'there was a proplem deleting this product or id not existing' ?>
-                    </div>
+                    <?php
+                       if (isset($theMsg)):
+                          echo alertStatus('success', $theMsg);
+                       endif;
+                    ?>
                     <?php RedirectFunc('Succrss Deleted', 'back', 5) ?>
                  </div>
              </div>
          </div>
         <?php endif; ?>
-
     </div>
 </div>
 <?php

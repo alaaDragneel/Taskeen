@@ -107,17 +107,16 @@
                     <div class="panel-body">
                        <?php
                           if(!empty($formError)): // if not he array empty
-                             foreach($formError as $err):
-                       ?>
-                                <div class='alert alert-danger'><?php echo $err; ?></div>
-                       <?php
-                             endforeach;
+                           echo alertStatus('error', null, $formError);
                           endif;
                        ?>
 
-                        <?php if (isset($theMsg)): ?>
-                            <div class="alert alert-success"><?php echo $theMsg; ?></div>
-                        <?php endif; ?>
+                       <?php
+                          if (isset($theMsg)):
+                             echo alertStatus('success', $theMsg);
+                          endif;
+                       ?>
+
                         <!-- `id`, `name`, `email`, `phone`, `address`, `facebook`, `password`, `isadmin` -->
                         <form class="form-horizontal" role="form" action="categouries.php?do=Add" method="post">
                            <!-- Categouries name -->
@@ -214,24 +213,20 @@
                    <div class="panel-body">
 
                        <?php if (isset($invalidCategouriesInfo)): // appear when the id is incorrect ?>
-                           <div class="alert alert-danger"><?php echo $invalidCategouriesInfo; ?></div>
+                           <?php echo alertStatus('error', null, $invalidCategouriesInfo);?>
                        <?php exit(); endif; ?>
 
-
                        <?php
-                             if(!empty($formError)): // if not he array empty
-                                foreach($formError as $err):
-                       ?>
-                                   <div class='alert alert-danger'><?php echo $err; ?></div>
-                       <?php
-                                endforeach;
-                             endif;
+                          if(!empty($formError)): // if not he array empty
+                           echo alertStatus('error', null, $formError);
+                          endif;
                        ?>
 
-
-                       <?php if (isset($theMsg)): // success message?>
-                           <div class="alert alert-success"><?php echo $theMsg; ?></div>
-                       <?php endif; ?>
+                       <?php
+                          if (isset($theMsg)):
+                             echo alertStatus('success', $theMsg);
+                          endif;
+                       ?>
 
                        <!-- `id`, `name`, `email`, `phone`, `address`, `facebook`, `password`, `isadmin` -->
                        <form class="form-horizontal" role="form" action="categouries.php?do=Edit&categouriesId=<?php echo $categouriesInfo['id'];?>" method="post">
@@ -298,19 +293,16 @@
                       <div class="panel-body">
 
                         <?php
-                           if(!empty($formError)): // if not he array empty
-                              foreach($formError as $err):
+                          if(!empty($formError)): // if not he array empty
+                           echo alertStatus('error', null, $formError);
+                          endif;
                         ?>
-                                  <div class='alert alert-danger'><?php echo $err; ?></div>
+
                         <?php
-                              endforeach;
-                           exit(); endif;
+                          if (isset($theMsg)):
+                             echo alertStatus('success', $theMsg);
+                          endif;
                         ?>
-
-                        <?php if (isset($theMsg)): ?>
-                           <div class="alert alert-success"><?php echo $theMsg; ?></div>
-                        <?php exit(); endif; ?>
-
 
                       </div>
                   </div>

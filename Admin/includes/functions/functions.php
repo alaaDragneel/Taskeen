@@ -220,6 +220,47 @@
       return $new;
    }
 
+   function alertStatus($type, $message = null, $errors = null)
+   {
+      $alert = '';
+      if ($errors !== null && $message == null) {
+         $alert .= '
+         <script type="text/javascript">
+         swal({
+            type: "'. $type .'",';
+            $alert .= 'title: "';
+            if (is_array($errors)) {
+               foreach ($errors as $err) {
+                  $alert .= $err .'\n';
+               }
+            } else {
+               $alert .= $errors .'\n';
+            }
+            $alert .= '",';
+            $alert .= 'text: "this message will disappear after 4s",
+            timer: 4000,
+            showConfirmButton: false
+         });
+         </script>
+         ';
 
+         return $alert;
+
+      } else {
+         $alert .= '
+         <script type="text/javascript">
+         swal({
+            type: "'. $type .'",
+            title: "'. $message .'",
+            text: "this message will disappear after 4s",
+            timer: 4000,
+            showConfirmButton: false
+         });
+         </script>
+         ';
+
+         return $alert;
+      }
+   }
 
 ?>
