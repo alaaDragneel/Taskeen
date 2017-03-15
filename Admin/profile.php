@@ -89,7 +89,7 @@ if (isset($_SESSION["admin_mail"])) {
                                              <tr>
                                                  <th>ID#</th>
                                                  <th>Title</th>
-                                                 <th>DESC</th>
+                                                 <th style="width: 300px">DESC</th>
                                                  <th>address</th>
                                                  <th>price</th>
                                                  <th>rooms</th>
@@ -103,7 +103,8 @@ if (isset($_SESSION["admin_mail"])) {
                                                 <tr>
                                                     <td><?php echo $bu['id'] ?></td>
                                                     <td><?php echo $bu['title'] ?></td>
-                                                    <td><?php echo $bu['description'] ?></td>
+                                                    <?php $description = str_split($bu['description'], 100) ?>
+                                                    <td><?php echo $description[0] . '...' ?></td>
                                                     <td><?php echo $bu['address'] ?></td>
                                                     <td><?php echo $bu['price'] ?></td>
                                                     <td><?php echo $bu['num_rooms'] ?></td>
@@ -132,7 +133,7 @@ if (isset($_SESSION["admin_mail"])) {
                                              <tr>
                                                  <th>ID#</th>
                                                  <th>Title</th>
-                                                 <th>DESC</th>
+                                                 <th style="width: 300px">DESC</th>
                                                  <th>address</th>
                                                  <th>price</th>
                                                  <th>rooms</th>
@@ -146,7 +147,8 @@ if (isset($_SESSION["admin_mail"])) {
                                                 <tr>
                                                     <td><?php echo $bu['id'] ?></td>
                                                     <td><?php echo $bu['title'] ?></td>
-                                                    <td><?php echo $bu['description'] ?></td>
+                                                    <?php $description = str_split($bu['description'], 100) ?>
+                                                    <td><?php echo $description[0] . '...' ?></td>
                                                     <td><?php echo $bu['address'] ?></td>
                                                     <td><?php echo $bu['price'] ?></td>
                                                     <td><?php echo $bu['num_rooms'] ?></td>
