@@ -104,19 +104,6 @@
               </ul>
           </li>
           <li><a href="statistics.php"><i class="fa fa-bar-chart-o"></i> statistics</a></li>
-          <li><a href="tables.php"><i class="glyphicon glyphicon-list"></i> Tables</a></li>
-          <li><a href="buttons.php"><i class="glyphicon glyphicon-record"></i> Buttons</a></li>
-          <li><a href="forms.php"><i class="glyphicon glyphicon-tasks"></i> Forms</a></li>
-          <li class="submenu">
-               <a href="#">
-                  <i class="glyphicon glyphicon-list"></i> Pages
-                  <span class="caret pull-right"></span>
-               </a>
-               <!-- Sub menu -->
-               <ul>
-                  <li><a href="login.php">Login</a></li>
-              </ul>
-          </li>
       </ul>
    </div>
 </div>
