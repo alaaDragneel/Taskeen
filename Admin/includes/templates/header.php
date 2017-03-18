@@ -15,6 +15,7 @@
     <link href="layouts/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- styles -->
     <link href="layouts/css/font-awesome.min.css" rel="stylesheet">
+    <link href="layouts/css/select2.min.css" rel="stylesheet">
     <!-- sweet alert Must Keep The Js On The Top TO Load The Functions -->
     <link href="layouts/css/sweetalert.css" rel="stylesheet">
     <script src="layouts/js/sweetalert.min.js"></script>

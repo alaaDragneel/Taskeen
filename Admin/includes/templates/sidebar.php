@@ -100,7 +100,7 @@
                   <li><a href="buldings.php"><i class="fa fa-dashboard"></i> Manage Buldings</a></li>
               </ul>
                <ul>
-                  <li><a href="#"><i class="fa fa-plus"></i> Add Buldings</a></li>
+                  <li><a href="buldings.php?do=Add"><i class="fa fa-plus"></i> Add Buldings</a></li>
               </ul>
           </li>
           <li><a href="statistics.php"><i class="fa fa-bar-chart-o"></i> statistics</a></li>
