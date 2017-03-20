@@ -103,14 +103,25 @@
       return $all;
    }
 
-   function getOneFrom($field, $table, $where = null, $and = null)
+   function getOneFrom($field, $table, $where = null, $and = null, $orderField = 'id', $ordering = 'ASC', $limit = null)
    {
       global $conn;
-      $stmt = $conn->prepare("SELECT $field FROM $table $where $and");
+      $stmt = $conn->prepare("SELECT $field FROM $table $where $and ORDER BY $orderField $ordering $limit");
       $stmt->execute();
       $all = $stmt->fetch();
       return $all;
    }
+
+   // site setting
+   function getSetting($settingName = 'siteName')
+   {
+      global $conn;
+      $stmt = $conn->prepare("SELECT value FROM sitesetting WHERE nameSetting = '$settingName'");
+      $stmt->execute();
+      $all = $stmt->fetch();
+      return $all[0];
+   }
+
 
    function dd($value)
    {

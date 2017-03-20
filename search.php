@@ -205,7 +205,8 @@
 									<span data-original-title="Kitchen" data-placement="bottom" data-toggle="tooltip"><?php echo $bu['num_kit'] ?></span>
 								</div><a class="btn btn-primary" href="property-detail.php?bu_id=<?php echo $bu['id'] ?>&view=<?php echo sha1($bu['title']) ?>">View Details</a>
 							</div>
-						</div><!-- properties -->
+						</div>
+                  <!-- properties -->
 					<?php endforeach; ?>
             <?php else:?>
                <div class="alert alert-danger">No Resualt</div>
