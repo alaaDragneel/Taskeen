@@ -32,7 +32,7 @@
                       <a href="buldings.php?do=Manage&viewType=Tables" class="btn btn-default"><i class="fa fa-table" aria-hidden="true"></i> Tables</a>
                       <a href="buldings.php?do=Manage&viewType=Cards" class="btn btn-default"><i class="fa fa-credit-card-alt" aria-hidden="true"></i> Cards</a>
                   <hr>
-                  <?php $viewType = isset($_GET['viewType']) ? $_GET['viewType'] : 'Tables'; // Check if the $viewType is Exixets ?>
+                  <?php $viewType = isset($_GET['viewType']) ? $_GET['viewType'] : 'Cards'; // Check if the $viewType is Exixets ?>
                   <?php if ($viewType == 'Tables'): ?>
                       <div class="table-responsive">
                           <table class="table">
@@ -546,6 +546,8 @@
            $bu_id = isset($_GET['bu_id']) && is_numeric($_GET['bu_id']) ? intval($_GET['bu_id']) : 0;
 
            $bus = getOneFrom('*', 'buldings', 'WHERE id = '.$bu_id, null, 'id', 'ASC');
+
+           $cities = getAllFrom('*', 'city', null, null, 'id', 'ASC');
            $areas = getAllFrom('area.*, city.id AS CITY_ID', 'area', 'INNER JOIN city ON area.city_id = city.id WHERE area.city_id ='.$bus['city_id'], null, 'name', 'ASC');
            $s_areas = getAllFrom('sub_area.*, area.id AS AREA_ID', 'sub_area', 'INNER JOIN area ON sub_area.area_id = area.id WHERE sub_area.area_id ='.$bus['area_id'], null, 'name', 'ASC');
            $s_cats = getAllFrom('sub_categouries.*, categouries.id AS CAT_ID', 'sub_categouries', 'INNER JOIN categouries ON sub_categouries.categoury_id = categouries.id WHERE sub_categouries.categoury_id ='.$bus['categoury_id'], null, 'name', 'ASC');
@@ -583,9 +585,8 @@
                if ($image == false) {
                   $formError[] = 'The image upload faild try another one';
                }
-
                if (empty($formError)) {
-                   $stmt = $conn->prepare("UPDATE `buldings` SET `title`= ?,`description`= ?,`address`= ?,`price`= ?,`num_pr`= ?,`num_kit`= ?, `num_rooms`= ?,`status`= ?,`type`= ?,`city_id`= ?,`area_id`= ?,`subarea_id`= ?,`categoury_id`= ?,`subcategoury_id`= ?, image = ?, isApproved = ? WHERE id = ?");
+                   $stmt = $conn->prepare("UPDATE `buldings` SET `title`= ?,`description`= ?,`address`= ?,`price`= ?,`num_pr`= ?,`num_kit`= ?, `num_rooms`= ?,`status`= ?,`type`= ?,`city_id`= ?,`area_id`= ?,`subarea_id`= ?,`categoury_id`= ?,`subcategoury_id`= ?, `image` = ?, isApproved = ? WHERE id = ?");
 
                    $stmt->execute([
                       $title,
@@ -610,6 +611,8 @@
                    $theMsg = 'Updated Successfully';
 
                    $bus = getOneFrom('*', 'buldings', 'WHERE id = '.$bu_id, null, 'id', 'ASC');
+
+                   $cities = getAllFrom('*', 'city', null, null, 'id', 'ASC');
 
                    $areas = getAllFrom('area.*, city.id AS CITY_ID', 'area', 'INNER JOIN city ON area.city_id = city.id WHERE area.city_id ='.$bus['city_id'], null, 'name', 'ASC');
 
@@ -711,9 +714,6 @@
                               <label for="city_id" class="col-sm-2 control-label">city_id</label>
                               <div class="col-sm-10">
                                    <select class="form-control" name="city_id" id="city_id_bulding">
-                                       <?php
-                                           $cities = getAllFrom('*', 'city', null, null, 'id', 'ASC');
-                                       ?>
                                        <?php foreach ($cities as $city): ?>
                                            <option value="<?php echo $city['id'] ?>" <?php echo $bus['city_id'] == $city['id'] ? 'selected' : '' ?>><?php echo $city['name'] ?></option>
                                        <?php endforeach; ?>

@@ -19,8 +19,12 @@
     <link rel="stylesheet" type="text/css" href="assets/slitslider/css/custom.css" />
     <!-- slitslider -->
 
+    <!-- select2 stylesheet-->
+    <link rel="stylesheet" href="assets/css/select2.min.css"/>
+    <!-- select2 stylesheet -->
+
     <!-- main stylesheet -->
-    <link rel="stylesheet" href="assets/css/style.css"/>
+    <link rel="stylesheet" href="assets/css/styles.css"/>
     <!-- main stylesheet -->
 </head>
 

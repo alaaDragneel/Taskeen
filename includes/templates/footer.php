@@ -90,6 +90,8 @@
          <script src="assets/js/jquery-1.9.1.min.js"></script>
          <!-- bootstrap -->
          <script src="assets/bootstrap/js/bootstrap.js"></script>
+         <!-- select2 -->
+         <script src="assets/js/select2.min.js"></script>
          <!-- owl -->
          <script src="assets/owl-carousel/owl.carousel.js"></script>
          <!-- slitslider -->

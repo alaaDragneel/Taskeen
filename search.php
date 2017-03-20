@@ -45,7 +45,7 @@
 					<h4>
                   <span class="glyphicon glyphicon-search"></span> Search for
                </h4>
-					<div class="row">
+               <div class="row">
 						<form action="search.php" method="get">
 							<div class="col-lg-6">
 								<input class="form-control" type="number" name="price_from" value="" placeholder="Price From">
@@ -129,10 +129,68 @@
 				<div class="row">
 					<?php
 
-					$bus = getAllFrom('*', 'buldings', $catid, $subcatid, 'title', 'ASC', null);
 
-					?>
-					<?php foreach ($bus as $bu):  ?>
+                     $requestAll = $_GET;
+
+                     // select
+                     $query = "SELECT * FROM buldings ";
+                     // count all the fields
+                     $count = count($requestAll);
+                     $i = 0;
+                     // loop for the data
+                     foreach($requestAll as $key => $req) {
+                        $i++;
+                        // check
+                        if ($req !== '') {
+                           //check the price
+                           if ($key == 'price_from' && $requestAll['price_to'] === '') {
+
+                              $query .= " WHERE price >= " . $req;
+
+                           } else if ($key == 'price_to' && $requestAll['price_from'] === '') {
+
+                              $query .= " WHERE price <= " . $req;
+
+                           } else {
+
+                              if ($key !== 'price_from' && $key !== 'price_to') {
+                                 // get and assign the data
+                                 $query .= " WHERE " . $key . " = " . $req;
+                              }
+
+                           }
+
+
+                        }
+
+                        if($count == $i && $requestAll['price_from'] !== '' && $requestAll['price_to'] !== ''){
+                           // if the $i is the final thing in the loop it will get here.
+                           $query .= " WHERE price BETWEEN " . $requestAll['price_from'] . " AND " . $requestAll['price_to'];
+                        }
+                     }
+                     // count the SQL WORD WHERE If Greater Than 1
+                     if (substr_count($query, 'WHERE') > 1) {
+                        // cut The First Where word
+                        $query_where_fixer = substr($query, 0, 29);
+                        // cut the others Where words
+                        $query_and_fixer = substr($query, 29);
+                        // replace the where by and
+                        $query_sql_fixer = str_replace('WHERE', 'AND', $query_and_fixer);
+                        // create the fixed sql
+                        $query = $query_where_fixer . $query_sql_fixer;
+                     }
+
+                     $bus = $conn->prepare($query . " ORDER By id DESC");
+
+                     $bus->execute();
+
+                     $busFetch = $bus->fetchAll();
+
+                     $buCount = $bus->rowCount();
+
+                ?>
+                <?php if ($buCount > 0): ?>
+                <?php foreach ($busFetch as $bu):  ?>
 						<!-- properties -->
 						<div class="col-lg-4 col-sm-6">
 							<div class="properties">
@@ -149,6 +207,9 @@
 							</div>
 						</div><!-- properties -->
 					<?php endforeach; ?>
+            <?php else:?>
+               <div class="alert alert-danger">No Resualt</div>
+            <?php endif; ?>
 				</div>
 			</div>
 		</div>
