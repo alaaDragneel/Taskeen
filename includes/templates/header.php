@@ -72,9 +72,12 @@
             <a href="index.php"><img src="images/logo.png" alt="Realestate"></a>
 
             <ul class="pull-right">
-                <li><a href="buysalerent.php">Buy</a></li>
-                <li><a href="buysalerent.php">Sale</a></li>
-                <li><a href="buysalerent.php">Rent</a></li>
+                <li><a href="buysalerent.php">All Buldings</a></li>
+                <?php
+                $cats = getAllFrom('*', 'categouries', null, null, 'name', 'ASC', null);
+                foreach ($cats as $cat): ?>
+                <li><a href="buysalerent.php?cat_id=<?php echo $cat['id'] ?>"><?php echo $cat['name'] ?></a></li>
+                <?php endforeach; ?>
             </ul>
         </div>
         <!-- #Header Starts -->

@@ -98,6 +98,7 @@
          <script type="text/javascript" src="assets/slitslider/js/jquery.slitslider.js"></script>
          <!-- main js file -->
          <script src="assets/js/script.js"></script>
+         <script src="assets/js/ajaxRequests.js"></script>
 
       </body>
       </html>

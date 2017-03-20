@@ -89,7 +89,7 @@ table{background-color: #fff;}
 .inside-banner span{margin-top: 10px;}
 
 .search-form {margin-bottom: 50px;}
-.search-form h4{margin: 17px 0;}
+.search-form h4{margin: 17px 0;font-size: 22px !important;color: #666 !important;}
 
 
 .hot-properties {margin-bottom: 50px;}
@@ -121,7 +121,7 @@ table{background-color: #fff;}
 
 
 /*footer*/
-.footer{background:url(../images/bg.jpg) #222; padding: 20px 0; color: #999;} 
+.footer{background:url(../images/bg.jpg) #222; padding: 20px 0; color: #999;}
 .footer h4{color: #fff;border-bottom: 2px solid #131313;margin-bottom: 10px;padding-bottom: 10px;}
 .footer ul{list-style: none;padding: 0; }
 .footer a:hover{color: #fff;}
