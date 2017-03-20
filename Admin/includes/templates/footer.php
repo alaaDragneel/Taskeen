@@ -16,6 +16,7 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="layouts/bootstrap/js/bootstrap.min.js"></script>
     <script src="layouts/js/Chart.min.js"></script>
+    <script src="layouts/js/select2.min.js"></script>
 
     <script src="layouts/js/velocity.min.js"></script>
 
@@ -24,7 +25,7 @@
     <script src="layouts/js/card.js"></script>
 
     <script src="layouts/js/app.min.js"></script>
-    <script src="layouts/js/custom.js"></script>
+    <script src="layouts/js/main.js"></script>
 
     <?php if (isset($chartData)): ?>
       <script type="text/javascript">

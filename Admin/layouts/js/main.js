@@ -68,4 +68,5 @@ $(document).ready(function () {
    });
 
    // end bulding
+   $('select').select2();
 });
