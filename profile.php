@@ -7,16 +7,23 @@ if (isset($_SESSION["user_mail"])) {
 
    include "init.php";
 
-
+   $bus = getAllFrom('*', 'buldings', 'WHERE user_id ='.$_SESSION["id"], null, 'id', 'DESC');
    $resentBulldingView = getAllFrom('*', 'buldings', 'WHERE user_id ='.$_SESSION["id"], null, 'id', 'DESC');
    $resentPublishiedBulldingView = getAllFrom('*', 'buldings', 'WHERE user_id ='.$_SESSION["id"], 'AND isApproved = 1', 'id', 'DESC');
    $resentWaitingBulldingView = getAllFrom('*', 'buldings', 'WHERE user_id ='.$_SESSION["id"], 'AND isApproved = 0', 'id', 'DESC');
-   ?>
-   <div class="page-content">
+?>
+<!-- banner -->
+<div class="inside-banner">
+    <div class="container">
+        <span class="pull-right"><a href="#">Home</a> / Profile</span>
+        <h2>Profile</h2>
+    </div>
+</div>
+<!-- banner -->
+
+<div class="container">
+    <div class="spacer">
       <div class="row">
-            <div class="col-md-10">
-               <section class="content">
-                  <div class="row">
 
                      <div class="col-md-12">
                         <div class="nav-tabs-custom">
@@ -30,88 +37,89 @@ if (isset($_SESSION["user_mail"])) {
                               <div class="tab-pane active" id="all">
                                  <!-- /.box-header -->
                                  <div class="box-body">
-                                    <div class="table-responsive">
-                                       <table class="table no-margin">
-                                          <thead>
-                                             <tr>
-                                                 <th>ID#</th>
-                                                 <th>Title</th>
-                                                 <th style="width: 300px">DESC</th>
-                                                 <th>address</th>
-                                                 <th>price</th>
-                                                 <th>rooms</th>
-                                                 <th>Status</th>
-                                                 <th>image</th>
-                                                 <th>actions</th>
-                                             </tr>
-                                          </thead>
-                                          <tbody>
-                                             <?php foreach ($resentBulldingView as $bu): ?>
-                                                <tr>
-                                                    <td><?php echo $bu['id'] ?></td>
-                                                    <td><?php echo $bu['title'] ?></td>
-                                                    <?php $description = str_split($bu['description'], 100) ?>
-                                                    <td><?php echo $description[0] . '...' ?></td>
-                                                    <td><?php echo $bu['address'] ?></td>
-                                                    <td><?php echo $bu['price'] ?></td>
-                                                    <td><?php echo $bu['num_rooms'] ?></td>
-                                                    <td><span class="label label-<?php echo $bu['isApproved'] == 0 ? 'danger' : 'success' ?>"><?php echo $bu['isApproved'] == 0 ? 'unapproved' : 'published' ?></span></td>
-                                                    <td><img src="<?php echo $bu['image'] ?>" alt="<?php echo $bu['title'] ?>" width="100"/></td>
-                                                    <td>
-                                                        <a href="buldings.php?do=Edit&bu_id=<?php echo $bu['id'] ?>" class="btn btn-success">Edit</a>
-                                                        <a href="buldings.php?do=Delete&bu_id=<?php echo $bu['id'] ?>" class="btn btn-danger">Delete</a>
-                                                    </td>
-                                                </tr>
+                                    <div class="row">
+                                       <?php if (count($bus) > 0): ?>
+
+                                          <?php
+                                          $role = $_SESSION['userRole'] == 1 ? 'Admin/' : '';
+                                          ?>
+                                          <ul class="cd-items cd-container">
+                                             <?php foreach ($bus as $key): ?>
+                                                <li class="cd-item">
+                                                   <img src="<?php echo $role . $key['image']?>" alt="<?php echo $key['title'] ?>" width="257" height="280">
+                                                   <a href="#" class="cd-trigger" data-id="<?php echo $key['id'] ?>" title="Bullding <?php echo $key['title'] ?> Preview">Quick View</a>
+                                                </li> <!-- cd-item -->
                                              <?php endforeach; ?>
-                                          </tbody>
-                                       </table>
-                                    </div>
-                                    <!-- /.table-responsive -->
+                                          </ul> <!-- cd-items -->
+
+                                          <div class="cd-quick-view">
+                                             <div class="cd-slider-wrapper">
+                                                <ul class="cd-slider">
+                                                   <li><img src="images/bullding_image/avatar/cardAvatar.jpg" class="imgBox" alt="Product 1"></li>
+                                                </ul> <!-- cd-slider -->
+                                             </div> <!-- cd-slider-wrapper -->
+
+                                             <div class="cd-item-info">
+                                                <h2 class="title"></h2>
+                                                <p class="disBox"></p>
+                                                <div class="btn-group" role="group" style="margin-left: 19%;">
+                                                   <a href="#" class="moreBox btn btn-default">Edit</a>
+                                                   <a href="#" class="deleteBox btn btn-danger">Delete</a>
+                                                   <span href="#" class="priceBox btn btn-warning"></span>
+                                                   <span href="#" class="statusBox btn "></span>
+                                                </div> <!-- cd-item-action -->
+                                             </div> <!-- cd-item-info -->
+                                             <a href="#0" class="cd-close">Close</a>
+                                          </div> <!-- cd-quick-view -->
+                                       <?php else: ?>
+                                          <div class="alert alert-danger">You Did'nt add Any Buldings</div>
+                                       <?php endif; ?>
+                                   </div>
                                  </div>
                                  <!-- /.box-body -->
-
                               </div>
                               <!-- /.tab-pane -->
                               <div class="tab-pane" id="Approved">
                                  <!-- /.box-header -->
                                  <div class="box-body">
-                                    <div class="table-responsive">
-                                       <table class="table no-margin">
-                                          <thead>
-                                             <tr>
-                                                 <th>ID#</th>
-                                                 <th>Title</th>
-                                                 <th style="width: 300px">DESC</th>
-                                                 <th>address</th>
-                                                 <th>price</th>
-                                                 <th>rooms</th>
-                                                 <th>Status</th>
-                                                 <th>image</th>
-                                                 <th>actions</th>
-                                             </tr>
-                                          </thead>
-                                          <tbody>
-                                             <?php foreach ($resentPublishiedBulldingView as $bu): ?>
-                                                <tr>
-                                                    <td><?php echo $bu['id'] ?></td>
-                                                    <td><?php echo $bu['title'] ?></td>
-                                                    <?php $description = str_split($bu['description'], 100) ?>
-                                                    <td><?php echo $description[0] . '...' ?></td>
-                                                    <td><?php echo $bu['address'] ?></td>
-                                                    <td><?php echo $bu['price'] ?></td>
-                                                    <td><?php echo $bu['num_rooms'] ?></td>
-                                                    <td><span class="label label-<?php echo $bu['isApproved'] == 0 ? 'danger' : 'success' ?>"><?php echo $bu['isApproved'] == 0 ? 'unapproved' : 'published' ?></span></td>
-                                                    <td><img src="<?php echo $bu['image'] ?>" alt="<?php echo $bu['title'] ?>" width="100"/></td>
-                                                    <td>
-                                                        <a href="buldings.php?do=Edit&bu_id=<?php echo $bu['id'] ?>" class="btn btn-success">Edit</a>
-                                                        <a href="buldings.php?do=Delete&bu_id=<?php echo $bu['id'] ?>" class="btn btn-danger">Delete</a>
-                                                    </td>
-                                                </tr>
+                                    <div class="row">
+                                       <?php if (count($resentPublishiedBulldingView) > 0): ?>
+                                          <?php
+                                          $role = $_SESSION['userRole'] == 1 ? 'Admin/' : '';
+                                          ?>
+                                          <ul class="cd-items cd-container">
+                                             <?php foreach ($resentPublishiedBulldingView as $key): ?>
+                                                <li class="cd-item">
+                                                   <img src="<?php echo $role . $key['image']?>" alt="<?php echo $key['title'] ?>" width="257" height="280">
+                                                   <a href="#" class="cd-trigger" data-id="<?php echo $key['id'] ?>" title="Bullding <?php echo $key['title'] ?> Preview">Quick View</a>
+                                                </li> <!-- cd-item -->
                                              <?php endforeach; ?>
-                                          </tbody>
-                                       </table>
+                                          </ul> <!-- cd-items -->
+
+                                          <div class="cd-quick-view">
+                                             <div class="cd-slider-wrapper">
+                                                <ul class="cd-slider">
+                                                   <li><img src="images/bullding_image/avatar/cardAvatar.jpg" class="imgBox" alt="Product 1"></li>
+                                                </ul> <!-- cd-slider -->
+                                             </div> <!-- cd-slider-wrapper -->
+
+                                             <div class="cd-item-info">
+                                                <h2 class="title"></h2>
+                                                <p class="disBox"></p>
+                                                <div class="btn-group" role="group" style="margin-left: 19%;">
+                                                   <a href="#" class="moreBox btn btn-default">Edit</a>
+                                                   <a href="#" class="deleteBox btn btn-danger">Delete</a>
+                                                   <span href="#" class="priceBox btn btn-warning"></span>
+                                                   <span href="#" class="statusBox btn "></span>
+                                                </div> <!-- cd-item-action -->
+                                             </div> <!-- cd-item-info -->
+                                             <a href="#0" class="cd-close">Close</a>
+                                          </div> <!-- cd-quick-view -->
+                                       <?php else: ?>
+                                          <div class="alert alert-info">There're no Published Bullding</div>
+                                       <?php endif; ?>
                                     </div>
-                                    <!-- /.table-responsive -->
+
                                  </div>
                                  <!-- /.box-body -->
                               </div>
@@ -119,43 +127,43 @@ if (isset($_SESSION["user_mail"])) {
                               <div class="tab-pane" id="UnApproved">
                                  <!-- /.box-header -->
                                  <div class="box-body">
-                                    <div class="table-responsive">
-                                       <table class="table no-margin">
-                                          <thead>
-                                             <tr>
-                                                 <th>ID#</th>
-                                                 <th>Title</th>
-                                                 <th style="width: 300px">DESC</th>
-                                                 <th>address</th>
-                                                 <th>price</th>
-                                                 <th>rooms</th>
-                                                 <th>Status</th>
-                                                 <th>image</th>
-                                                 <th>actions</th>
-                                             </tr>
-                                          </thead>
-                                          <tbody>
-                                             <?php foreach ($resentWaitingBulldingView as $bu): ?>
-                                                <tr>
-                                                    <td><?php echo $bu['id'] ?></td>
-                                                    <td><?php echo $bu['title'] ?></td>
-                                                    <?php $description = str_split($bu['description'], 100) ?>
-                                                    <td><?php echo $description[0] . '...' ?></td>
-                                                    <td><?php echo $bu['address'] ?></td>
-                                                    <td><?php echo $bu['price'] ?></td>
-                                                    <td><?php echo $bu['num_rooms'] ?></td>
-                                                    <td><span class="label label-<?php echo $bu['isApproved'] == 0 ? 'danger' : 'success' ?>"><?php echo $bu['isApproved'] == 0 ? 'unapproved' : 'published' ?></span></td>
-                                                    <td><img src="<?php echo $bu['image'] ?>" alt="<?php echo $bu['title'] ?>" width="100"/></td>
-                                                    <td>
-                                                        <a href="buldings.php?do=Edit&bu_id=<?php echo $bu['id'] ?>" class="btn btn-success">Edit</a>
-                                                        <a href="buldings.php?do=Delete&bu_id=<?php echo $bu['id'] ?>" class="btn btn-danger">Delete</a>
-                                                    </td>
-                                                </tr>
+                                    <div class="row">
+                                       <?php if (count($resentWaitingBulldingView) > 0): ?>
+                                          <?php
+                                          $role = $_SESSION['userRole'] == 1 ? 'Admin/' : '';
+                                          ?>
+                                          <ul class="cd-items cd-container">
+                                             <?php foreach ($resentWaitingBulldingView as $key): ?>
+                                                <li class="cd-item">
+                                                   <img src="<?php echo $role . $key['image']?>" alt="<?php echo $key['title'] ?>" width="257" height="280">
+                                                   <a href="#" class="cd-trigger" data-id="<?php echo $key['id'] ?>" title="Bullding <?php echo $key['title'] ?> Preview">Quick View</a>
+                                                </li> <!-- cd-item -->
                                              <?php endforeach; ?>
-                                          </tbody>
-                                       </table>
+                                          </ul> <!-- cd-items -->
+
+                                          <div class="cd-quick-view">
+                                             <div class="cd-slider-wrapper">
+                                                <ul class="cd-slider">
+                                                   <li><img src="images/bullding_image/avatar/cardAvatar.jpg" class="imgBox" alt="Product 1"></li>
+                                                </ul> <!-- cd-slider -->
+                                             </div> <!-- cd-slider-wrapper -->
+
+                                             <div class="cd-item-info">
+                                                <h2 class="title"></h2>
+                                                <p class="disBox"></p>
+                                                <div class="btn-group" role="group" style="margin-left: 19%;">
+                                                   <a href="#" class="moreBox btn btn-default">Edit</a>
+                                                   <a href="#" class="deleteBox btn btn-danger">Delete</a>
+                                                   <span href="#" class="priceBox btn btn-warning"></span>
+                                                   <span href="#" class="statusBox btn "></span>
+                                                </div> <!-- cd-item-action -->
+                                             </div> <!-- cd-item-info -->
+                                             <a href="#0" class="cd-close">Close</a>
+                                          </div> <!-- cd-quick-view -->
+                                       <?php else: ?>
+                                          <div class="alert alert-warning">there're no Waiting Buldings</div>
+                                       <?php endif; ?>
                                     </div>
-                                    <!-- /.table-responsive -->
                                  </div>
                                  <!-- /.box-body -->
                               </div>
@@ -171,7 +179,7 @@ if (isset($_SESSION["user_mail"])) {
 
                                        $name           =   strValidation($_POST['name']);
                                        $email          =   strValidation($_POST['email'], 'email');
-                                       $phone          =   strValidation($_POST['phone'], 'int');
+                                       $phone          =   '0'.strValidation($_POST['phone'], 'int');
                                        $address        =   strValidation($_POST['address']);
                                        $facebook       =   strValidation($_POST['facebook'], 'url');
                                        $password       =   $_POST['newPassword'] === '' ? $_POST['oldPassowrd'] : sha1($_POST['newPassword']);
@@ -208,7 +216,7 @@ if (isset($_SESSION["user_mail"])) {
                                                 $userInfoUpdate->execute([
                                                 $name, $email, $phone, $address, $facebook, $password, $isadmin, $userId,
                                                 ]);
-                                                $theMsg = 'The User Updated Successfully';
+                                                $theMsg = 'The info Updated Successfully';
                                              }
                                           }
                                        }
@@ -309,11 +317,11 @@ if (isset($_SESSION["user_mail"])) {
                      </div>
 
                   </div>
-               </section>
-        </div>
-        <?php endif; ?>
     </div>
 </div>
+<?php if($_SESSION['userRole'] == 1):?>
+   <script>function image() {return "Admin/";}</script>
+<?php endif?>
 <?php
         include "includes/templates/footer.php";
     } else {

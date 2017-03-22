@@ -57,8 +57,6 @@
          <script type="text/javascript" src="assets/slitslider/js/jquery.ba-cond.min.js"></script>
          <script type="text/javascript" src="assets/slitslider/js/jquery.slitslider.js"></script>
          <!-- main js file -->
-         <script src="assets/js/modernizr.js"></script>
-         <script src="assets/js/velocity.min.js"></script>
          <script src="assets/js/card.js"></script>
          <script src="assets/js/app.min.js"></script>
          <script src="assets/js/script.js"></script>
