@@ -28,6 +28,10 @@
     <link rel="stylesheet" href="assets/css/select2.min.css"/>
     <!-- select2 stylesheet -->
 
+    <!-- profile stylesheet -->
+    <link rel="stylesheet" href="assets/css/AdminLTE.min.css"/>
+    <!-- profile stylesheet -->
+
     <!-- main stylesheet -->
     <link rel="stylesheet" href="assets/css/styles.css"/>
     <!-- main stylesheet -->

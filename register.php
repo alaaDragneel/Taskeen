@@ -2,6 +2,12 @@
 
 <?php
    ob_start();
+   session_start();
+   if(isset($_SESSION["user_mail"])){
+      header("Location: index.php"); //Redirect the user to the dashboard
+      exit();
+   }
+
    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
          // remove the submit name
          unset($_POST['Submit']);
@@ -86,13 +92,8 @@ endif;
 <?php
 if (isset($theMsg)):
    echo alertStatus('success', $theMsg);
-
    header("refresh: 5;url=index.php");
-
 endif;
 ?>
 
-<?php
- include'includes/templates/footer.php';
- ob_end_flush();
-?>
+<?php include'includes/templates/footer.php';?>

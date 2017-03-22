@@ -1,5 +1,49 @@
-<?php include'init.php';?>
+<?php
+   include'init.php';
+   ob_start();
+   session_start();
+   if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
+      unset($_POST['submit']);
+      $email         = strValidation($_POST['email'], 'email');
+      $password      = strValidation($_POST['password']);
+      $hashedpass    = sha1($password);
+      $errors = [];
+      if (empty($email)) {
+         $errors[] = "Email Feild IS Required";
+      }
 
+      if(empty($password)) {
+         $errors[] = "password Feild IS Required";
+      }
+
+      if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+         $errors[] = "Invalid email format";
+      }
+
+      if (empty($errors)) {
+         $stmt = $conn->prepare("SELECT * FROM `users` WHERE email = ? AND password = ? LIMIT 1");
+         $stmt->execute([$email, $hashedpass]);
+         $row   = $stmt->fetch();
+         $count = $stmt->rowCount();
+         // if count > 0 means database contains information
+         if ($count > 0) {
+            $_SESSION["user_mail"] = $row['email']; //Register the sission name
+            $_SESSION["id"] = $row["id"]; //Register the sission ID
+            // echo "<script>window.location.replace('profile.php')</script>";
+            /*
+            - because the headers Throw errors and To keep the login code above the form Used the javaScript replace Function for redirect
+            -- header("Location: profile.php");//Redirect the user to the dashboard
+            */
+            header("Location: profile.php");//Redirect the user to the dashboard
+            exit();
+         }
+      }
+   }
+
+   if(!empty($errors)): // if not he array empty
+      echo alertStatus('error', null, $errors);
+   endif;
+?>
 <div class="">
 	<div class="sl-slider-wrapper" id="slider">
 		<div class="sl-slider">
@@ -122,12 +166,46 @@
 					</div>
 				</div>
 				<div class="col-lg-5 col-lg-offset-1 col-sm-6">
-					<p>Join now and get updated with all the properties deals.</p><button class="btn btn-info" data-target="#loginpop" data-toggle="modal">Login</button>
+               <?php if(isset($_SESSION["user_mail"])):?>
+                  <button class="btn btn-info" onclick="window.location.replace('logout.php');">Logout</button>
+               <?php else:?>
+                  <p>Join now and get updated with all the properties deals.</p><button class="btn btn-info" data-target="#loginpop" data-toggle="modal">Login</button>
+               <?php endif;?>
 				</div>
 			</div>
 		</div>
 	</div>
 </div><!-- banner -->
+<!-- Modal -->
+<div id="loginpop" class="modal fade">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="row">
+            <div class="col-sm-6 login">
+               <h4>Login</h4>
+               <form class="form-horizontal" action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" role="form">
+                  <div class="form-group">
+                     <label class="sr-only" for="exampleInputEmail2">Email address</label>
+                     <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Enter email" name="email">
+                  </div>
+                  <div class="form-group">
+                     <label class="sr-only" for="exampleInputPassword2">Password</label>
+                     <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" name="password">
+                  </div>
+                  <button type="submit" name="submit" class="btn btn-success">Sign in</button>
+               </form>
+            </div>
+            <div class="col-sm-6">
+               <h4>New User Sign Up</h4>
+               <p>Join today and get updated with all the properties deal happening around.</p>
+               <button type="submit" class="btn btn-info"  onclick="window.location.href='register.php'">Join Now</button>
+            </div>
+
+         </div>
+      </div>
+   </div>
+</div>
+<!-- /.modal -->
 <div class="container">
 	<div class="properties-listing spacer">
 		<a class="pull-right viewall" href="buysalerent.php">View All Listing</a>
@@ -308,4 +386,7 @@
 	</div>
 </div>
 
-<?php include'includes/templates/footer.php';?>
+<?php
+   include'includes/templates/footer.php';
+   ob_end_flush();
+?>
