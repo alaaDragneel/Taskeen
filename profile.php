@@ -7,7 +7,6 @@ if (isset($_SESSION["user_mail"])) {
 
    include "init.php";
 
-   $do = isset($_GET['do']) ? $_GET['do'] : 'Manage'; // Check if the $do is Exixets
 
    $resentBulldingView = getAllFrom('*', 'buldings', 'WHERE user_id ='.$_SESSION["id"], null, 'id', 'DESC');
    $resentPublishiedBulldingView = getAllFrom('*', 'buldings', 'WHERE user_id ='.$_SESSION["id"], 'AND isApproved = 1', 'id', 'DESC');
@@ -15,7 +14,6 @@ if (isset($_SESSION["user_mail"])) {
    ?>
    <div class="page-content">
       <div class="row">
-         <?php if ($do == 'Manage'): ?>
             <div class="col-md-10">
                <section class="content">
                   <div class="row">
