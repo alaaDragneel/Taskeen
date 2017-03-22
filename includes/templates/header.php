@@ -19,6 +19,11 @@
     <link rel="stylesheet" type="text/css" href="assets/slitslider/css/custom.css" />
     <!-- slitslider -->
 
+    <!-- sweetalert -->
+    <link rel="stylesheet" type="text/css" href="assets/css/sweetalert.css" />
+    <script src="assets/js/sweetalert.min.js"></script>
+    <!-- sweetalert -->
+
     <!-- select2 stylesheet-->
     <link rel="stylesheet" href="assets/css/select2.min.css"/>
     <!-- select2 stylesheet -->

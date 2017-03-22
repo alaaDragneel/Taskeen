@@ -44,11 +44,11 @@
       <div class="col-md-4 col-md-offset-4">
          <div class="login-wrapper">
             <div class="box">
-               <?php if (isset($errors)): ?>
-                  <?php foreach ($errors as $e): ?>
-                     <div class="alert alert-danger"><?php echo $e ?></div>
-                  <?php endforeach; ?>
-               <?php endif; ?>
+               <?php
+                  if(!empty($errors)): // if not he array empty
+                     echo alertStatus('error', null, $errors);
+                  endif;
+               ?>
                <div class="content-wrap">
                   <h6>Sign In</h6>
                   <form method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
