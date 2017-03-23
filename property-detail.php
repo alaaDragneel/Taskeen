@@ -12,7 +12,7 @@
 <?php
 // this query is for bulding informations
 $bu_id = isset($_GET['bu_id']) && is_numeric($_GET['bu_id']) ? intval($_GET['bu_id']) : 0;
-$bu = getOneFrom('*', 'buldings', 'WHERE id = '.$bu_id, null);
+$bu = getOneFrom('*', 'buldings', 'WHERE id = '.$bu_id, 'AND isApproved = 1');
 ?>
 
 <div class="container">
@@ -22,13 +22,13 @@ $bu = getOneFrom('*', 'buldings', 'WHERE id = '.$bu_id, null);
 				<div class="hot-properties hidden-xs">
 					<h4>Suggested Buldings</h4>
                     <?php
-                    $suggestedbus = getAllFrom("*", 'buldings', 'WHERE categoury_id='.$bu['categoury_id'], 'And subcategoury_id='.$bu['subcategoury_id'], 'created_at', 'DESC', 'LIMIT 10');
+                    $suggestedbus = getAllFrom("*", 'buldings', 'WHERE categoury_id='.$bu['categoury_id'], 'And subcategoury_id='.$bu['subcategoury_id'] . ' AND isApproved = 1', 'created_at', 'DESC', 'LIMIT 10');
                     ?>
                     <?php foreach ($suggestedbus as $key): ?>
                         <div class="row">
                             <div class="col-lg-4 col-sm-5"><img alt="properties" class="img-responsive img-circle" src="<?php echo $key['image'] ?>"></div>
                             <div class="col-lg-8 col-sm-7">
-                                <h5><a href="property-detail.php"><?php echo $key['title'] ?></a></h5>
+                                <h5><a href="property-detail.php?bu_id=<?php echo $key['id'] ?>&view=<?php echo sha1($key['title']) ?>"><?php echo $key['title'] ?></a></h5>
                                 <p class="price">$<?php echo $key['price'] ?></p>
                             </div>
                         </div>
@@ -38,7 +38,7 @@ $bu = getOneFrom('*', 'buldings', 'WHERE id = '.$bu_id, null);
             <!-- start property -->
             <?php
             $bu_id = isset($_GET['bu_id']) && is_numeric($_GET['bu_id']) ? intval($_GET['bu_id']) : 0;
-            $bu = getOneFrom('*', 'buldings', 'WHERE id = '.$bu_id, null);
+            $bu = getOneFrom('*', 'buldings', 'WHERE id = '.$bu_id, 'AND isApproved = 1');
             ?>
 			<div class="col-lg-9 col-sm-8">
 				<h2><?php echo $bu['title'] ?></h2>
@@ -78,20 +78,11 @@ $bu = getOneFrom('*', 'buldings', 'WHERE id = '.$bu_id, null);
 								</div>
 							</div>
 
-                            <div class="listing-detail">
-                                <span data-original-title="Path Room" data-placement="bottom" data-toggle="tooltip"><?php echo $bu['num_pr'] ?></span>
-                                <span data-original-title="Rooms" data-placement="bottom" data-toggle="tooltip"><?php echo $bu['num_rooms'] ?></span>
-                                <span data-original-title="Kitchen" data-placement="bottom" data-toggle="tooltip"><?php echo $bu['num_kit'] ?></span>
-                            </div>
-						</div>
-						<div class="col-lg-12 col-sm-6">
-							<div class="enquiry">
-								<h6><span class="glyphicon glyphicon-envelope"></span> Post Enquiry</h6>
-								<form role="form">
-									<input class="form-control" placeholder="Full Name" type="text"> <input class="form-control" placeholder="you@yourdomain.com" type="text"> <input class="form-control" placeholder="your number" type="text">
-									<textarea class="form-control" placeholder="Whats on your mind?" rows="6"></textarea> <button class="btn btn-primary" name="Submit" type="submit">Send Message</button>
-								</form>
-							</div>
+                      <div class="listing-detail">
+                          <span data-original-title="Path Room" data-placement="bottom" data-toggle="tooltip"><?php echo $bu['num_pr'] ?></span>
+                          <span data-original-title="Rooms" data-placement="bottom" data-toggle="tooltip"><?php echo $bu['num_rooms'] ?></span>
+                          <span data-original-title="Kitchen" data-placement="bottom" data-toggle="tooltip"><?php echo $bu['num_kit'] ?></span>
+                      </div>
 						</div>
 					</div>
 				</div>

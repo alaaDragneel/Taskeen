@@ -36,6 +36,8 @@
             $_SESSION["adminRole"] = $row["isadmin"]; //Register the sission ID
             header("Location: index.php");//Redirect the user to the dashboard
             exit();
+         } else {
+            $errors[] = 'Email Or Password Wrong Try Again';
          }
       }
    }

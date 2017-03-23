@@ -103,6 +103,15 @@
       return $all;
    }
 
+   function getAllApproved($field, $table, $where = null, $and = null, $Aproved = null, $orderField = 'id', $ordering = 'ASC', $limit = null)
+   {
+      global $conn;
+      $stmt = $conn->prepare("SELECT $field FROM $table $where $and $Aproved ORDER BY $orderField $ordering $limit");
+      $stmt->execute();
+      $all = $stmt->fetchAll();
+      return $all;
+   }
+
    function getOneFrom($field, $table, $where = null, $and = null, $orderField = 'id', $ordering = 'ASC', $limit = null)
    {
       global $conn;

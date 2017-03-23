@@ -67,14 +67,20 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="active"><a href="index.php">Home</a></li>
                         <li><a href="about.php">About</a></li>
-                        <li><a href="agents.php">Agents</a></li>
-                        <li><a href="blog.php">Blog</a></li>
                         <li><a href="contact.php">Contact</a></li>
                         <?php session_start();?>
                         <?php if (isset($_SESSION['user_mail'])): ?>
                            <li><a href="buldings.php">Add Free Bullding</a></li>
                            <li><a href="profile.php">profile</a></li>
                            <li><a href="logout.php">logout</a></li>
+                        <?php else: ?>
+                         <?php
+                           /*Login Function*/
+                           require_once 'login.php';
+                           /*Login Function*/
+                         ?>
+                           <li><a href="#" data-target="#loginpop" data-toggle="modal">Login</a></li>
+
                         <?php endif; ?>
                     </ul>
                 </div>
@@ -85,10 +91,6 @@
 
     </div>
     <!-- #Header Starts -->
-
-
-
-
 
     <div class="container">
 

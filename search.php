@@ -77,6 +77,13 @@
 									<option value="5">Buldings</option>
 								</select>
 							</div>
+                     <div class="col-lg-12 marginSelect">
+                        <select class="form-control" name="status">
+                           <option value="">Select status</option>
+                           <option value="1">Rent</option>
+                           <option value="2">Sell</option>
+                        </select>
+                     </div>
 							<div class="col-lg-12">
 								<input class="form-control" type="number" name="num_pr" value="" placeholder="Number Of Pathrooms">
 							</div>
@@ -94,13 +101,13 @@
 				<div class="hot-properties hidden-xs">
 					<h4>Hot Properties</h4>
 					<?php
-					$suggested = getAllFrom('*', 'buldings', null, null, 'id', 'DESC', 'LIMIT 5');
+					$suggested = getAllFrom('*', 'buldings', 'WHERE isApproved = 1', null, 'id', 'DESC', 'LIMIT 5');
 
 					foreach ($suggested as $bu): ?>
 					<div class="row">
 						<div class="col-lg-4 col-sm-5"><img alt="properties" class="img-responsive img-circle" src="<?php echo $bu['image'] ?>"></div>
 						<div class="col-lg-8 col-sm-7">
-							<h5><a href="property-detail.php"><?php echo $bu['title'] ?> Has <?php echo $bu['num_rooms'] ?> Rooms, <?php echo $bu['num_kit'] ?> Kitchens</a></h5>
+							<h5><a href="property-detail.php?bu_id=<?php echo $bu['id'] ?>&view=<?php echo sha1($bu['title']) ?>"><?php echo $bu['title'] ?> Has <?php echo $bu['num_rooms'] ?> Rooms, <?php echo $bu['num_kit'] ?> Kitchens</a></h5>
 							<p class="price">$<?php echo $bu['price'] ?></p>
 						</div>
 					</div>
@@ -108,24 +115,7 @@
 				</div>
 			</div>
 			<div class="col-lg-9 col-sm-8">
-				<div class="sortby clearfix">
-					<div class="pull-left result">
-						Showing: 12 of 100
-					</div>
-					<div class="pull-right">
-						<select class="form-control">
-							<option>
-								Sort by
-							</option>
-							<option>
-								Price: Low to High
-							</option>
-							<option>
-								Price: High to Low
-							</option>
-						</select>
-					</div>
-				</div>
+            <br><br><br>
 				<div class="row">
 					<?php
 
@@ -140,6 +130,7 @@
                      // loop for the data
                      foreach($requestAll as $key => $req) {
                         $i++;
+                        $req = strValidation($req, 'int');
                         // check
                         if ($req !== '') {
                            //check the price
@@ -177,10 +168,9 @@
                         // replace the where by and
                         $query_sql_fixer = str_replace('WHERE', 'AND', $query_and_fixer);
                         // create the fixed sql
-                        $query = $query_where_fixer . $query_sql_fixer;
+                        $query = $query_where_fixer . $query_sql_fixer . ' AND isApproved = 1 ORDER BY id DESC';
                      }
-
-                     $bus = $conn->prepare($query . " ORDER By id DESC");
+                     $bus = $conn->prepare($query);
 
                      $bus->execute();
 
@@ -196,6 +186,12 @@
 							<div class="properties">
 								<div class="image-holder">
 									<img alt="properties" class="img-responsive img-thumbnail" style="height: 200px;" src="<?php echo $bu['image'] ?>">
+                           <!-- status -->
+                           <div class="status <?php echo $bu['status'] == 1 ? 'sold' : 'new'?>">
+                              <?php echo $bu['status'] == 1 ? 'Rent' : 'Sell'?>
+                           </div>
+                           <!-- status -->
+
 								</div>
 								<h4><a href="property-detail.php"><?php echo $bu['title'] ?></a></h4>
 								<p class="price">Price: <?php echo $bu['price'] ?> $</p>
