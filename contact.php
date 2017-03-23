@@ -1,6 +1,5 @@
 <?php
    include'init.php';
-
    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       unset($_POST['Submit']);
       // set the values in variables

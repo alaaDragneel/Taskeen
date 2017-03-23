@@ -3,7 +3,7 @@
       <ul class="nav">
           <!-- Main menu -->
           <!-- class="current" for selected -->
-          <li><a href="index.php"><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
+          <li><a href="index.php"><i class="fa fa-tachometer"></i> Dashboard</a></li>
           <li class="submenu">
                <a href="#">
                   <i class="fa fa-users"></i> Users
@@ -91,7 +91,7 @@
           <!-- Buldings -->
           <li class="submenu">
                <a href="#">
-                  <i class="fa fa-tags"></i> Buldings
+                  <i class="fa fa-home"></i> Buldings
                   <span class="caret pull-right"></span>
                   <div class="clearfix"></div>
                </a>
@@ -104,7 +104,7 @@
               </ul>
           </li>
           <li><a href="contact.php"><i class="fa fa-comments"></i> Messages</a></li>
-          <li><a href="siteSetting.php"><i class="fa fa-edit"></i> Site Setting</a></li>
+          <li><a href="siteSetting.php"><i class="fa fa-cogs"></i> Site Setting</a></li>
           <li><a href="statistics.php"><i class="fa fa-bar-chart-o"></i> statistics</a></li>
       </ul>
    </div>

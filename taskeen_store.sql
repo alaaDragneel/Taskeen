@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 20, 2017 at 10:56 PM
+-- Generation Time: Mar 23, 2017 at 11:26 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.23
 
@@ -80,23 +80,27 @@ CREATE TABLE `buldings` (
 --
 
 INSERT INTO `buldings` (`id`, `title`, `description`, `address`, `price`, `num_pr`, `num_kit`, `num_rooms`, `status`, `type`, `city_id`, `area_id`, `subarea_id`, `user_id`, `categoury_id`, `subcategoury_id`, `image`, `month`, `year`, `isApproved`, `created_at`, `updated_at`) VALUES
-(2, 'test 2`', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address 2', 1, '22', '32', '42', 2, 0, 2, 1, 4, 1, 1, 1, 'layouts/images/bullding_image/17-03-14-07-44-34_f50112e1a66318535df4d36e9c7521a5de42e340.jpg', '01', '2017', 1, '2017-03-14 18:44:34', '2017-03-20 20:42:52'),
-(3, 'test3', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address3', 1, '2', '3', '4', 1, 0, 2, 1, 4, 1, 1, 1, 'layouts/images/bullding_image/17-03-14-11-59-07_0d76c634444a843f3c1ef7dee1663b2353541da2.jpg', '04', '2017', 1, '2017-03-14 18:02:55', '2017-03-20 20:42:52'),
-(6, 'test 6', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address 6', 12, '22', '32', '42', 2, 0, 2, 1, 4, 1, 1, 1, 'layouts/images/bullding_image/17-03-14-11-57-45_ddaf6890dc9a1054168c10ae4a8f9fe2ee154d79.jpg', '06', '2017', 1, '2017-03-14 18:44:34', '2017-03-20 20:42:52'),
-(7, 'test3', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address3', 1, '2', '3', '4', 1, 0, 2, 1, 4, 1, 1, 1, 'layouts/images/bullding_image/17-03-14-11-57-27_0bba3e5fc28ab4a35224462517daf1f2902cdb2f.jpg', '06', '2017', 1, '2017-03-14 18:02:55', '2017-03-20 20:42:52'),
-(8, 'test 4', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address 4', 12, '22', '32', '42', 2, 0, 2, 1, 4, 1, 3, 1, 'layouts/images/bullding_image/17-03-14-11-57-07_5255041a51a1ee4ec1633d2007f39595ef06b260.jpg', '07', '2017', 1, '2017-03-14 18:44:34', '2017-03-20 20:42:52'),
-(9, 'test', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address', 1, '2', '3', '4', 1, 0, 2, 1, 4, 1, 1, 1, 'layouts/images/bullding_image/17-03-14-11-56-51_5075b05af4eccac0ed2724f6fe7722a768fba606.jpg', '07', '2017', 0, '2017-03-14 18:02:55', '2017-03-20 20:42:52'),
-(10, 'test 2`', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address 2', 12, '22', '32', '42', 2, 0, 2, 1, 4, 1, 1, 1, 'layouts/images/bullding_image/17-03-14-11-56-37_38681ffdc30422ea1f7491c11a289ad0e16bee06.jpg', '07', '2017', 1, '2017-03-14 18:44:34', '2017-03-20 20:42:52'),
-(11, 'test3', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address3', 1, '2', '3', '4', 1, 0, 2, 1, 4, 1, 1, 1, 'layouts/images/bullding_image/17-03-14-11-56-23_f53c27ca0ca249e9d1799f300921b7a38183816f.jpg', '07', '2017', 1, '2017-03-14 18:02:55', '2017-03-20 20:42:52'),
-(12, 'test 4', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address 4', 12, '22', '32', '42', 2, 0, 2, 1, 4, 1, 1, 1, 'layouts/images/bullding_image/17-03-15-12-02-51_7bceb24ed92a001eb33eabc26768328bbab3c7ab.jpg', '08', '2017', 0, '2017-03-14 18:44:34', '2017-03-20 20:42:52'),
-(14, 'test 6', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address 6', 12, '22', '32', '42', 2, 0, 2, 1, 4, 1, 1, 1, 'layouts/images/bullding_image/17-03-14-11-55-11_2bb70922ab645166835bc497e8e25469d8323c06.jpg', '01', '2018', 0, '2017-03-14 18:44:34', '2017-03-20 20:42:52'),
-(15, 'test3', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address3', 1, '2', '3', '4', 1, 0, 2, 1, 4, 1, 1, 1, 'layouts/images/bullding_image/17-03-14-11-55-00_93085df1d86ea712757e561382c45be7dabb4901.jpg', '02', '2018', 1, '2017-03-14 18:02:55', '2017-03-20 20:42:52'),
-(16, 'test 4', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address 4', 140000, '3', '2', '5', 2, 0, 2, 7, 4, 1, 1, 1, 'layouts/images/bullding_image/17-03-15-07-01-35_c3b6081b37a87ce3e3817285af771261a17eda9a.jpeg', '03', '2018', 1, '2017-03-14 18:44:34', '2017-03-20 20:42:52'),
-(17, 'test 6', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address 6', 300, '2', '3', '5', 2, 0, 2, 7, 4, 1, 1, 1, 'layouts/images/bullding_image/17-03-14-11-54-22_54d5283fc6edf0678cacad7e074a6af7ea43c7b9.jpg', '04', '2018', 1, '2017-03-14 18:44:34', '2017-03-20 20:42:52'),
-(19, 'test 4', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address 4', 100000, '12', '4', '3', 2, 0, 2, 7, 4, 1, 1, 1, 'layouts/images/bullding_image/17-03-14-11-53-46_14396d974ba72e8f8be162ae3cb5b43a22bd6ca2.jpg', '04', '2018', 1, '2017-03-14 18:44:34', '2017-03-20 20:42:52'),
-(20, 'test 6', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address 6', 50000, '22', '32', '42', 2, 0, 1, 8, 2, 1, 1, 1, 'layouts/images/bullding_image/17-03-14-11-53-29_bb7fa0e572fb18477bb620702bc165f669c3bf0e.jpg', '06', '2018', 1, '2017-03-14 18:44:34', '2017-03-20 20:42:52'),
-(21, 'test3', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address3', 100, '2', '3', '4', 1, 0, 1, 1, 4, 1, 1, 1, 'layouts/images/bullding_image/17-03-15-12-02-05_d1cd89f8c33bc6056e73d934ff060bc32a40bfde.jpg', '07', '2018', 1, '2017-03-14 18:02:55', '2017-03-20 20:42:52'),
-(22, 'test 4', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address 4', 1200, '22', '32', '42', 2, 0, 1, 1, 4, 1, 1, 1, 'layouts/images/bullding_image/17-03-14-11-52-42_f798c5b46ab407d1e842e37bba8d99165d46a5ad.jpg', '07', '2018', 1, '2017-03-14 18:44:34', '2017-03-20 20:42:52');
+(2, 'test 2`', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address 2', 1, '22', '32', '42', 2, 0, 2, 1, 4, 1, 1, 1, 'images/bullding_image/17-03-14-07-44-34_f50112e1a66318535df4d36e9c7521a5de42e340.jpg', '01', '2017', 1, '2017-03-14 18:44:34', '2017-03-23 00:25:14'),
+(3, 'test3', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address3', 1, '2', '3', '4', 1, 0, 2, 1, 4, 1, 1, 1, 'images/bullding_image/17-03-14-11-59-07_0d76c634444a843f3c1ef7dee1663b2353541da2.jpg', '04', '2017', 1, '2017-03-14 18:02:55', '2017-03-23 00:25:05'),
+(6, 'test 6', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor', 'test address 6', 12, '22', '32', '42', 2, 2, 1, 8, 5, 1, 1, 1, 'images/bullding_image/17-03-14-11-57-45_ddaf6890dc9a1054168c10ae4a8f9fe2ee154d79.jpg', '06', '2017', 1, '2017-03-14 18:44:34', '2017-03-23 20:49:38'),
+(7, 'test3', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address3', 1, '2', '3', '4', 1, 0, 2, 1, 4, 1, 1, 1, 'images/bullding_image/17-03-14-11-57-27_0bba3e5fc28ab4a35224462517daf1f2902cdb2f.jpg', '06', '2017', 1, '2017-03-14 18:02:55', '2017-03-23 00:24:56'),
+(8, 'test 4', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address 4', 12, '22', '32', '42', 2, 0, 2, 1, 4, 1, 3, 1, 'images/bullding_image/17-03-14-11-57-07_5255041a51a1ee4ec1633d2007f39595ef06b260.jpg', '07', '2017', 1, '2017-03-14 18:44:34', '2017-03-23 00:24:47'),
+(9, 'test', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address', 1, '2', '3', '4', 1, 0, 2, 1, 4, 1, 1, 1, 'images/bullding_image/17-03-14-11-56-51_5075b05af4eccac0ed2724f6fe7722a768fba606.jpg', '07', '2017', 0, '2017-03-14 18:02:55', '2017-03-23 00:24:43'),
+(10, 'test 2`', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address 2', 12, '22', '32', '42', 2, 0, 2, 1, 4, 1, 1, 1, 'images/bullding_image/17-03-14-11-56-37_38681ffdc30422ea1f7491c11a289ad0e16bee06.jpg', '07', '2017', 1, '2017-03-14 18:44:34', '2017-03-23 00:24:38'),
+(11, 'test3', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address3', 1, '2', '3', '4', 1, 0, 2, 1, 4, 1, 1, 1, 'images/bullding_image/17-03-14-11-56-23_f53c27ca0ca249e9d1799f300921b7a38183816f.jpg', '07', '2017', 1, '2017-03-14 18:02:55', '2017-03-23 00:24:34'),
+(12, 'test 4', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address 4', 12, '22', '32', '42', 2, 0, 2, 1, 4, 1, 1, 1, 'images/bullding_image/17-03-15-12-02-51_7bceb24ed92a001eb33eabc26768328bbab3c7ab.jpg', '08', '2017', 0, '2017-03-14 18:44:34', '2017-03-23 00:24:29'),
+(14, 'test 6', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address 6', 12, '22', '32', '42', 2, 0, 2, 1, 4, 1, 1, 1, 'images/bullding_image/17-03-14-11-55-11_2bb70922ab645166835bc497e8e25469d8323c06.jpg', '01', '2018', 0, '2017-03-14 18:44:34', '2017-03-23 00:24:24'),
+(15, 'test3', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address3', 1, '2', '3', '4', 1, 0, 2, 1, 4, 1, 1, 1, 'images/bullding_image/17-03-14-11-55-00_93085df1d86ea712757e561382c45be7dabb4901.jpg', '02', '2018', 1, '2017-03-14 18:02:55', '2017-03-23 00:24:20'),
+(16, 'test 4', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address 4', 140000, '3', '2', '5', 2, 0, 2, 7, 4, 1, 1, 1, 'images/bullding_image/17-03-15-07-01-35_c3b6081b37a87ce3e3817285af771261a17eda9a.jpeg', '03', '2018', 1, '2017-03-14 18:44:34', '2017-03-23 00:24:15'),
+(17, 'test 6', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address 6', 300, '2', '3', '5', 2, 0, 2, 7, 4, 1, 1, 1, 'images/bullding_image/17-03-14-11-54-22_54d5283fc6edf0678cacad7e074a6af7ea43c7b9.jpg', '04', '2018', 1, '2017-03-14 18:44:34', '2017-03-23 00:24:09'),
+(19, 'test 4', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address 4', 100000, '12', '4', '3', 2, 0, 2, 7, 4, 1, 1, 1, 'images/bullding_image/17-03-14-11-53-46_14396d974ba72e8f8be162ae3cb5b43a22bd6ca2.jpg', '04', '2018', 1, '2017-03-14 18:44:34', '2017-03-23 00:23:59'),
+(20, 'test 6', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address 6', 50000, '22', '32', '42', 2, 0, 1, 8, 2, 1, 1, 1, 'images/bullding_image/17-03-14-11-53-29_bb7fa0e572fb18477bb620702bc165f669c3bf0e.jpg', '06', '2018', 1, '2017-03-14 18:44:34', '2017-03-23 00:23:49'),
+(21, 'test3', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address3', 100, '2', '3', '4', 1, 0, 1, 1, 4, 1, 1, 1, 'images/bullding_image/17-03-15-12-02-05_d1cd89f8c33bc6056e73d934ff060bc32a40bfde.jpg', '07', '2018', 1, '2017-03-14 18:02:55', '2017-03-23 00:23:52'),
+(22, 'test 4', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address 4', 1200, '22', '32', '42', 2, 0, 1, 1, 4, 1, 1, 1, 'images/bullding_image/17-03-14-11-52-42_f798c5b46ab407d1e842e37bba8d99165d46a5ad.jpg', '07', '2018', 1, '2017-03-14 18:44:34', '2017-03-23 00:23:39'),
+(23, 'test title', 'test description', 'test address', 100, '2', '2', '2', 1, 0, 1, 1, 4, 14, 1, 1, 'images/bullding_image/17-03-23-01-38-50_c02acf3c73d5f4cc31632c1fb1be85bb182db507.jpg', '03', '2017', 1, '2017-03-22 23:45:23', '2017-03-23 00:38:50'),
+(25, 'bulding test image', 'bulding test imagebulding test imagebulding test image', 'bulding test image', 20, '1', '4', '3', 2, 3, 1, 8, 2, 1, 1, 1, 'images/bullding_image/17-03-23-01-30-05_f50112e1a66318535df4d36e9c7521a5de42e340.jpg', '05', '2017', 1, '2017-03-23 00:30:05', '2017-03-23 01:09:56'),
+(26, 'bulding test image', 'bulding test image', 'bulding test image', 2, '12', '3', '5', 2, 0, 1, 1, 4, 1, 1, 1, 'images/bullding_image/avatar/avatar.jpg', '05', '2017', 0, '2017-03-23 00:31:15', '2017-03-23 01:09:36'),
+(27, 'new bullding', 'test description', 'imbaba', 200, '2', '1', '3', 2, 2, 1, 1, 4, 1, 1, 1, 'images/bullding_image/17-03-23-10-55-06_0d95e15525b2d6fb3343e505b1ff14d09488332e.png', '03', '2017', 1, '2017-03-23 21:55:06', '2017-03-23 21:55:06');
 
 -- --------------------------------------------------------
 
@@ -139,6 +143,28 @@ INSERT INTO `city` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `contact`
+--
+
+CREATE TABLE `contact` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `phone` varchar(255) NOT NULL,
+  `message` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `contact`
+--
+
+INSERT INTO `contact` (`id`, `name`, `email`, `phone`, `message`) VALUES
+(2, 'Mohamed Zayed Mohamed', 'mohamedzayed709@yahoo.com', '01096901954', 'this is the test of the message'),
+(4, 'moa', 'test@test.com', '010929255', '''Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.''');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `sitesetting`
 --
 
@@ -160,13 +186,14 @@ INSERT INTO `sitesetting` (`id`, `slug`, `nameSetting`, `value`, `type`, `create
 (1, 'site name', 'siteName', 'Taskeen Bullding Site', 0, '0000-00-00 00:00:00', '2016-11-09 10:09:24'),
 (2, 'facebook', 'facebook', 'https://www.facebook.com/', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (3, 'site phone', 'sitePhone', '00000000000000', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(4, 'site Description', 'siteDesc', 'this is a site description test update', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(4, 'site Description', 'siteDesc', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\n    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\n    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\n    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\n    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (7, 'address', 'address', 'egypt', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (8, 'email', 'email', 'test@test.com', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (9, 'twitter', 'twitter', 'https://twitter.com/', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (10, 'linkedin', 'linkedin', 'https://www.linkedin.com/', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (11, 'google', 'google', 'https://plus.google.com/', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(12, 'Site Copyright', 'copyright', 'Taskeen Programming', 0, '0000-00-00 00:00:00', '2017-02-03 14:49:36');
+(12, 'Site Copyright', 'copyright', 'Taskeen Programming', 0, '0000-00-00 00:00:00', '2017-02-03 14:49:36'),
+(13, 'instgram', 'instgram', 'https://www.instagram.com/', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -231,7 +258,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `phone`, `address`, `facebook`, `password`, `isadmin`) VALUES
-(1, 'Mohamed Zayed Mohamed', 'mohamedzayed709@yahoo.com', '1127946754', 'AinShams', 'https://www.facebook.com/', '601f1889667efaebb33b8c12572835da3f027f78', 1);
+(1, 'Mohamed Zayed Mohamed', 'mohamedzayed709@yahoo.com', '1127946754', 'AinShams', 'https://www.facebook.com/', '601f1889667efaebb33b8c12572835da3f027f78', 1),
+(14, 'moa', 'moaalaa16@gmail.com', '01096901954', 'imbaba, giza', 'https://www.facebook.com', '601f1889667efaebb33b8c12572835da3f027f78', 0);
 
 --
 -- Indexes for dumped tables
@@ -269,6 +297,12 @@ ALTER TABLE `categouries`
 ALTER TABLE `city`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `name` (`name`);
+
+--
+-- Indexes for table `contact`
+--
+ALTER TABLE `contact`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `sitesetting`
@@ -311,7 +345,7 @@ ALTER TABLE `area`
 -- AUTO_INCREMENT for table `buldings`
 --
 ALTER TABLE `buldings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT for table `categouries`
 --
@@ -323,10 +357,15 @@ ALTER TABLE `categouries`
 ALTER TABLE `city`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
+-- AUTO_INCREMENT for table `contact`
+--
+ALTER TABLE `contact`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
 -- AUTO_INCREMENT for table `sitesetting`
 --
 ALTER TABLE `sitesetting`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `sub_area`
 --
@@ -341,7 +380,7 @@ ALTER TABLE `sub_categouries`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- Constraints for dumped tables
 --
