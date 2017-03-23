@@ -171,7 +171,7 @@
                               <?php foreach ($resentBulldingView as $bu): ?>
                                  <li class="item">
                                     <div class="product-img">
-                                       <img alt="<?php echo $bu['title']?>" src="<?php echo $bu['image']?>">
+                                       <img alt="<?php echo $bu['title']?>" src="<?php echo '../' . $bu['image']?>">
                                     </div>
 
                                     <div class="product-info">
@@ -218,7 +218,7 @@
                               <?php foreach ($resentPublishiedBulldingView as $bu): ?>
                                  <li class="item">
                                     <div class="product-img">
-                                       <img alt="<?php echo $bu['title']?>" src="<?php echo $bu['image']?>">
+                                       <img alt="<?php echo $bu['title']?>" src="<?php echo '../' . $bu['image']?>">
                                     </div>
 
                                     <div class="product-info">
@@ -265,7 +265,7 @@
                               <?php foreach ($resentWaitingBulldingView as $bu): ?>
                                  <li class="item">
                                     <div class="product-img">
-                                       <img alt="<?php echo $bu['title']?>" src="<?php echo $bu['image']?>">
+                                       <img alt="<?php echo $bu['title']?>" src="<?php echo '../' . $bu['image']?>">
                                     </div>
 
                                     <div class="product-info">
