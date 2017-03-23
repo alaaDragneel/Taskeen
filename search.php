@@ -98,7 +98,7 @@
 
 					foreach ($suggested as $bu): ?>
 					<div class="row">
-						<div class="col-lg-4 col-sm-5"><img alt="properties" class="img-responsive img-circle" src="<?php echo 'Admin/' . $bu['image'] ?>"></div>
+						<div class="col-lg-4 col-sm-5"><img alt="properties" class="img-responsive img-circle" src="<?php echo $bu['image'] ?>"></div>
 						<div class="col-lg-8 col-sm-7">
 							<h5><a href="property-detail.php"><?php echo $bu['title'] ?> Has <?php echo $bu['num_rooms'] ?> Rooms, <?php echo $bu['num_kit'] ?> Kitchens</a></h5>
 							<p class="price">$<?php echo $bu['price'] ?></p>
@@ -195,7 +195,7 @@
 						<div class="col-lg-4 col-sm-6">
 							<div class="properties">
 								<div class="image-holder">
-									<img alt="properties" class="img-responsive img-thumbnail" style="height: 200px;" src="<?php echo 'Admin/' . $bu['image'] ?>">
+									<img alt="properties" class="img-responsive img-thumbnail" style="height: 200px;" src="<?php echo $bu['image'] ?>">
 								</div>
 								<h4><a href="property-detail.php"><?php echo $bu['title'] ?></a></h4>
 								<p class="price">Price: <?php echo $bu['price'] ?> $</p>

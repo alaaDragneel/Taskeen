@@ -1,13 +1,12 @@
 <?php
 
     ob_start();
-    session_start();
 
     $pageTitle = 'Buldings';
 
-    if (isset($_SESSION["user_mail"])) {
+    include "init.php";
 
-        include "init.php";
+    if (isset($_SESSION["user_mail"])) {
 
         $do = isset($_GET['do']) ? $_GET['do'] : 'Add'; // Check if the $do is Exixets
 ?>
@@ -276,7 +275,6 @@
                $categoury_id       =   strValidation($_POST['categoury_id'], 'int');
                $subcategoury_id    =   strValidation($_POST['subcategoury_id'], 'int');
                $image              =   empty($_FILES['image']['name']) ? $busImage['image'] : imageValidation($_FILES['image']);
-               $isApproved         =   $_POST['isApproved'];
 
                $formError = array();
                foreach ($_POST as $key => $value) {
@@ -289,7 +287,7 @@
                   $formError[] = 'The image upload faild try another one';
                }
                if (empty($formError)) {
-                   $stmt = $conn->prepare("UPDATE `buldings` SET `title`= ?,`description`= ?,`address`= ?,`price`= ?,`num_pr`= ?,`num_kit`= ?, `num_rooms`= ?,`status`= ?,`type`= ?,`city_id`= ?,`area_id`= ?,`subarea_id`= ?,`categoury_id`= ?,`subcategoury_id`= ?, `image` = ?, isApproved = ? WHERE id = ?");
+                   $stmt = $conn->prepare("UPDATE `buldings` SET `title`= ?,`description`= ?,`address`= ?,`price`= ?,`num_pr`= ?,`num_kit`= ?, `num_rooms`= ?,`status`= ?,`type`= ?,`city_id`= ?,`area_id`= ?,`subarea_id`= ?,`categoury_id`= ?,`subcategoury_id`= ?, `image` = ? WHERE id = ?");
 
                    $stmt->execute([
                       $title,
@@ -307,7 +305,6 @@
                       $categoury_id,
                       $subcategoury_id,
                       $image,
-                      $isApproved,
                       $bu_id,
                    ]);
 
@@ -373,19 +370,19 @@
                               </div>
                            </div>
                            <div class="form-group">
-                              <label for="num_pr" class="col-sm-2 control-label">num_pr</label>
+                              <label for="num_pr" class="col-sm-2 control-label">number of bathroom</label>
                               <div class="col-sm-10">
                                    <input type="number" name="num_pr" id="num_pr" class="form-control" placeholder="num_pr" value="<?php echo $bus['num_pr'] ?>">
                               </div>
                            </div>
                            <div class="form-group">
-                              <label for="num_kit" class="col-sm-2 control-label">num_kit</label>
+                              <label for="num_kit" class="col-sm-2 control-label">number of kitchen</label>
                               <div class="col-sm-10">
                                    <input type="number" name="num_kit" id="num_kit" class="form-control" placeholder="num_kit" value="<?php echo $bus['num_kit'] ?>">
                               </div>
                            </div>
                            <div class="form-group">
-                              <label for="num_rooms" class="col-sm-2 control-label">num_rooms</label>
+                              <label for="num_rooms" class="col-sm-2 control-label">number of rooms</label>
                               <div class="col-sm-10">
                                    <input type="text" name="num_rooms" id="num_rooms" class="form-control" placeholder="num_rooms" value="<?php echo $bus['num_rooms'] ?>">
                               </div>
@@ -414,7 +411,7 @@
                               </div>
                            </div>
                            <div class="form-group">
-                              <label for="city_id" class="col-sm-2 control-label">city_id</label>
+                              <label for="city_id" class="col-sm-2 control-label">city</label>
                               <div class="col-sm-10">
                                    <select class="form-control" name="city_id" id="city_id_bulding">
                                        <?php foreach ($cities as $city): ?>
@@ -424,7 +421,7 @@
                               </div>
                            </div>
                            <div class="form-group">
-                              <label for="area_id" class="col-sm-2 control-label">area_id</label>
+                              <label for="area_id" class="col-sm-2 control-label">area</label>
                               <div class="col-sm-10">
                                    <select class="form-control" name="area_id" id="area_id_bulding">
                                        <option value=""> Select City Frist </option>
@@ -435,7 +432,7 @@
                               </div>
                            </div>
                            <div class="form-group">
-                              <label for="subarea_id" class="col-sm-2 control-label">subarea_id</label>
+                              <label for="subarea_id" class="col-sm-2 control-label">subarea</label>
                               <div class="col-sm-10">
                                    <select class="form-control" name="subarea_id" id="subarea_id_bulding">
                                        <option value=""> Select Area Frist </option>$s_areas
@@ -446,7 +443,7 @@
                               </div>
                            </div>
                            <div class="form-group">
-                              <label for="categoury_id" class="col-sm-2 control-label">categoury_id</label>
+                              <label for="categoury_id" class="col-sm-2 control-label">categoury</label>
                               <div class="col-sm-10">
                                    <select class="form-control" name="categoury_id" id="cat_id_bulding">
                                        <?php
@@ -459,7 +456,7 @@
                               </div>
                            </div>
                            <div class="form-group">
-                              <label for="subcategoury_id" class="col-sm-2 control-label">subcategoury_id</label>
+                              <label for="subcategoury_id" class="col-sm-2 control-label">subcategoury</label>
                               <div class="col-sm-10">
                                    <select class="form-control" name="subcategoury_id" id="subcat_id_bulding">
                                        <option value=""> Select Categoury Frist </option>$s_cats
@@ -468,16 +465,6 @@
                                        <?php endforeach; ?>
                                    </select>
                               </div>
-                           </div>
-                           <div class="form-group">
-                               <label for="isApproved" class="col-sm-2 control-label">Approve</label>
-                               <div class="col-sm-10">
-                                   <select class="form-control" name="isApproved" id="isApproved">
-                                       <option> Select the permision </option>
-                                       <option value="0" <?php echo $bus['isApproved'] == 0 ? 'selected' : '' ?> > unapprove </option>
-                                       <option value="1" <?php echo $bus['isApproved'] == 1 ? 'selected' : '' ?> > published </option>
-                                   </select>
-                               </div>
                            </div>
                            <div class="form-group">
                               <label for="image" class="col-sm-2 control-label">image</label>

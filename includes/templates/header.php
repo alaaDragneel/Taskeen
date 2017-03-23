@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="assets/css/reset.css"/>
     <link rel="stylesheet" href="assets/css/card.css"/>
     <!-- card stylesheet -->
+
     <!-- profile stylesheet -->
     <link rel="stylesheet" href="assets/css/AdminLTE.min.css"/>
     <!-- profile stylesheet -->
@@ -69,9 +70,12 @@
                         <li><a href="agents.php">Agents</a></li>
                         <li><a href="blog.php">Blog</a></li>
                         <li><a href="contact.php">Contact</a></li>
-                        <li><a href="buldings.php">Add Free Bullding</a></li>
-                        <li><a href="profile.php">profile</a></li>
-                        <li><a href="logout.php">logout</a></li>
+                        <?php session_start();?>
+                        <?php if (isset($_SESSION['user_mail'])): ?>
+                           <li><a href="buldings.php">Add Free Bullding</a></li>
+                           <li><a href="profile.php">profile</a></li>
+                           <li><a href="logout.php">logout</a></li>
+                        <?php endif; ?>
                     </ul>
                 </div>
                 <!-- #Nav Ends -->

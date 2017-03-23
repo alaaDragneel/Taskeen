@@ -1,7 +1,7 @@
 <?php
    include'init.php';
    ob_start();
-   session_start();
+   
    if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
       unset($_POST['submit']);
       $email         = strValidation($_POST['email'], 'email');

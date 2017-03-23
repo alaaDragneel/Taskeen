@@ -26,7 +26,7 @@ $bu = getOneFrom('*', 'buldings', 'WHERE id = '.$bu_id, null);
                     ?>
                     <?php foreach ($suggestedbus as $key): ?>
                         <div class="row">
-                            <div class="col-lg-4 col-sm-5"><img alt="properties" class="img-responsive img-circle" src="<?php echo 'Admin/'.$key['image'] ?>"></div>
+                            <div class="col-lg-4 col-sm-5"><img alt="properties" class="img-responsive img-circle" src="<?php echo $key['image'] ?>"></div>
                             <div class="col-lg-8 col-sm-7">
                                 <h5><a href="property-detail.php"><?php echo $key['title'] ?></a></h5>
                                 <p class="price">$<?php echo $key['price'] ?></p>
@@ -48,7 +48,7 @@ $bu = getOneFrom('*', 'buldings', 'WHERE id = '.$bu_id, null);
 						<div class="property-images">
 							<!-- Slider Starts -->
                             <div style="height: 350px; width: 100%;" >
-                                <img style="height: 100%; width: 100%;" class="img-responsive img-rounded img-thumbnail" src="<?php echo 'Admin/' . $bu['image'] ?>" alt="">
+                                <img style="height: 100%; width: 100%;" class="img-responsive img-rounded img-thumbnail" src="<?php echo $bu['image'] ?>" alt="">
                             </div>
                             <!-- #Slider Ends -->
 						</div>

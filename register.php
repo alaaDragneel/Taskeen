@@ -2,7 +2,7 @@
 
 <?php
    ob_start();
-   session_start();
+   
    if(isset($_SESSION["user_mail"])){
       header("Location: index.php"); //Redirect the user to the dashboard
       exit();
