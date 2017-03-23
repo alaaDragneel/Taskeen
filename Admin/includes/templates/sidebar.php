@@ -103,6 +103,7 @@
                   <li><a href="buldings.php?do=Add"><i class="fa fa-plus"></i> Add Buldings</a></li>
               </ul>
           </li>
+          <li><a href="contact.php"><i class="fa fa-comments"></i> Messages</a></li>
           <li><a href="siteSetting.php"><i class="fa fa-edit"></i> Site Setting</a></li>
           <li><a href="statistics.php"><i class="fa fa-bar-chart-o"></i> statistics</a></li>
       </ul>
