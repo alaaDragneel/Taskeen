@@ -29,7 +29,6 @@
          if ($count > 0) {
             $_SESSION["user_mail"] = $row['email']; //Register the sission name
             $_SESSION["id"] = $row["id"]; //Register the sission ID
-            $_SESSION["userRole"] = $row["isadmin"]; //Register the sission ID
             // echo "<script>window.location.replace('profile.php')</script>";
             /*
             - because the headers Throw errors and To keep the login code above the form Used the javaScript replace Function for redirect

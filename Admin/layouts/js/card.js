@@ -13,7 +13,7 @@ jQuery(document).ready(function($){
          $.get(url, {id: id}, function(res){
          var json = JSON.parse(res);
 
-         $('.imgBox').attr('src', json.image);
+         $('.imgBox').attr('src', '../' + json.image);
          $('.title').html(json.title);
          $('.priceBox').html('Cost: ' + json.price);
          if (json.isApproved == 0) {

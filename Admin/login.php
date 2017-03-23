@@ -33,6 +33,7 @@
          if ($count > 0) {
             $_SESSION["admin_mail"] = $row['email']; //Register the sission name
             $_SESSION["id"] = $row["id"]; //Register the sission ID
+            $_SESSION["adminRole"] = $row["isadmin"]; //Register the sission ID
             header("Location: index.php");//Redirect the user to the dashboard
             exit();
          }

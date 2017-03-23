@@ -20,7 +20,8 @@
 </div>
 <!-- banner -->
 
-<div class="page-content">
+<div class="container">
+    <div class="spacer">
     <div class="row">
 
         <?php if ($do == 'Add'):
@@ -45,7 +46,6 @@
                 $categoury_id       =   strValidation($_POST['categoury_id'], 'int');
                 $subcategoury_id    =   strValidation($_POST['subcategoury_id'], 'int');
                 $image              =   empty($_FILES['image']['name']) ? avatar() : imageValidation($_FILES['image']);
-
                 $formError = array();
                 foreach ($_POST as $key => $value) {
                     if (empty($value) && $value != 0) {
@@ -89,7 +89,7 @@
             }
 
         ?>
-            <div class="col-md-10">
+            <div class="col-lg-8 col-lg-offset-2 col-sm-12">
                 <div class="content-box-large">
                     <div class="panel-heading">
                         <div class="panel-title">
@@ -134,19 +134,19 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="num_pr" class="col-sm-2 control-label">num_pr</label>
+                                <label for="num_pr" class="col-sm-2 control-label">Number Of Pathroom</label>
                                 <div class="col-sm-10">
                                     <input type="number" name="num_pr" id="num_pr" class="form-control" placeholder="num_pr">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="num_kit" class="col-sm-2 control-label">num_kit</label>
+                                <label for="num_kit" class="col-sm-2 control-label">Number Of kitchen</label>
                                 <div class="col-sm-10">
                                     <input type="number" name="num_kit" id="num_kit" class="form-control" placeholder="num_kit">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="num_rooms" class="col-sm-2 control-label">num_rooms</label>
+                                <label for="num_rooms" class="col-sm-2 control-label">Number Of Rooms</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="num_rooms" id="num_rooms" class="form-control" placeholder="num_rooms">
                                 </div>
@@ -165,7 +165,8 @@
                                 <label for="type" class="col-sm-2 control-label">type</label>
                                 <div class="col-sm-10">
                                     <select class="form-control" name="type">
-                                        <option value="0" selected>Flat</option>
+                                        <option value="">Select Type</option>
+                                        <option value="0">Flat</option>
                                         <option value="1">Villa</option>
                                         <option value="2">Shops</option>
                                         <option value="3">Lands</option>
@@ -175,9 +176,10 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="city_id" class="col-sm-2 control-label">city_id</label>
+                                <label for="city_id" class="col-sm-2 control-label">city</label>
                                 <div class="col-sm-10">
                                     <select class="form-control" name="city_id" id="city_id_bulding">
+                                       <option value="">Select City</option>
                                         <?php
                                             $cities = getAllFrom('*', 'city', null, null, 'id', 'ASC');
                                         ?>
@@ -188,7 +190,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="area_id" class="col-sm-2 control-label">area_id</label>
+                                <label for="area_id" class="col-sm-2 control-label">area</label>
                                 <div class="col-sm-10">
                                     <select class="form-control" name="area_id" id="area_id_bulding">
                                         <option value=""> Select City Frist </option>
@@ -207,6 +209,7 @@
                                 <label for="categoury_id" class="col-sm-2 control-label">categoury_id</label>
                                 <div class="col-sm-10">
                                     <select class="form-control" name="categoury_id" id="cat_id_bulding">
+                                       <option value="">select categoury</option>
                                         <?php
                                             $cats = getAllFrom('*', 'categouries', null, null, 'id', 'ASC');
                                         ?>
@@ -221,16 +224,6 @@
                                 <div class="col-sm-10">
                                     <select class="form-control" name="subcategoury_id" id="subcat_id_bulding">
                                         <option value=""> Select Categoury Frist </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="isApproved" class="col-sm-2 control-label">Approve</label>
-                                <div class="col-sm-10">
-                                    <select class="form-control" name="isApproved" id="isApproved">
-                                        <option> Select the permision </option>
-                                        <option value="0"> unapprove </option>
-                                        <option value="1"> published </option>
                                     </select>
                                 </div>
                             </div>
@@ -335,7 +328,7 @@
            }
 
       ?>
-           <div class="col-md-10">
+           <div class="col-lg-8 col-lg-offset-2 col-sm-12">
                <div class="content-box-large">
                    <div class="panel-heading">
                        <div class="panel-title">
@@ -553,6 +546,7 @@
          </div>
         <?php endif; ?>
     </div>
+</div>
 </div>
 <?php
         include "includes/templates/footer.php";

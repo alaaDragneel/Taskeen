@@ -129,13 +129,10 @@ if (isset($_SESSION["user_mail"])) {
                                  <div class="box-body">
                                     <div class="row">
                                        <?php if (count($resentWaitingBulldingView) > 0): ?>
-                                          <?php
-                                          $role = $_SESSION['userRole'] == 1 ? 'Admin/' : '';
-                                          ?>
                                           <ul class="cd-items cd-container">
                                              <?php foreach ($resentWaitingBulldingView as $key): ?>
                                                 <li class="cd-item">
-                                                   <img src="<?php echo $role . $key['image']?>" alt="<?php echo $key['title'] ?>" width="257" height="280">
+                                                   <img src="<?php echo $key['image']?>" alt="<?php echo $key['title'] ?>" width="257" height="280">
                                                    <a href="#" class="cd-trigger" data-id="<?php echo $key['id'] ?>" title="Bullding <?php echo $key['title'] ?> Preview">Quick View</a>
                                                 </li> <!-- cd-item -->
                                              <?php endforeach; ?>
@@ -183,7 +180,6 @@ if (isset($_SESSION["user_mail"])) {
                                        $address        =   strValidation($_POST['address']);
                                        $facebook       =   strValidation($_POST['facebook'], 'url');
                                        $password       =   $_POST['newPassword'] === '' ? $_POST['oldPassowrd'] : sha1($_POST['newPassword']);
-                                       $isadmin        =   1;
 
                                        /*Start Check the Fileds */
                                        $formError = array();
@@ -209,12 +205,12 @@ if (isset($_SESSION["user_mail"])) {
                                           } else {
                                              // Update TO database
                                              $userInfoUpdate = $conn->prepare("UPDATE users SET
-                                                name = ?, email = ?, phone = ?, address = ?, facebook = ?, password = ?, isadmin  = ?
+                                                name = ?, email = ?, phone = ?, address = ?, facebook = ?, password = ?
                                                 WHERE
                                                 id = ?");
 
                                                 $userInfoUpdate->execute([
-                                                $name, $email, $phone, $address, $facebook, $password, $isadmin, $userId,
+                                                $name, $email, $phone, $address, $facebook, $password, $userId,
                                                 ]);
                                                 $theMsg = 'The info Updated Successfully';
                                              }
@@ -319,9 +315,6 @@ if (isset($_SESSION["user_mail"])) {
                   </div>
     </div>
 </div>
-<?php if($_SESSION['userRole'] == 1):?>
-   <script>function image() {return "Admin/";}</script>
-<?php endif?>
 <?php
         include "includes/templates/footer.php";
     } else {

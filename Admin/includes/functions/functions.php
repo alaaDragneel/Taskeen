@@ -173,7 +173,7 @@
    /* start image validate function */
    function imageValidation($image)
    {
-      $dir_name        = "layouts/images/bullding_image/";
+      $dir_name        = "../images/bullding_image/";
       $path            = $image['tmp_name'];//temporary path
       $name            = $image['name'];
       $size            = $image['size'];
@@ -188,7 +188,7 @@
          $fileName = date("y-m-d-h-i-s") . "_" . $sha1 . '.' . $ext;
                move_uploaded_file($path, $dir_name . $fileName);
 
-         return $dir_name . $fileName;
+         return "images/bullding_image/" . $fileName;
       } else {
          return false;
       }
@@ -197,7 +197,7 @@
 
    function avatar()
    {
-      return "layouts/images/bullding_image/avatar/avatar.jpg";
+      return "images/bullding_image/avatar/avatar.jpg";
    }
 
    /* end image validate function */

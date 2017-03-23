@@ -16,7 +16,7 @@ $(document).ready(function () {
       }
    });
 
-   $('#city').on('change', function() {
+      $('#city').on('change', function() {
 
       var cityID = $(this).val();
       $.ajax({
@@ -29,7 +29,7 @@ $(document).ready(function () {
    });
 
 
-   // bulding
+     // bulding
    $('#city_id_bulding').on('change click', function() {
 
       var cityID = $(this).val();
@@ -38,7 +38,8 @@ $(document).ready(function () {
          url: 'ajaxfiles/buldings/getarea.php',
          data: { cityID: cityID },
       }).done(function(msg){
-         $('#area_id_bulding').html("");
+         $('#area_id_bulding').html('');         
+         $('#area_id_bulding').append('<option value=""> Select area </option>');         
          $('#area_id_bulding').append(msg);
       });
    });
@@ -51,6 +52,7 @@ $(document).ready(function () {
          data: { area_id: area_id },
       }).done(function(msg){
          $('#subarea_id_bulding').html("");
+         $('#subarea_id_bulding').append('<option value=""> Select subarea </option>');         
          $('#subarea_id_bulding').append(msg);
       });
    });
@@ -63,6 +65,7 @@ $(document).ready(function () {
          data: { cat_id: cat_id },
       }).done(function(msg){
          $('#subcat_id_bulding').html("");
+         $('#subcat_id_bulding').append('<option value=""> Select subcategory </option>');
          $('#subcat_id_bulding').append(msg);
       });
    });
