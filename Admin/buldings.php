@@ -195,9 +195,28 @@
                 $image              =   empty($_FILES['image']['name']) ? avatar() : imageValidation($_FILES['image']);
                 $isApproved         =   strValidation($_POST['isApproved'], 'int');
 
+
+                // for the services
+                $requestAll = [
+                    'check'                 =>   $_POST['survice_check'],
+                    'survice_name'          =>   $_POST['survice_name'],
+                    'survice_description'   =>   $_POST['survice_description'],
+                ];
+
+                // for the services
+                unset($_POST['survice_check']);
+                unset($_POST['survice_name']);
+                unset($_POST['survice_description']);
+                unset($_POST['isApproved']);
+
+
+
                 $formError = array();
+
+
+
                 foreach ($_POST as $key => $value) {
-                    if (empty($value) && $value != 0) {
+                    if (empty($value)) {
 
                         $formError[] = 'The ' . $key . ' Field Can\'t be Empty';
                     }
@@ -209,8 +228,7 @@
 
                 if (empty($formError)) {
                     $stmt = $conn->prepare("INSERT INTO `buldings`(`title`, `description`, `address`, `price`, `num_pr`, `num_kit`, `num_rooms`, `status`, `type`, `city_id`, `area_id`, `subarea_id`, `user_id`, `categoury_id`, `subcategoury_id`, `image`, `month`, `year`, `isApproved`)
-                                            VALUES (:title, :des, :address, :price, :num_pr, :num_kit, :num_rooms, :stauts, :type, :city_id, :areaid,
-                                                    :said, :userid, :catid, :scatid, :image, :month, :year, :isApproved)");
+                                            VALUES (:title, :des, :address, :price, :num_pr, :num_kit, :num_rooms, :stauts, :type, :city_id, :areaid, :said, :userid, :catid, :scatid, :image, :month, :year, :isApproved)");
                     $stmt->execute([
                         'title'     => $title,
                         'des'       => $description,
@@ -232,10 +250,26 @@
                         'year'      => date('Y'),
                         'isApproved' => $isApproved,
                     ]);
+
+                    $buldingid = $conn->lastInsertId();
+
                     $theMsg = 'The Bulding Added Successfully';
+
+                    for ($i=0; $i < count($requestAll['check']); $i++) {
+                        $stmt = $conn->prepare("INSERT INTO `services` (`name`, `describtion`, `buid`) VALUES (:name, :description, :buid)");
+                        $stmt->execute([
+                            'name'              => $requestAll['survice_name'][$i],
+                            'description'       => $requestAll['survice_description'][$i],
+                            'buid'              => $buldingid,
+                        ]);
+                        $serviceID = $conn->lastInsertId();
+                        $stmt = $conn->prepare("INSERT INTO `bu_ser` (`bu_id`, `service_id`) VALUES (:buid, :srid)");
+                        $stmt->execute([
+                            'buid'       => $buldingid,
+                            'srid'       => $serviceID,
+                        ]);
+                    }
                 }
-
-
             }
 
         ?>
@@ -249,9 +283,17 @@
                     <div class="panel-body">
                        <?php
                           if(!empty($formError)): // if not he array empty
-                             echo alertStatus('error', null, $formError);
-                          endif;
                           ?>
+                          <div class="alert alert-danger">
+                              <ul>
+                                  <?php foreach ($formError as $key): ?>
+                                      <li><?php echo $key ?></li>
+                                  <?php endforeach; ?>
+                              </ul>
+                          </div>
+                          <?php
+                          endif;
+                       ?>
 
                           <?php
                           if (isset($theMsg)):
@@ -381,7 +423,7 @@
                                 <label for="isApproved" class="col-sm-2 control-label">Approve</label>
                                 <div class="col-sm-10">
                                     <select class="form-control" name="isApproved" id="isApproved">
-                                        <option> Select the permision </option>
+                                        <option value=""> Select the permision </option>
                                         <option value="0"> unapprove </option>
                                         <option value="1"> published </option>
                                     </select>
@@ -391,6 +433,28 @@
                                 <label for="image" class="col-sm-2 control-label">image</label>
                                 <div class="col-sm-10">
                                     <input type="file" id="image" class="form-control" name="image">
+                                </div>
+                            </div>
+                            <hr>
+                            <h1 style="font-size: 25px;margin-left: 100px;">Bulding Survices</h1>
+                            <br>
+                            <h1 style="font-size: 15px;margin-left: 100px;color:red;">not required fields</h1>
+                            <hr>
+                            <a class="btn btn-link" style="margin-left: 100px;" href="#" id="Add_another_service">Add Another Survice</a>
+                            <hr>
+                            <div class="survices">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">survice name</label>
+                                    <div class="col-sm-10">
+                                        <input type="hidden" name="survice_check[]">
+                                        <input type="text" name="survice_name[]" class="form-control" placeholder="survice_name">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">survice description</label>
+                                    <div class="col-sm-10">
+                                        <textarea name="survice_description[]" class="form-control" placeholder="description" rows="4" cols="80"></textarea>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">

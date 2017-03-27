@@ -25,7 +25,7 @@
     <script src="layouts/js/card.js"></script>
 
     <script src="layouts/js/app.min.js"></script>
-    <script src="layouts/js/main.js"></script>
+    <script src="layouts/js/scripts.js"></script>
 
     <?php if (isset($chartData)): ?>
       <script type="text/javascript">

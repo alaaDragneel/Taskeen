@@ -29,8 +29,8 @@ $(document).ready(function() {
          url: 'ajaxfiles/buldings/getarea.php',
          data: { cityID: cityID },
       }).done(function(msg){
-         $('#area_id_bulding').html('');         
-         $('#area_id_bulding').append('<option value=""> Select area </option>');         
+         $('#area_id_bulding').html('');
+         $('#area_id_bulding').append('<option value=""> Select area </option>');
          $('#area_id_bulding').append(msg);
       });
    });
@@ -43,7 +43,7 @@ $(document).ready(function() {
          data: { area_id: area_id },
       }).done(function(msg){
          $('#subarea_id_bulding').html("");
-         $('#subarea_id_bulding').append('<option value=""> Select subarea </option>');         
+         $('#subarea_id_bulding').append('<option value=""> Select subarea </option>');
          $('#subarea_id_bulding').append(msg);
       });
    });
@@ -135,5 +135,23 @@ $(function() {
    ss.add($items);
 
    */
+
+
+
+   $(document).on('click', '#Add_another_service', function(event) {
+       event.preventDefault();
+
+       $.ajax({
+           method: 'get',
+           url: 'admin/survice_form.php',
+           success: function (msg) {
+               $('.survices').append(msg);
+           },
+           error: function () {
+               alert('error');
+           }
+       });
+   });
+
 
 });

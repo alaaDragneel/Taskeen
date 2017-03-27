@@ -45,9 +45,24 @@
                 $categoury_id       =   strValidation($_POST['categoury_id'], 'int');
                 $subcategoury_id    =   strValidation($_POST['subcategoury_id'], 'int');
                 $image              =   empty($_FILES['image']['name']) ? avatar() : imageValidation($_FILES['image']);
+
+
+                // for the services
+                $requestAll = [
+                    'check'                 =>   $_POST['survice_check'],
+                    'survice_name'          =>   $_POST['survice_name'],
+                    'survice_description'   =>   $_POST['survice_description'],
+                ];
+
+                // for the services
+                unset($_POST['survice_check']);
+                unset($_POST['survice_name']);
+                unset($_POST['survice_description']);
+
+
                 $formError = array();
                 foreach ($_POST as $key => $value) {
-                    if (empty($value) && $value != 0) {
+                    if (empty($value)) {
 
                         $formError[] = 'The ' . $key . ' Field Can\'t be Empty';
                     }
@@ -81,7 +96,22 @@
                         'month'     => date('m'),
                         'year'      => date('Y'),
                     ]);
+                    $buldingid = $conn->lastInsertId();
                     $theMsg = 'The Bulding Added Successfully';
+                    for ($i=0; $i < count($requestAll['check']); $i++) {
+                        $stmt = $conn->prepare("INSERT INTO `services` (`name`, `describtion`, `buid`) VALUES (:name, :description, :buid)");
+                        $stmt->execute([
+                            'name'              => $requestAll['survice_name'][$i],
+                            'description'       => $requestAll['survice_description'][$i],
+                            'buid'              => $buldingid,
+                        ]);
+                        $serviceID = $conn->lastInsertId();
+                        $stmt = $conn->prepare("INSERT INTO `bu_ser` (`bu_id`, `service_id`) VALUES (:buid, :srid)");
+                        $stmt->execute([
+                            'buid'       => $buldingid,
+                            'srid'       => $serviceID,
+                        ]);
+                    }
                 }
 
 
@@ -96,11 +126,19 @@
                         </div>
                     </div>
                     <div class="panel-body">
-                       <?php
-                          if(!empty($formError)): // if not he array empty
-                             echo alertStatus('error', null, $formError);
-                          endif;
-                          ?>
+                        <?php
+                           if(!empty($formError)): // if not he array empty
+                           ?>
+                           <div class="alert alert-danger">
+                               <ul>
+                                   <?php foreach ($formError as $key): ?>
+                                       <li><?php echo $key ?></li>
+                                   <?php endforeach; ?>
+                               </ul>
+                           </div>
+                           <?php
+                           endif;
+                        ?>
 
                           <?php
                           if (isset($theMsg)):
@@ -230,6 +268,28 @@
                                 <label for="image" class="col-sm-2 control-label">image</label>
                                 <div class="col-sm-10">
                                     <input type="file" id="image" class="form-control" name="image">
+                                </div>
+                            </div>
+                            <hr>
+                            <h1 style="font-size: 25px;color:black">Bulding Survices</h1>
+                            <br>
+                            <h1 style="font-size: 15px;color:red">not required fields</h1>
+                            <hr>
+                            <a class="btn btn-link" href="#" id="Add_another_service">Add Another Survice</a>
+                            <hr>
+                            <div class="survices">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">survice name</label>
+                                    <div class="col-sm-10">
+                                        <input type="hidden" name="survice_check[]">
+                                        <input type="text" name="survice_name[]" class="form-control" placeholder="survice_name">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">survice description</label>
+                                    <div class="col-sm-10">
+                                        <textarea name="survice_description[]" class="form-control" placeholder="description" rows="4" cols="80"></textarea>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">

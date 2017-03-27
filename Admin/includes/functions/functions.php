@@ -239,7 +239,7 @@
          <script type="text/javascript">
          swal({
             type: "'. $type .'",';
-            $alert .= 'title: "';
+        $alert .= 'title: "';
             if (is_array($errors)) {
                foreach ($errors as $err) {
                   $alert .= $err .'\n';
@@ -249,8 +249,8 @@
             }
             $alert .= '",';
             $alert .= 'text: "this message will disappear after 4s",
-            timer: 4000,
-            showConfirmButton: false
+            timer: 20000,
+            showConfirmButton: true
          });
          </script>
          ';

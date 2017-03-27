@@ -3,9 +3,12 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2017 at 03:36 PM
--- Server version: 10.1.13-MariaDB
--- PHP Version: 5.6.23
+-- Generation Time: Mar 27, 2017 at 08:05 PM
+-- Server version: 10.1.19-MariaDB
+-- PHP Version: 5.6.28
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -96,7 +99,53 @@ INSERT INTO `buldings` (`id`, `title`, `description`, `address`, `price`, `num_p
 (23, 'test title', 'test description', 'test address', 100, '2', '2', '2', 1, 0, 1, 1, 4, 14, 1, 1, 'images/bullding_image/17-03-23-01-38-50_c02acf3c73d5f4cc31632c1fb1be85bb182db507.jpg', '03', '2017', 1, '2017-03-22 23:45:23', '2017-03-23 00:38:50'),
 (25, 'bulding test image', 'bulding test imagebulding test imagebulding test image', 'bulding test image', 20, '1', '4', '3', 2, 3, 1, 8, 2, 1, 1, 1, 'images/bullding_image/17-03-23-01-30-05_f50112e1a66318535df4d36e9c7521a5de42e340.jpg', '05', '2017', 1, '2017-03-23 00:30:05', '2017-03-23 01:09:56'),
 (26, 'bulding test image', 'bulding test image', 'bulding test image', 2, '12', '3', '5', 2, 0, 1, 1, 4, 1, 1, 1, 'images/bullding_image/avatar/avatar.jpg', '05', '2017', 0, '2017-03-23 00:31:15', '2017-03-23 01:09:36'),
-(27, 'new bullding', 'test description', 'imbaba', 200, '2', '1', '3', 2, 2, 1, 1, 4, 1, 1, 1, 'images/bullding_image/17-03-23-10-55-06_0d95e15525b2d6fb3343e505b1ff14d09488332e.png', '03', '2017', 1, '2017-03-23 21:55:06', '2017-03-23 21:55:06');
+(27, 'new bullding', 'test description', 'imbaba', 200, '2', '1', '3', 2, 2, 1, 1, 4, 1, 1, 1, 'images/bullding_image/17-03-23-10-55-06_0d95e15525b2d6fb3343e505b1ff14d09488332e.png', '03', '2017', 1, '2017-03-23 21:55:06', '2017-03-23 21:55:06'),
+(49, 'Mohmed Mohmed', 'Mohmed Mohmed Mohmed Mohmed', 'Mohmed Mohmed Mohmed Mohmed Mohmed', 100000, '5', '5', '5', 1, 1, 1, 1, 4, 1, 1, 1, 'images/bullding_image/17-03-27-07-23-57_e2cc3416a5ea0c4cd8eef55a83610a60dfd2ef26.jpg', '03', '2017', 0, '2017-03-27 19:23:57', '2017-03-27 19:23:57'),
+(52, 'Mohmed Mohmed', 'Mohmed Mohmed Mohmed Mohmed', 'Mohmed Mohmed Mohmed Mohmed Mohmed', 100000, '5', '5', '5', 1, 1, 1, 1, 4, 1, 1, 1, 'images/bullding_image/17-03-27-07-27-10_e2cc3416a5ea0c4cd8eef55a83610a60dfd2ef26.jpg', '03', '2017', 0, '2017-03-27 19:27:10', '2017-03-27 19:27:10'),
+(53, 'Mohmed Mohmed', 'Mohmed Mohmed Mohmed Mohmed', 'Mohmed Mohmed Mohmed Mohmed Mohmed', 100000, '5', '5', '5', 1, 1, 1, 1, 4, 1, 1, 1, 'images/bullding_image/17-03-27-07-27-12_e2cc3416a5ea0c4cd8eef55a83610a60dfd2ef26.jpg', '03', '2017', 0, '2017-03-27 19:27:12', '2017-03-27 19:27:12'),
+(54, 'Mohmed Mohmed', 'Mohmed Mohmed Mohmed Mohmed', 'Mohmed Mohmed Mohmed Mohmed Mohmed', 100000, '5', '5', '5', 1, 1, 1, 1, 4, 1, 1, 1, 'images/bullding_image/17-03-27-07-27-14_e2cc3416a5ea0c4cd8eef55a83610a60dfd2ef26.jpg', '03', '2017', 0, '2017-03-27 19:27:14', '2017-03-27 19:27:14'),
+(55, 'Mohmed Mohmed', 'Mohmed Mohmed Mohmed Mohmed', 'Mohmed Mohmed Mohmed Mohmed Mohmed', 100000, '5', '5', '5', 1, 1, 1, 1, 4, 1, 1, 1, 'images/bullding_image/17-03-27-07-27-16_e2cc3416a5ea0c4cd8eef55a83610a60dfd2ef26.jpg', '03', '2017', 0, '2017-03-27 19:27:16', '2017-03-27 19:27:16'),
+(56, 'Mohmed Mohmed', 'Mohmed Mohmed Mohmed Mohmed', 'Mohmed Mohmed Mohmed Mohmed Mohmed', 100000, '5', '5', '5', 1, 1, 1, 1, 4, 1, 1, 1, 'images/bullding_image/17-03-27-07-27-18_e2cc3416a5ea0c4cd8eef55a83610a60dfd2ef26.jpg', '03', '2017', 1, '2017-03-27 19:27:18', '2017-03-27 19:28:58'),
+(58, 'Moegfkjsebf', 'Moegfkjsebf Moegfkjsebf Moegfkjsebf Moegfkjsebf', 'Moegfkjsebf Moegfkjsebf Moegfkjsebf', 55, '55', '55', '55', 1, 2, 1, 1, 4, 1, 1, 1, 'images/bullding_image/17-03-27-07-53-15_e2cc3416a5ea0c4cd8eef55a83610a60dfd2ef26.jpg', '03', '2017', 0, '2017-03-27 19:53:15', '2017-03-27 19:53:15'),
+(59, 'Moegfkjsebf', 'Moegfkjsebf Moegfkjsebf Moegfkjsebf Moegfkjsebf', 'Moegfkjsebf Moegfkjsebf Moegfkjsebf', 55, '55', '55', '55', 1, 2, 1, 1, 4, 1, 1, 1, 'images/bullding_image/17-03-27-07-54-16_e2cc3416a5ea0c4cd8eef55a83610a60dfd2ef26.jpg', '03', '2017', 0, '2017-03-27 19:54:16', '2017-03-27 19:54:16'),
+(60, 'Moegfkjsebf', 'Moegfkjsebf Moegfkjsebf Moegfkjsebf Moegfkjsebf', 'Moegfkjsebf Moegfkjsebf Moegfkjsebf', 55, '55', '55', '55', 1, 2, 1, 1, 4, 1, 1, 1, 'images/bullding_image/17-03-27-07-54-20_e2cc3416a5ea0c4cd8eef55a83610a60dfd2ef26.jpg', '03', '2017', 0, '2017-03-27 19:54:20', '2017-03-27 19:54:20');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bu_ser`
+--
+
+CREATE TABLE `bu_ser` (
+  `id` int(11) NOT NULL,
+  `bu_id` int(11) NOT NULL,
+  `service_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `bu_ser`
+--
+
+INSERT INTO `bu_ser` (`id`, `bu_id`, `service_id`) VALUES
+(7, 52, 7),
+(8, 52, 8),
+(9, 52, 9),
+(10, 53, 10),
+(11, 53, 11),
+(12, 53, 12),
+(13, 54, 13),
+(14, 54, 14),
+(15, 54, 15),
+(16, 55, 16),
+(17, 55, 17),
+(18, 55, 18),
+(19, 56, 19),
+(20, 56, 20),
+(21, 56, 21),
+(22, 59, 22),
+(23, 59, 23),
+(24, 60, 24),
+(25, 60, 25);
 
 -- --------------------------------------------------------
 
@@ -157,6 +206,44 @@ CREATE TABLE `contact` (
 INSERT INTO `contact` (`id`, `name`, `email`, `phone`, `message`) VALUES
 (2, 'Mohamed Zayed Mohamed', 'mohamedzayed709@yahoo.com', '01096901954', 'this is the test of the message'),
 (4, 'moa', 'test@test.com', '010929255', '''Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.''');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `services`
+--
+
+CREATE TABLE `services` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `describtion` text NOT NULL,
+  `buid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `services`
+--
+
+INSERT INTO `services` (`id`, `name`, `describtion`, `buid`) VALUES
+(7, 'ikfharjkrb', 'kjesbfjkrkrbg', 52),
+(8, 'lksdnvlkdsmngdrlkb', 'lkrdgnkdlrngdrlkgn', 52),
+(9, 'kjsdbfjksbtb', 'mnsbfmnsbtmnerbt', 52),
+(10, 'ikfharjkrb', 'kjesbfjkrkrbg', 53),
+(11, 'lksdnvlkdsmngdrlkb', 'lkrdgnkdlrngdrlkgn', 53),
+(12, 'kjsdbfjksbtb', 'mnsbfmnsbtmnerbt', 53),
+(13, 'ikfharjkrb', 'kjesbfjkrkrbg', 54),
+(14, 'lksdnvlkdsmngdrlkb', 'lkrdgnkdlrngdrlkgn', 54),
+(15, 'kjsdbfjksbtb', 'mnsbfmnsbtmnerbt', 54),
+(16, 'ikfharjkrb', 'kjesbfjkrkrbg', 55),
+(17, 'lksdnvlkdsmngdrlkb', 'lkrdgnkdlrngdrlkgn', 55),
+(18, 'kjsdbfjksbtb', 'mnsbfmnsbtmnerbt', 55),
+(19, 'ikfharjkrb', 'kjesbfjkrkrbg', 56),
+(20, 'lksdnvlkdsmngdrlkb', 'lkrdgnkdlrngdrlkgn', 56),
+(21, 'kjsdbfjksbtb', 'mnsbfmnsbtmnerbt', 56),
+(22, 'dfslkjbvdsmbdmsbq', 'elrknglkernglkdng', 59),
+(23, 'lkjsdbgkjsdbgkjb', 'dflkgnerlkdgn', 59),
+(24, 'dfslkjbvdsmbdmsbq', 'elrknglkernglkdng', 60),
+(25, 'lkjsdbgkjsdbgkjb', 'dflkgnerlkdgn', 60);
 
 -- --------------------------------------------------------
 
@@ -282,6 +369,14 @@ ALTER TABLE `buldings`
   ADD KEY `subcategoury_id` (`subcategoury_id`);
 
 --
+-- Indexes for table `bu_ser`
+--
+ALTER TABLE `bu_ser`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `service_id` (`service_id`),
+  ADD KEY `bu_id` (`bu_id`);
+
+--
 -- Indexes for table `categouries`
 --
 ALTER TABLE `categouries`
@@ -299,6 +394,13 @@ ALTER TABLE `city`
 --
 ALTER TABLE `contact`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `services`
+--
+ALTER TABLE `services`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `buid` (`buid`);
 
 --
 -- Indexes for table `sitesetting`
@@ -341,7 +443,12 @@ ALTER TABLE `area`
 -- AUTO_INCREMENT for table `buldings`
 --
 ALTER TABLE `buldings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+--
+-- AUTO_INCREMENT for table `bu_ser`
+--
+ALTER TABLE `bu_ser`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT for table `categouries`
 --
@@ -357,6 +464,11 @@ ALTER TABLE `city`
 --
 ALTER TABLE `contact`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `services`
+--
+ALTER TABLE `services`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT for table `sitesetting`
 --
@@ -397,6 +509,19 @@ ALTER TABLE `buldings`
   ADD CONSTRAINT `buldings_ibfk_4` FOREIGN KEY (`subarea_id`) REFERENCES `sub_area` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `buldings_ibfk_5` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `buldings_ibfk_6` FOREIGN KEY (`subcategoury_id`) REFERENCES `sub_categouries` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `bu_ser`
+--
+ALTER TABLE `bu_ser`
+  ADD CONSTRAINT `bu_ser_ibfk_1` FOREIGN KEY (`bu_id`) REFERENCES `buldings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `bu_ser_ibfk_2` FOREIGN KEY (`service_id`) REFERENCES `services` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `services`
+--
+ALTER TABLE `services`
+  ADD CONSTRAINT `services_ibfk_1` FOREIGN KEY (`buid`) REFERENCES `buldings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `sub_area`
