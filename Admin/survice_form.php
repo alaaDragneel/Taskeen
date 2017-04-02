@@ -8,6 +8,7 @@
 <div class="form-group">
     <label class="col-sm-2 control-label">survice description</label>
     <div class="col-sm-10">
-        <textarea name="survice_description[]" class="form-control" placeholder="description" rows="4" cols="80"></textarea>
+        <textarea name="survice_description[]" maxlength="250" class="form-control textarea" placeholder="description" rows="4" cols="80" required></textarea>
+        <div></div>
     </div>
 </div>

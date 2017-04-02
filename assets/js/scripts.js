@@ -154,4 +154,15 @@ $(function() {
    });
 
 
+
+   $(document).on('keyup', '.textarea', function(event) {
+       var text_max       = 250;
+       $(this).next('div').html(text_max + ' characters remaining');
+       var text_length    = $(this).val().length;
+       var text_remaining = text_max - text_length;
+       $(this).next('div').html(text_remaining + ' characters remaining');
+   });
+
+
+
 });

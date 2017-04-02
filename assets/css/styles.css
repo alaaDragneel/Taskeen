@@ -143,3 +143,11 @@ h2{font-size: 25px;}
 .marginSelect {
    margin: 0 0 24px !important;
 }
+
+
+.service {
+    background-color: #fff;
+    border-radius: 17px;
+    box-shadow: 4px 5px 8px #ccc;
+    padding: 10px 20px;
+}

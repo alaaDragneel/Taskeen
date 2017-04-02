@@ -3,9 +3,12 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2017 at 03:36 PM
--- Server version: 10.1.13-MariaDB
--- PHP Version: 5.6.23
+-- Generation Time: Apr 02, 2017 at 10:35 PM
+-- Server version: 10.1.19-MariaDB
+-- PHP Version: 5.6.28
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -15,8 +18,6 @@
 --
 -- Database: `taskeen_store`
 --
-CREATE DATABASE IF NOT EXISTS `taskeen_store` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `taskeen_store`;
 
 -- --------------------------------------------------------
 
@@ -35,10 +36,15 @@ CREATE TABLE `area` (
 --
 
 INSERT INTO `area` (`id`, `name`, `city_id`) VALUES
-(1, 'imbaba', 1),
-(2, 'nasr city', 1),
-(7, 'test area cairo', 2),
-(8, 'test area giza', 1);
+(1, 'Ain Shams', 1),
+(2, 'Nasr City', 1),
+(3, 'New Cairo', 1),
+(4, 'Maadi', 1),
+(5, 'Helmaya', 1),
+(6, 'Badr City', 1),
+(7, 'Imbaba', 2),
+(8, 'Alhram', 2),
+(9, '6 october', 2);
 
 -- --------------------------------------------------------
 
@@ -71,32 +77,17 @@ CREATE TABLE `buldings` (
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `buldings`
+-- Table structure for table `bu_ser`
 --
 
-INSERT INTO `buldings` (`id`, `title`, `description`, `address`, `price`, `num_pr`, `num_kit`, `num_rooms`, `status`, `type`, `city_id`, `area_id`, `subarea_id`, `user_id`, `categoury_id`, `subcategoury_id`, `image`, `month`, `year`, `isApproved`, `created_at`, `updated_at`) VALUES
-(2, 'test 2`', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address 2', 1, '22', '32', '42', 2, 0, 2, 1, 4, 1, 1, 1, 'images/bullding_image/17-03-14-07-44-34_f50112e1a66318535df4d36e9c7521a5de42e340.jpg', '01', '2017', 1, '2017-03-14 18:44:34', '2017-03-23 00:25:14'),
-(3, 'test3', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address3', 1, '2', '3', '4', 1, 0, 2, 1, 4, 1, 1, 1, 'images/bullding_image/17-03-14-11-59-07_0d76c634444a843f3c1ef7dee1663b2353541da2.jpg', '04', '2017', 1, '2017-03-14 18:02:55', '2017-03-23 00:25:05'),
-(6, 'test 6', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor', 'test address 6', 12, '22', '32', '42', 2, 2, 1, 8, 5, 1, 1, 1, 'images/bullding_image/17-03-14-11-57-45_ddaf6890dc9a1054168c10ae4a8f9fe2ee154d79.jpg', '06', '2017', 1, '2017-03-14 18:44:34', '2017-03-23 20:49:38'),
-(7, 'test3', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address3', 1, '2', '3', '4', 1, 0, 2, 1, 4, 1, 1, 1, 'images/bullding_image/17-03-14-11-57-27_0bba3e5fc28ab4a35224462517daf1f2902cdb2f.jpg', '06', '2017', 1, '2017-03-14 18:02:55', '2017-03-23 00:24:56'),
-(8, 'test 4', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address 4', 12, '22', '32', '42', 2, 0, 2, 1, 4, 1, 3, 1, 'images/bullding_image/17-03-14-11-57-07_5255041a51a1ee4ec1633d2007f39595ef06b260.jpg', '07', '2017', 1, '2017-03-14 18:44:34', '2017-03-23 00:24:47'),
-(9, 'test', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address', 1, '2', '3', '4', 1, 0, 2, 1, 4, 1, 1, 1, 'images/bullding_image/17-03-14-11-56-51_5075b05af4eccac0ed2724f6fe7722a768fba606.jpg', '07', '2017', 0, '2017-03-14 18:02:55', '2017-03-23 00:24:43'),
-(10, 'test 2`', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address 2', 12, '22', '32', '42', 2, 0, 2, 1, 4, 1, 1, 1, 'images/bullding_image/17-03-14-11-56-37_38681ffdc30422ea1f7491c11a289ad0e16bee06.jpg', '07', '2017', 1, '2017-03-14 18:44:34', '2017-03-23 00:24:38'),
-(11, 'test3', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address3', 1, '2', '3', '4', 1, 0, 2, 1, 4, 1, 1, 1, 'images/bullding_image/17-03-14-11-56-23_f53c27ca0ca249e9d1799f300921b7a38183816f.jpg', '07', '2017', 1, '2017-03-14 18:02:55', '2017-03-23 00:24:34'),
-(12, 'test 4', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address 4', 12, '22', '32', '42', 2, 0, 2, 1, 4, 1, 1, 1, 'images/bullding_image/17-03-15-12-02-51_7bceb24ed92a001eb33eabc26768328bbab3c7ab.jpg', '08', '2017', 0, '2017-03-14 18:44:34', '2017-03-23 00:24:29'),
-(14, 'test 6', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address 6', 12, '22', '32', '42', 2, 0, 2, 1, 4, 1, 1, 1, 'images/bullding_image/17-03-14-11-55-11_2bb70922ab645166835bc497e8e25469d8323c06.jpg', '01', '2018', 0, '2017-03-14 18:44:34', '2017-03-23 00:24:24'),
-(15, 'test3', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address3', 1, '2', '3', '4', 1, 0, 2, 1, 4, 1, 1, 1, 'images/bullding_image/17-03-14-11-55-00_93085df1d86ea712757e561382c45be7dabb4901.jpg', '02', '2018', 1, '2017-03-14 18:02:55', '2017-03-23 00:24:20'),
-(16, 'test 4', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address 4', 140000, '3', '2', '5', 2, 0, 2, 7, 4, 1, 1, 1, 'images/bullding_image/17-03-15-07-01-35_c3b6081b37a87ce3e3817285af771261a17eda9a.jpeg', '03', '2018', 1, '2017-03-14 18:44:34', '2017-03-23 00:24:15'),
-(17, 'test 6', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address 6', 300, '2', '3', '5', 2, 0, 2, 7, 4, 1, 1, 1, 'images/bullding_image/17-03-14-11-54-22_54d5283fc6edf0678cacad7e074a6af7ea43c7b9.jpg', '04', '2018', 1, '2017-03-14 18:44:34', '2017-03-23 00:24:09'),
-(19, 'test 4', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address 4', 100000, '12', '4', '3', 2, 0, 2, 7, 4, 1, 1, 1, 'images/bullding_image/17-03-14-11-53-46_14396d974ba72e8f8be162ae3cb5b43a22bd6ca2.jpg', '04', '2018', 1, '2017-03-14 18:44:34', '2017-03-23 00:23:59'),
-(20, 'test 6', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address 6', 50000, '22', '32', '42', 2, 0, 1, 8, 2, 1, 1, 1, 'images/bullding_image/17-03-14-11-53-29_bb7fa0e572fb18477bb620702bc165f669c3bf0e.jpg', '06', '2018', 1, '2017-03-14 18:44:34', '2017-03-23 00:23:49'),
-(21, 'test3', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address3', 100, '2', '3', '4', 1, 0, 1, 1, 4, 1, 1, 1, 'images/bullding_image/17-03-15-12-02-05_d1cd89f8c33bc6056e73d934ff060bc32a40bfde.jpg', '07', '2018', 1, '2017-03-14 18:02:55', '2017-03-23 00:23:52'),
-(22, 'test 4', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 'test address 4', 1200, '22', '32', '42', 2, 0, 1, 1, 4, 1, 1, 1, 'images/bullding_image/17-03-14-11-52-42_f798c5b46ab407d1e842e37bba8d99165d46a5ad.jpg', '07', '2018', 1, '2017-03-14 18:44:34', '2017-03-23 00:23:39'),
-(23, 'test title', 'test description', 'test address', 100, '2', '2', '2', 1, 0, 1, 1, 4, 14, 1, 1, 'images/bullding_image/17-03-23-01-38-50_c02acf3c73d5f4cc31632c1fb1be85bb182db507.jpg', '03', '2017', 1, '2017-03-22 23:45:23', '2017-03-23 00:38:50'),
-(25, 'bulding test image', 'bulding test imagebulding test imagebulding test image', 'bulding test image', 20, '1', '4', '3', 2, 3, 1, 8, 2, 1, 1, 1, 'images/bullding_image/17-03-23-01-30-05_f50112e1a66318535df4d36e9c7521a5de42e340.jpg', '05', '2017', 1, '2017-03-23 00:30:05', '2017-03-23 01:09:56'),
-(26, 'bulding test image', 'bulding test image', 'bulding test image', 2, '12', '3', '5', 2, 0, 1, 1, 4, 1, 1, 1, 'images/bullding_image/avatar/avatar.jpg', '05', '2017', 0, '2017-03-23 00:31:15', '2017-03-23 01:09:36'),
-(27, 'new bullding', 'test description', 'imbaba', 200, '2', '1', '3', 2, 2, 1, 1, 4, 1, 1, 1, 'images/bullding_image/17-03-23-10-55-06_0d95e15525b2d6fb3343e505b1ff14d09488332e.png', '03', '2017', 1, '2017-03-23 21:55:06', '2017-03-23 21:55:06');
+CREATE TABLE `bu_ser` (
+  `id` int(11) NOT NULL,
+  `bu_id` int(11) NOT NULL,
+  `service_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -114,8 +105,9 @@ CREATE TABLE `categouries` (
 --
 
 INSERT INTO `categouries` (`id`, `name`) VALUES
-(1, 'Shaleh'),
-(3, 'howek');
+(1, 'Sell & Buy'),
+(2, 'Mo9trbeen'),
+(3, 'Tourests');
 
 -- --------------------------------------------------------
 
@@ -133,8 +125,8 @@ CREATE TABLE `city` (
 --
 
 INSERT INTO `city` (`id`, `name`) VALUES
-(2, 'Cairo2'),
-(1, 'Giza');
+(1, 'Cairo'),
+(2, 'Giza');
 
 -- --------------------------------------------------------
 
@@ -150,13 +142,18 @@ CREATE TABLE `contact` (
   `message` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `contact`
+-- Table structure for table `services`
 --
 
-INSERT INTO `contact` (`id`, `name`, `email`, `phone`, `message`) VALUES
-(2, 'Mohamed Zayed Mohamed', 'mohamedzayed709@yahoo.com', '01096901954', 'this is the test of the message'),
-(4, 'moa', 'test@test.com', '010929255', '''Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.''');
+CREATE TABLE `services` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `describtion` text NOT NULL,
+  `buid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -209,9 +206,18 @@ CREATE TABLE `sub_area` (
 --
 
 INSERT INTO `sub_area` (`id`, `name`, `city_id`, `area_id`) VALUES
-(2, 'elkhlfawy', 1, 8),
-(4, 'test2', 2, 1),
-(5, 'nnnnnn', 1, 8);
+(1, 'Alhay 10', 1, 2),
+(2, 'Alhay 7', 1, 2),
+(3, 'kobry october', 2, 9),
+(4, 'Elbeny', 2, 8),
+(5, 'Tallat Harb', 2, 7),
+(6, 'Elarbeen', 1, 1),
+(7, 'Ahmed Esmat', 1, 1),
+(8, 'Mohamed Mahmoud', 1, 5),
+(9, 'Kornesh Eelnel', 1, 4),
+(10, '9 street', 1, 4),
+(11, 'Al Tgmo3 5', 1, 3),
+(12, 'Al Tgmo3 3', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -224,13 +230,6 @@ CREATE TABLE `sub_categouries` (
   `name` varchar(255) NOT NULL,
   `categoury_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `sub_categouries`
---
-
-INSERT INTO `sub_categouries` (`id`, `name`, `categoury_id`) VALUES
-(1, 'test Shaleh', 1);
 
 -- --------------------------------------------------------
 
@@ -282,6 +281,14 @@ ALTER TABLE `buldings`
   ADD KEY `subcategoury_id` (`subcategoury_id`);
 
 --
+-- Indexes for table `bu_ser`
+--
+ALTER TABLE `bu_ser`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `service_id` (`service_id`),
+  ADD KEY `bu_id` (`bu_id`);
+
+--
 -- Indexes for table `categouries`
 --
 ALTER TABLE `categouries`
@@ -299,6 +306,13 @@ ALTER TABLE `city`
 --
 ALTER TABLE `contact`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `services`
+--
+ALTER TABLE `services`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `buid` (`buid`);
 
 --
 -- Indexes for table `sitesetting`
@@ -336,12 +350,17 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `area`
 --
 ALTER TABLE `area`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `buldings`
 --
 ALTER TABLE `buldings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `bu_ser`
+--
+ALTER TABLE `bu_ser`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `categouries`
 --
@@ -356,7 +375,12 @@ ALTER TABLE `city`
 -- AUTO_INCREMENT for table `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `services`
+--
+ALTER TABLE `services`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `sitesetting`
 --
@@ -366,12 +390,12 @@ ALTER TABLE `sitesetting`
 -- AUTO_INCREMENT for table `sub_area`
 --
 ALTER TABLE `sub_area`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `sub_categouries`
 --
 ALTER TABLE `sub_categouries`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `users`
 --
@@ -397,6 +421,19 @@ ALTER TABLE `buldings`
   ADD CONSTRAINT `buldings_ibfk_4` FOREIGN KEY (`subarea_id`) REFERENCES `sub_area` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `buldings_ibfk_5` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `buldings_ibfk_6` FOREIGN KEY (`subcategoury_id`) REFERENCES `sub_categouries` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `bu_ser`
+--
+ALTER TABLE `bu_ser`
+  ADD CONSTRAINT `bu_ser_ibfk_1` FOREIGN KEY (`bu_id`) REFERENCES `buldings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `bu_ser_ibfk_2` FOREIGN KEY (`service_id`) REFERENCES `services` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `services`
+--
+ALTER TABLE `services`
+  ADD CONSTRAINT `services_ibfk_1` FOREIGN KEY (`buid`) REFERENCES `buldings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `sub_area`

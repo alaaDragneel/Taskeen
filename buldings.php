@@ -282,13 +282,14 @@
                                     <label class="col-sm-2 control-label">survice name</label>
                                     <div class="col-sm-10">
                                         <input type="hidden" name="survice_check[]">
-                                        <input type="text" name="survice_name[]" class="form-control" placeholder="survice_name">
+                                        <input type="text" name="survice_name[]" class="form-control" placeholder="survice_name" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">survice description</label>
                                     <div class="col-sm-10">
-                                        <textarea name="survice_description[]" class="form-control" placeholder="description" rows="4" cols="80"></textarea>
+                                        <textarea name="survice_description[]" maxlength="250" class="form-control textarea" placeholder="description" rows="4" cols="80" required></textarea>
+                                        <div></div>
                                     </div>
                                 </div>
                             </div>
@@ -336,6 +337,19 @@
                $subcategoury_id    =   strValidation($_POST['subcategoury_id'], 'int');
                $image              =   empty($_FILES['image']['name']) ? $busImage['image'] : imageValidation($_FILES['image']);
 
+               // for the services
+               $requestAll = [
+                   'check'                 =>   $_POST['survice_check'],
+                   'survice_name'          =>   $_POST['survice_name'],
+                   'survice_description'   =>   $_POST['survice_description'],
+               ];
+
+               // for the services
+               unset($_POST['survice_check']);
+               unset($_POST['survice_name']);
+               unset($_POST['survice_description']);
+
+
                $formError = array();
                foreach ($_POST as $key => $value) {
                    if (empty($value) && $value != 0) {
@@ -367,6 +381,31 @@
                       $image,
                       $bu_id,
                    ]);
+
+
+                   for ($i=0; $i < count($requestAll['check']); $i++) {
+                       if ($requestAll['check'][$i] != '') {
+                           $stmt = $conn->prepare("UPDATE `services` SET `name`= ?,`describtion`= ? WHERE  id = ".$requestAll['check'][$i]);
+                           $stmt->execute([
+                               $requestAll['survice_name'][$i],
+                               $requestAll['survice_description'][$i],
+                           ]);
+                       }
+                       if ($requestAll['check'][$i] == '') {
+                           $stmt = $conn->prepare("INSERT INTO `services` (`name`, `describtion`, `buid`) VALUES (:name, :description, :buid)");
+                           $stmt->execute([
+                               'name'              => $requestAll['survice_name'][$i],
+                               'description'       => $requestAll['survice_description'][$i],
+                               'buid'              => $bu_id,
+                           ]);
+                           $serviceID = $conn->lastInsertId();
+                           $stmt = $conn->prepare("INSERT INTO `bu_ser` (`bu_id`, `service_id`) VALUES (:buid, :srid)");
+                           $stmt->execute([
+                               'buid'       => $bu_id,
+                               'srid'       => $serviceID,
+                           ]);
+                       }
+                   }
 
                    $theMsg = 'Updated Successfully';
 
@@ -537,19 +576,64 @@
                               <div class="col-sm-10">
                                    <div class="row">
                                      <div class="col-sm-6">
-                                        <div style="padding: 5px; box-shadow: 5px 5px 19px #999;border-radius: 5px;">
+                                        <div style="padding: 5px; box-shadow: 5px 5px 19px #999;border-radius: 5px;background-color:#fff;">
                                             <div class="card" style="padding: 2px 4px;">
                                                 <img class="card-img-top img-responsive" style="height: 300px; width: 400px;" src="<?php echo $bus['image'] ?>" alt="<?php echo $bus['title'] ?>">
-                                                <div class="card-block">
-                                                    <h4 class="card-title"><?php echo $bus['title'] ?></h4>
-                                                    <p class="card-text"><?php echo $bus['description'] ?></p>
-                                                </div>
                                             </div>
                                         </div>
 
                                      </div>
                                    </div>
                               </div>
+                           </div>
+
+                           <hr>
+                           <h1 style="font-size: 25px;color:black">Bulding Survices</h1>
+                           <a class="btn btn-warning" href="#" id="Add_another_service">Add Another Survice</a>
+                           <hr>
+                           <?php
+
+                           $stmt = $conn->prepare("SELECT * FROM services WHERE buid = ".$bus['id']);
+                           $stmt->execute();
+                           $count = $stmt->rowCount();
+                           $rows = $stmt->fetchAll();
+                           ?>
+                           <div class="survices">
+                               <?php if ($count > 0): ?>
+                                   <?php foreach ($rows as $row): ?>
+                                       <div class="form-group">
+                                           <label class="col-sm-2 control-label">survice name</label>
+                                           <div class="col-sm-10">
+                                               <input type="hidden" name="survice_check[]" value="<?php echo $row['id'] ?>">
+                                               <input type="text" name="survice_name[]" class="form-control" placeholder="survice_name" required value="<?php echo $row['name'] ?>">
+                                           </div>
+                                       </div>
+                                       <div class="form-group">
+                                           <label class="col-sm-2 control-label">survice description</label>
+                                           <div class="col-sm-10">
+                                               <textarea name="survice_description[]" maxlength="250" class="form-control textarea" placeholder="description" rows="4" cols="80" required> <?php echo $row['describtion'] ?></textarea>
+                                               <div></div>
+                                           </div>
+                                       </div>
+                                   <?php endforeach; ?>
+                               <?php else: ?>
+                                   <div class="survices">
+                                       <div class="form-group">
+                                           <label class="col-sm-2 control-label">survice name</label>
+                                           <div class="col-sm-10">
+                                               <input type="hidden" name="survice_check[]">
+                                               <input type="text" name="survice_name[]" class="form-control" placeholder="survice_name" required>
+                                           </div>
+                                       </div>
+                                       <div class="form-group">
+                                           <label class="col-sm-2 control-label">survice description</label>
+                                           <div class="col-sm-10">
+                                               <textarea name="survice_description[]" maxlength="250" class="form-control textarea" placeholder="description" rows="4" cols="80" required></textarea>
+                                               <div></div>
+                                           </div>
+                                       </div>
+                                   </div>
+                               <?php endif; ?>
                            </div>
                            <div class="form-group">
                               <div class="col-sm-offset-2 col-sm-10">
@@ -596,6 +680,8 @@
 </div>
 </div>
 <?php
+
+
         include "includes/templates/footer.php";
     }else {
         header ("Location: index.php");

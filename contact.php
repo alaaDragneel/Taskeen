@@ -65,4 +65,8 @@ endif;
         </div>
     </div>
 </div>
+<!-- Login Modal -->
+<?php require_once "loginModal.php"; ?>
+<!-- Login Modal -->
+
 <?php include'includes/templates/footer.php';?>

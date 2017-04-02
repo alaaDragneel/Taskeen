@@ -52,7 +52,7 @@
          <script src="assets/js/velocity.min.js"></script>
          <script src="assets/js/card.js"></script>
          <script src="assets/js/app.min.js"></script>
-         <script src="assets/js/main.js"></script>
+         <script src="assets/js/scripts.js"></script>
          <script src="assets/js/ajaxRequests.js"></script>
 
       </body>

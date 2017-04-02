@@ -2,10 +2,10 @@
 
 	if (isset($_GET['cat_id'])) {
 		$catid = 'WHERE categoury_id = '.intval($_GET['cat_id']);
-      $approved = ' AND ';
+		$approved = ' AND ';
 	}else {
 		$catid = null;
-      $approved = ' WHERE ';
+		$approved = ' WHERE ';
 	}
 
 	if (isset($_GET['sub_cat_id']) && isset($_GET['cat_id'])) {
@@ -42,13 +42,13 @@
 				<?php endif; ?>
 				<div class="search-form">
 					<!-- // `id`, `title`, `description`, `address`, `price`, `num_pr`, `num_kit`, `num_rooms`, `status`, `type`, `city_id`,
-				    //  `area_id`, `subarea_id`, `user_id`, `categoury_id`,
-				    //  `subcategoury_id`, `image`, `month`, `year`, `isApproved`, `created_at`, `updated_at` -->
+					//  `area_id`, `subarea_id`, `user_id`, `categoury_id`,
+					//  `subcategoury_id`, `image`, `month`, `year`, `isApproved`, `created_at`, `updated_at` -->
 					<h4>
-                  <span class="glyphicon glyphicon-search"></span> Search for
-               </h4>
-					<div class="row">
-						<form action="search.php" method="get">
+						<span class="glyphicon glyphicon-search"></span> Search for
+					</h4>
+					<form action="search.php" method="get">
+						<div class="row">
 							<div class="col-lg-6">
 								<input class="form-control" type="number" name="price_from" value="" placeholder="Price From">
 							</div>
@@ -57,7 +57,7 @@
 							</div>
 							<div class="col-lg-12 marginSelect">
 								<select name="city_id" class="form-control" id="city_id">
-                           <option value="">Select City</option>
+									<option value="">Select City</option>
 									<?php
 									$cities = getAllFrom('*', 'city', null, null, 'id', 'ASC', null);
 									?>
@@ -117,11 +117,10 @@
 				</div>
 			</div>
 			<div class="col-lg-9 col-sm-8">
-            <br><br><br>
 				<div class="row">
 					<?php
 
-					$bus = getAllApproved('*', 'buldings', $catid, $subcatid, $approved.'isApproved = 1','title', 'ASC', null);
+					$bus = getAllApproved('*', 'buldings', $catid, $subcatid, $approved.'isApproved = 1','title', 'DESC', null);
 
 					?>
 					<?php foreach ($bus as $bu):  ?>
@@ -140,7 +139,7 @@
 								<h4><a href="property-detail.php"><?php echo $bu['title'] ?></a></h4>
 								<p class="price">Price: <?php echo $bu['price'] ?> $</p>
 								<div class="listing-detail">
-                           <span data-original-title="Rooms" data-placement="bottom" data-toggle="tooltip"><?php echo $bu['num_rooms'] ?></span>
+                           			<span data-original-title="Rooms" data-placement="bottom" data-toggle="tooltip"><?php echo $bu['num_rooms'] ?></span>
 									<span data-original-title="Path Room" data-placement="bottom" data-toggle="tooltip"><?php echo $bu['num_pr'] ?></span>
 									<span data-original-title="Kitchen" data-placement="bottom" data-toggle="tooltip"><?php echo $bu['num_kit'] ?></span>
 								</div><a class="btn btn-primary" href="property-detail.php?bu_id=<?php echo $bu['id'] ?>&view=<?php echo sha1($bu['title']) ?>">View Details</a>
@@ -152,5 +151,12 @@
 		</div>
 	</div>
 </div>
+
+
+<?php if (!isset($_SESSION['user_mail'])): ?>
+	<!-- Login Modal -->
+	<?php require_once "loginModal.php"; ?>
+	<!-- Login Modal -->
+<?php endif; ?>
 
 <?php include'includes/templates/footer.php';?>

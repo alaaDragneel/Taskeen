@@ -28,37 +28,52 @@
 		</nav>
 	</div>
    <!-- /slider-wrapper -->
-</div>
-<!-- Modal -->
-<div id="loginpop" class="modal fade">
-   <div class="modal-dialog">
-      <div class="modal-content">
-         <div class="row">
-            <div class="col-sm-6 login">
-               <h4>Login</h4>
-               <form class="form-horizontal" action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" role="form">
-                  <div class="form-group">
-                     <label class="sr-only" for="exampleInputEmail2">Email address</label>
-                     <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Enter email" name="email">
-                  </div>
-                  <div class="form-group">
-                     <label class="sr-only" for="exampleInputPassword2">Password</label>
-                     <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" name="password">
-                  </div>
-                  <button type="submit" name="submit" class="btn btn-success">Sign in</button>
-               </form>
-            </div>
-            <div class="col-sm-6">
-               <h4>New User Sign Up</h4>
-               <p>Join today and get updated with all the properties deal happening around.</p>
-               <button type="submit" class="btn btn-info"  onclick="window.location.href='register.php'">Join Now</button>
-            </div>
 
-         </div>
-      </div>
-   </div>
+   <div class="banner-search">
+       <div class="container">
+           <!-- banner -->
+           <h3>Buy, Sale & Rent</h3>
+           <div class="searchbar">
+               <div class="row">
+                   <div class="col-lg-6 col-sm-6">
+                       <div class="search-form">
+       					<form action="search.php" method="get">
+       						<div class="row">
+       							<div class="col-lg-6">
+       								<input class="form-control" type="number" name="price_from" value="" placeholder="Price From">
+       							</div>
+       							<div class="col-lg-6">
+       								<input class="form-control" type="number" name="price_to" value="" placeholder="Price To">
+       							</div>
+       							<div class="col-lg-12 marginSelect">
+       								<select class="form-control" name="type">
+       									<option value="">Select Type</option>
+       									<option value="0">Flat</option>
+       									<option value="1">Villa</option>
+       									<option value="2">Shops</option>
+       									<option value="3">Lands</option>
+       									<option value="4">Chalet</option>
+       									<option value="5">Buldings</option>
+       								</select>
+       							</div>
+       						</div>
+       						<button type="submit" class="btn btn-primary">Find Now</button>
+       					</form>
+       				</div>
+                   </div>
+                   <div class="col-lg-5 col-lg-offset-1 col-sm-6 ">
+                       <p>Join now and get updated with all the properties deals Join now and get updated with all the properties deals Join now and get updated with all the properties deals Join now and get updated with all the properties deals Join now and get updated with all the properties deals .</p>
+                   </div>
+               </div>
+           </div>
+       </div>
+       <!-- banner -->
+
 </div>
-<!-- /.modal -->
+
+<!-- Login Modal -->
+<?php require_once "loginModal.php"; ?>
+<!-- Login Modal -->
 <div class="container">
 	<div class="properties-listing spacer">
 		<a class="pull-right viewall" href="buysalerent.php">View All Listing</a>
