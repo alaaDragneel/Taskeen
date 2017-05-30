@@ -10,6 +10,19 @@
         include "init.php";
 
         $do = isset($_GET['do']) ? $_GET['do'] : 'Manage'; // Check if the $do is Exixets
+
+
+        if ($do == 'changeStatus') {
+          $bu_id = isset($_GET['buId']) && is_numeric($_GET['buId']) ? intval($_GET['buId']) : 0;
+
+          $bu = getOneFrom('isApproved', 'buldings', 'WHERE id = '.$bu_id, null, 'id', 'ASC');
+          $isApproved = $bu['isApproved'] == 0 ? 1 : 0 ;
+          // dd($isApproved);
+          $stmt = $conn->prepare("UPDATE `buldings` SET isApproved = ? WHERE id = ?");
+
+          $stmt->execute([$isApproved, $bu_id]);
+          header("Location: " . $_SERVER['HTTP_REFERER']);
+        }
 ?>
 <div class="page-content">
     <div class="row">
@@ -46,18 +59,20 @@
                         <div class="cd-quick-view">
                            <div class="cd-slider-wrapper">
                               <ul class="cd-slider">
-                                 <li><img src="layouts/images/bullding_image/avatar/cardAvatar.jpg" class="imgBox" alt="Product 1"></li>
+                                 <li><img src="../images/bullding_image/avatar/cardAvatar.jpg" class="imgBox" alt="Product 1"></li>
                               </ul> <!-- cd-slider -->
                            </div> <!-- cd-slider-wrapper -->
 
                            <div class="cd-item-info">
                               <h2 class="title"></h2>
                               <p class="disBox"></p>
-                                 <div class="btn-group" role="group" style="margin-left: 19%;">
+                                 <div class="btn-group" role="group" style="margin-left: 10%;">
                                     <a href="#" class="moreBox btn btn-primary">Edit</a>
                                     <a href="#" class="deleteBox btn btn-danger">Delete</a>
                                     <span href="#" class="priceBox btn btn-warning"></span>
                                     <span href="#" class="statusBox btn "></span>
+                                    <a href="#" class="btn btn-default changeStatus">publishing/Waiting</a>
+
                                  </div> <!-- cd-item-action -->
                            </div> <!-- cd-item-info -->
                            <a href="#0" class="cd-close">Close</a>
@@ -98,18 +113,19 @@
                        <div class="cd-quick-view">
                           <div class="cd-slider-wrapper">
                              <ul class="cd-slider">
-                                <li><img src="layouts/images/bullding_image/avatar/cardAvatar.jpg" class="imgBox" alt="Product 1"></li>
+                                <li><img src="../images/bullding_image/avatar/cardAvatar.jpg" class="imgBox" alt="Product 1"></li>
                              </ul> <!-- cd-slider -->
                           </div> <!-- cd-slider-wrapper -->
 
                           <div class="cd-item-info">
                              <h2 class="title"></h2>
                              <p class="disBox"></p>
-                                <div class="btn-group" role="group" style="margin-left: 19%;">
+                                <div class="btn-group" role="group" style="margin-left: 10%;">
                                    <a href="#" class="moreBox btn btn-primary">Edit</a>
                                    <a href="#" class="deleteBox btn btn-danger">Delete</a>
                                    <span href="#" class="priceBox btn btn-warning"></span>
                                    <span href="#" class="statusBox btn "></span>
+                                   <a href="#" class="btn btn-default changeStatus">publishing/Waiting</a>
                                 </div> <!-- cd-item-action -->
                           </div> <!-- cd-item-info -->
                           <a href="#0" class="cd-close">Close</a>
@@ -149,18 +165,19 @@
                        <div class="cd-quick-view">
                           <div class="cd-slider-wrapper">
                              <ul class="cd-slider">
-                                <li><img src="layouts/images/bullding_image/avatar/cardAvatar.jpg" class="imgBox" alt="Product 1"></li>
+                                <li><img src="../images/bullding_image/avatar/cardAvatar.jpg" class="imgBox" alt="Product 1"></li>
                              </ul> <!-- cd-slider -->
                           </div> <!-- cd-slider-wrapper -->
 
                           <div class="cd-item-info">
                              <h2 class="title"></h2>
                              <p class="disBox"></p>
-                                <div class="btn-group" role="group" style="margin-left: 19%;">
+                                <div class="btn-group" role="group" style="margin-left: 10%;">
                                    <a href="#" class="moreBox btn btn-primary">Edit</a>
                                    <a href="#" class="deleteBox btn btn-danger">Delete</a>
                                    <span href="#" class="priceBox btn btn-warning"></span>
                                    <span href="#" class="statusBox btn "></span>
+                                   <a href="#" class="btn btn-default changeStatus">publishing/Waiting</a>
                                 </div> <!-- cd-item-action -->
                           </div> <!-- cd-item-info -->
                           <a href="#0" class="cd-close">Close</a>
@@ -255,6 +272,7 @@
                     $theMsg = 'The Bulding Added Successfully';
 
                     for ($i=0; $i < count($requestAll['check']); $i++) {
+                      if ($requestAll['survice_name'][$i] != '' && $requestAll['survice_description'][$i] != '') {
                         $stmt = $conn->prepare("INSERT INTO `services` (`name`, `describtion`, `buid`) VALUES (:name, :description, :buid)");
                         $stmt->execute([
                             'name'              => $requestAll['survice_name'][$i],
@@ -267,6 +285,7 @@
                             'buid'       => $buldingid,
                             'srid'       => $serviceID,
                         ]);
+                      }
                     }
                 }
             }
@@ -452,7 +471,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">survice description</label>
                                     <div class="col-sm-10">
-                                        <textarea name="survice_description[]" maxlength="250" class="form-control textarea" placeholder="description" rows="4" cols="80" required></textarea>
+                                        <textarea name="survice_description[]" maxlength="250" class="form-control textarea" placeholder="description" rows="4" cols="80"></textarea>
                                         <div></div>
                                     </div>
                                 </div>
@@ -558,18 +577,20 @@
                            ]);
                        }
                        if ($requestAll['check'][$i] == '') {
-                           $stmt = $conn->prepare("INSERT INTO `services` (`name`, `describtion`, `buid`) VALUES (:name, :description, :buid)");
-                           $stmt->execute([
-                               'name'              => $requestAll['survice_name'][$i],
-                               'description'       => $requestAll['survice_description'][$i],
-                               'buid'              => $bu_id,
-                           ]);
-                           $serviceID = $conn->lastInsertId();
-                           $stmt = $conn->prepare("INSERT INTO `bu_ser` (`bu_id`, `service_id`) VALUES (:buid, :srid)");
-                           $stmt->execute([
-                               'buid'       => $bu_id,
-                               'srid'       => $serviceID,
-                           ]);
+                           if ($requestAll['survice_name'][$i] != '' && $requestAll['survice_description'][$i] != '') {
+                               $stmt = $conn->prepare("INSERT INTO `services` (`name`, `describtion`, `buid`) VALUES (:name, :description, :buid)");
+                               $stmt->execute([
+                                   'name'              => $requestAll['survice_name'][$i],
+                                   'description'       => $requestAll['survice_description'][$i],
+                                   'buid'              => $bu_id,
+                               ]);
+                               $serviceID = $conn->lastInsertId();
+                               $stmt = $conn->prepare("INSERT INTO `bu_ser` (`bu_id`, `service_id`) VALUES (:buid, :srid)");
+                               $stmt->execute([
+                                   'buid'       => $bu_id,
+                                   'srid'       => $serviceID,
+                               ]);
+                           }
                        }
                    }
 
@@ -784,13 +805,13 @@
                                            <label class="col-sm-2 control-label">survice name</label>
                                            <div class="col-sm-10">
                                                <input type="hidden" name="survice_check[]" value="<?php echo $row['id'] ?>">
-                                               <input type="text" name="survice_name[]" class="form-control" placeholder="survice_name" required value="<?php echo $row['name'] ?>">
+                                               <input type="text" name="survice_name[]" class="form-control" placeholder="survice_name" value="<?php echo $row['name'] ?>">
                                            </div>
                                        </div>
                                        <div class="form-group">
                                            <label class="col-sm-2 control-label">survice description</label>
                                            <div class="col-sm-10">
-                                               <textarea name="survice_description[]" maxlength="250" class="form-control textarea" placeholder="description" rows="4" cols="80" required> <?php echo $row['describtion'] ?></textarea>
+                                               <textarea name="survice_description[]" maxlength="250" class="form-control textarea" placeholder="description" rows="4" cols="80"> <?php echo $row['describtion'] ?></textarea>
                                                <div></div>
                                            </div>
                                        </div>

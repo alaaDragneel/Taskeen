@@ -4,7 +4,7 @@ ob_start();
 session_start();
 
 
-$pageTitle = 'Dshboard';
+$pageTitle = 'Admin Profile';
 
 if (isset($_SESSION["admin_mail"])) {
 
@@ -64,7 +64,7 @@ if (isset($_SESSION["admin_mail"])) {
                                                     <td><?php echo $bu['price'] ?></td>
                                                     <td><?php echo $bu['num_rooms'] ?></td>
                                                     <td><span class="label label-<?php echo $bu['isApproved'] == 0 ? 'danger' : 'success' ?>"><?php echo $bu['isApproved'] == 0 ? 'unapproved' : 'published' ?></span></td>
-                                                    <td><img src="<?php echo $bu['image'] ?>" alt="<?php echo $bu['title'] ?>" width="100"/></td>
+                                                    <td><img src="../<?php echo $bu['image'] ?>" alt="<?php echo $bu['title'] ?>" width="100"/></td>
                                                     <td>
                                                         <a href="buldings.php?do=Edit&bu_id=<?php echo $bu['id'] ?>" class="btn btn-success">Edit</a>
                                                         <a href="buldings.php?do=Delete&bu_id=<?php echo $bu['id'] ?>" class="btn btn-danger">Delete</a>
@@ -109,7 +109,7 @@ if (isset($_SESSION["admin_mail"])) {
                                                     <td><?php echo $bu['price'] ?></td>
                                                     <td><?php echo $bu['num_rooms'] ?></td>
                                                     <td><span class="label label-<?php echo $bu['isApproved'] == 0 ? 'danger' : 'success' ?>"><?php echo $bu['isApproved'] == 0 ? 'unapproved' : 'published' ?></span></td>
-                                                    <td><img src="<?php echo $bu['image'] ?>" alt="<?php echo $bu['title'] ?>" width="100"/></td>
+                                                    <td><img src="../<?php echo $bu['image'] ?>" alt="<?php echo $bu['title'] ?>" width="100"/></td>
                                                     <td>
                                                         <a href="buldings.php?do=Edit&bu_id=<?php echo $bu['id'] ?>" class="btn btn-success">Edit</a>
                                                         <a href="buldings.php?do=Delete&bu_id=<?php echo $bu['id'] ?>" class="btn btn-danger">Delete</a>
@@ -153,7 +153,7 @@ if (isset($_SESSION["admin_mail"])) {
                                                     <td><?php echo $bu['price'] ?></td>
                                                     <td><?php echo $bu['num_rooms'] ?></td>
                                                     <td><span class="label label-<?php echo $bu['isApproved'] == 0 ? 'danger' : 'success' ?>"><?php echo $bu['isApproved'] == 0 ? 'unapproved' : 'published' ?></span></td>
-                                                    <td><img src="<?php echo $bu['image'] ?>" alt="<?php echo $bu['title'] ?>" width="100"/></td>
+                                                    <td><img src="../<?php echo $bu['image'] ?>" alt="<?php echo $bu['title'] ?>" width="100"/></td>
                                                     <td>
                                                         <a href="buldings.php?do=Edit&bu_id=<?php echo $bu['id'] ?>" class="btn btn-success">Edit</a>
                                                         <a href="buldings.php?do=Delete&bu_id=<?php echo $bu['id'] ?>" class="btn btn-danger">Delete</a>

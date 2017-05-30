@@ -3,7 +3,7 @@
             <div class="container">
 
                 <div class="copy text-center">
-                    Copyright 2014 <a href='#'>Website</a>
+                    Copyright <?php echo date('Y')?> <a href='index.php'><?php echo getSetting('copyright');?></a>
                 </div>
 
             </div>

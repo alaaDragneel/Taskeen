@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    $pageTitle = 'Dshboard';
+    $pageTitle = 'Stats';
 
     if (isset($_SESSION["admin_mail"])) {
 

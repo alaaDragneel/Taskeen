@@ -94,7 +94,8 @@ $bu = getOneFrom('*', 'buldings', 'WHERE id = '.$bu_id, 'AND isApproved = 1');
                                         <br>
                                         phone: <?php echo $user['phone'] ?>
                                         <br>
-                                        Email: <?php echo $user['email'] ?>
+                                        Email: <?php echo $user['email'] ?> <br>
+                                        Facebook: <a class="btn-link" href="<?php echo $user['facebook'] ?>">click here</a>
                                     </p>
                                 </div>
                             </div>

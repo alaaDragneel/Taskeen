@@ -112,10 +112,10 @@
       return $all;
    }
 
-   function getOneFrom($field, $table, $where = null, $and = null, $orderField = 'id', $ordering = 'ASC', $limit = null)
+   function getOneFrom($field, $table, $where = null, $and = null, $orderField = 'id', $ordering = 'ASC')
    {
       global $conn;
-      $stmt = $conn->prepare("SELECT $field FROM $table $where $and ORDER BY $orderField $ordering $limit");
+      $stmt = $conn->prepare("SELECT $field FROM $table $where $and ORDER BY $orderField $ordering LIMIT 1");
       $stmt->execute();
       $all = $stmt->fetch();
       return $all;

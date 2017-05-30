@@ -4,7 +4,7 @@
     session_start();
 
 
-    $pageTitle = 'Dshboard';
+    $pageTitle = 'Sub Areas';
 
     if (isset($_SESSION["admin_mail"])) {
 

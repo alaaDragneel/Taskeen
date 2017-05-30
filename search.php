@@ -128,6 +128,7 @@
                      $count = count($requestAll);
                      $i = 0;
                      // loop for the data
+
                      foreach($requestAll as $key => $req) {
                         $i++;
                         $req = strValidation($req, 'int');
@@ -150,15 +151,13 @@
                               }
 
                            }
-
-
                         }
-
                         if($count == $i && $requestAll['price_from'] !== '' && $requestAll['price_to'] !== ''){
                            // if the $i is the final thing in the loop it will get here.
                            $query .= " WHERE price BETWEEN " . $requestAll['price_from'] . " AND " . $requestAll['price_to'];
                         }
-                     }
+                     } //end loop
+
                      // count the SQL WORD WHERE If Greater Than 1
                      if (substr_count($query, 'WHERE') > 1) {
                         // cut The First Where word
@@ -177,7 +176,6 @@
                      $busFetch = $bus->fetchAll();
 
                      $buCount = $bus->rowCount();
-
                 ?>
                 <?php if ($buCount > 0): ?>
                 <?php foreach ($busFetch as $bu):  ?>

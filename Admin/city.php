@@ -4,7 +4,7 @@
     session_start();
 
 
-    $pageTitle = 'Dshboard';
+    $pageTitle = 'City';
 
     if (isset($_SESSION["admin_mail"])) {
 

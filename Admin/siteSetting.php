@@ -3,7 +3,7 @@
     ob_start();
     session_start();
 
-    $pageTitle = 'Buldings';
+    $pageTitle = 'Settings';
 
     if (isset($_SESSION["admin_mail"])) {
 

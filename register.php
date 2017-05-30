@@ -2,7 +2,7 @@
 
 <?php
    ob_start();
-   
+
    if(isset($_SESSION["user_mail"])){
       header("Location: index.php"); //Redirect the user to the dashboard
       exit();
@@ -19,6 +19,7 @@
         $facebook       =   strValidation($_POST['facebook'], 'url');
         $password       =   $_POST['password'] === '' ? '' : sha1($_POST['password']);
 
+        unset($_POST['facebook']);
          /*Start Check the Fileds */
          $formError = array();
          foreach ($_POST as $key => $value) {

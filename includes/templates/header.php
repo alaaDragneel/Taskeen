@@ -96,7 +96,7 @@
 
         <div class="row">
             <div class="col-md-4">
-              <img src="images/logo.png" alt="" class="img-rounded" style="margin-top: 9px;">
+              <img src="images/taskeen.png" alt="" class="img-rounded" style="margin-top: 9px;">
             </div>
             <div class="col-md-8">
                 <!-- Header Starts -->

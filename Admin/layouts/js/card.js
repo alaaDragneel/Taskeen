@@ -31,6 +31,27 @@ jQuery(document).ready(function($){
 
          }
 
+				 var protocol = window.location.protocol, // get the protocol Example: [HTTP, HTTPS]
+
+				  	hostName = window.location.hostname, // get the hostname Example: [localhost] NOTE can use window.location.host also
+
+				  	pathName = window.location.pathname, // get the pathname Example [/work/Taskeen/admin/buldings.php]
+
+				  	waitingHref = protocol + '//' + hostName +  pathName + '?do=waiting',
+
+						publishedHref = protocol + '//' + hostName +  pathName + '?do=published',
+
+				 		originalHref = window.location.href; // get the page link
+
+
+				 if (originalHref == waitingHref || originalHref == publishedHref) {
+					 $('.changeStatus').attr('href', originalHref + '&do=changeStatus&buId=' + id);
+
+				 } else {
+
+					 $('.changeStatus').attr('href', originalHref + '?do=changeStatus&buId=' + id);
+				 }
+
          $('.moreBox').attr('href', 'buldings.php?do=Edit&bu_id=' + json.id);
          $('.deleteBox').attr('href', 'buldings.php?do=Delete&bu_id=' + json.id);
          $('.disBox').html(json.description);
@@ -106,7 +127,7 @@ jQuery(document).ready(function($){
 			closeNoAnimation(selectedImage, finalWidth, maxQuickWidth);
 		}
 
-      $('.imgBox').attr('src', 'layouts/images/bullding_image/avatar/cardAvatar.jpg');
+      $('.imgBox').attr('src', '../images/bullding_image/avatar/cardAvatar.jpg');
 	}
 
 	function animateQuickView(image, finalWidth, maxQuickWidth, animationType) {

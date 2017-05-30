@@ -37,7 +37,7 @@
                 $num_kit            =   strValidation($_POST['num_kit'], 'int');
                 $num_rooms          =   strValidation($_POST['num_rooms'], 'int');
                 $status             =   strValidation($_POST['status'], 'int');
-                $type               =   strValidation($_POST['type'], 'int');
+                $type               =   strValidation($_POST['type']);
                 $city_id            =   strValidation($_POST['city_id'], 'int');
                 $area_id            =   strValidation($_POST['area_id'], 'int');
                 $subarea_id         =   strValidation($_POST['subarea_id'], 'int');
@@ -45,7 +45,6 @@
                 $categoury_id       =   strValidation($_POST['categoury_id'], 'int');
                 $subcategoury_id    =   strValidation($_POST['subcategoury_id'], 'int');
                 $image              =   empty($_FILES['image']['name']) ? avatar() : imageValidation($_FILES['image']);
-
 
                 // for the services
                 $requestAll = [
@@ -62,10 +61,9 @@
 
                 $formError = array();
                 foreach ($_POST as $key => $value) {
-                    if (empty($value)) {
-
-                        $formError[] = 'The ' . $key . ' Field Can\'t be Empty';
-                    }
+                  if ($value == '') {
+                      $formError[] = 'The ' . $key . ' Field Can\'t be Empty';
+                  }
                 }
 
                 if ($image == false) {
@@ -98,19 +96,22 @@
                     ]);
                     $buldingid = $conn->lastInsertId();
                     $theMsg = 'The Bulding Added Successfully';
+
                     for ($i=0; $i < count($requestAll['check']); $i++) {
+                      if ($requestAll['survice_name'][$i] != '' && $requestAll['survice_description'][$i] != '') {
                         $stmt = $conn->prepare("INSERT INTO `services` (`name`, `describtion`, `buid`) VALUES (:name, :description, :buid)");
                         $stmt->execute([
-                            'name'              => $requestAll['survice_name'][$i],
-                            'description'       => $requestAll['survice_description'][$i],
-                            'buid'              => $buldingid,
+                          'name'              => $requestAll['survice_name'][$i],
+                          'description'       => $requestAll['survice_description'][$i],
+                          'buid'              => $buldingid,
                         ]);
                         $serviceID = $conn->lastInsertId();
                         $stmt = $conn->prepare("INSERT INTO `bu_ser` (`bu_id`, `service_id`) VALUES (:buid, :srid)");
                         $stmt->execute([
-                            'buid'       => $buldingid,
-                            'srid'       => $serviceID,
+                          'buid'       => $buldingid,
+                          'srid'       => $serviceID,
                         ]);
+                      }
                     }
                 }
 
@@ -275,20 +276,20 @@
                             <br>
                             <h1 style="font-size: 15px;color:red">not required fields</h1>
                             <hr>
-                            <a class="btn btn-link" href="#" id="Add_another_service">Add Another Survice</a>
+                            <a class="btn btn btn-warning" href="#" id="Add_another_service">Add Another Survice</a>
                             <hr>
                             <div class="survices">
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">survice name</label>
                                     <div class="col-sm-10">
                                         <input type="hidden" name="survice_check[]">
-                                        <input type="text" name="survice_name[]" class="form-control" placeholder="survice_name" required>
+                                        <input type="text" name="survice_name[]" class="form-control" placeholder="survice_name">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">survice description</label>
                                     <div class="col-sm-10">
-                                        <textarea name="survice_description[]" maxlength="250" class="form-control textarea" placeholder="description" rows="4" cols="80" required></textarea>
+                                        <textarea name="survice_description[]" maxlength="250" class="form-control textarea" placeholder="description" rows="4" cols="80"></textarea>
                                         <div></div>
                                     </div>
                                 </div>
@@ -392,18 +393,20 @@
                            ]);
                        }
                        if ($requestAll['check'][$i] == '') {
+                         if ($requestAll['survice_name'][$i] != '' && $requestAll['survice_description'][$i] != '') {
                            $stmt = $conn->prepare("INSERT INTO `services` (`name`, `describtion`, `buid`) VALUES (:name, :description, :buid)");
                            $stmt->execute([
-                               'name'              => $requestAll['survice_name'][$i],
-                               'description'       => $requestAll['survice_description'][$i],
-                               'buid'              => $bu_id,
+                             'name'              => $requestAll['survice_name'][$i],
+                             'description'       => $requestAll['survice_description'][$i],
+                             'buid'              => $bu_id,
                            ]);
                            $serviceID = $conn->lastInsertId();
                            $stmt = $conn->prepare("INSERT INTO `bu_ser` (`bu_id`, `service_id`) VALUES (:buid, :srid)");
                            $stmt->execute([
-                               'buid'       => $bu_id,
-                               'srid'       => $serviceID,
+                             'buid'       => $bu_id,
+                             'srid'       => $serviceID,
                            ]);
+                         }
                        }
                    }
 
@@ -443,6 +446,7 @@
                             echo alertStatus('success', $theMsg);
                          endif;
                       ?>
+
                         <form class="form-horizontal" role="form" action="buldings.php?do=Edit&bu_id=<?php echo $bus['id'] ?>" method="post" enctype="multipart/form-data">
                            <div class="form-group">
                               <label for="title" class="col-sm-2 control-label">title</label>
@@ -593,7 +597,7 @@
                            <hr>
                            <?php
 
-                           $stmt = $conn->prepare("SELECT * FROM services WHERE buid = ".$bus['id']);
+                           $stmt = $conn->prepare("SELECT * FROM services WHERE buid = ". $bus['id']);
                            $stmt->execute();
                            $count = $stmt->rowCount();
                            $rows = $stmt->fetchAll();
@@ -611,7 +615,7 @@
                                        <div class="form-group">
                                            <label class="col-sm-2 control-label">survice description</label>
                                            <div class="col-sm-10">
-                                               <textarea name="survice_description[]" maxlength="250" class="form-control textarea" placeholder="description" rows="4" cols="80" required> <?php echo $row['describtion'] ?></textarea>
+                                               <textarea name="survice_description[]" maxlength="250" class="form-control textarea" placeholder="description" rows="4" cols="80"> <?php echo $row['describtion'] ?></textarea>
                                                <div></div>
                                            </div>
                                        </div>
@@ -622,13 +626,13 @@
                                            <label class="col-sm-2 control-label">survice name</label>
                                            <div class="col-sm-10">
                                                <input type="hidden" name="survice_check[]">
-                                               <input type="text" name="survice_name[]" class="form-control" placeholder="survice_name" required>
+                                               <input type="text" name="survice_name[]" class="form-control" placeholder="survice_name">
                                            </div>
                                        </div>
                                        <div class="form-group">
                                            <label class="col-sm-2 control-label">survice description</label>
                                            <div class="col-sm-10">
-                                               <textarea name="survice_description[]" maxlength="250" class="form-control textarea" placeholder="description" rows="4" cols="80" required></textarea>
+                                               <textarea name="survice_description[]" maxlength="250" class="form-control textarea" placeholder="description" rows="4" cols="80"></textarea>
                                                <div></div>
                                            </div>
                                        </div>

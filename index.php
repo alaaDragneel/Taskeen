@@ -1,17 +1,19 @@
 <?php
    include'init.php';
 
-   $recommendedBullding = getOneFrom('*', 'buldings', 'WHERE isApproved = 1');
-   $latestBullding = getAllFrom('*', 'buldings', 'WHERE isApproved = 1', null, 'id', 'DESC', 'LIMIT 5');
-   $featuredBullding = getAllFrom('*', 'buldings', 'WHERE isApproved = 1', null, 'id', 'DESC', 'LIMIT 10');
+   $featuredBullding = getAllFrom('*', 'buldings', 'WHERE isApproved = 1', null, 'RAND()' , '', 'LIMIT 10');
+
+   $latestBullding = getAllFrom('*', 'buldings', 'WHERE isApproved = 1', 'AND categoury_id = 2', 'price', 'ASC', 'LIMIT 5');
+
+   $latestBulldingSlider = getAllFrom('*', 'buldings', 'WHERE isApproved = 1', null, 'price', 'ASC', 'LIMIT 6');
 ?>
 <div class="">
 	<div class="sl-slider-wrapper" id="slider">
-		<div class="sl-slider">
-         <?php foreach ($latestBullding as $bu): ?>
+		<div class="sl-slider"> <!-- 1339 500-->
+         <?php foreach ($latestBulldingSlider as $bu): ?>
             <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice1-scale="2" data-slice2-rotation="-25" data-slice2-scale="2">
                <div class="sl-slide-inner">
-                  <div class="bg-img" style="background-image: url(<?php echo $bu['image']?>);"></div>
+                  <div class="bg-img" style="background-image: url(<?php echo $bu['image']?>); background-size: 77.3% 57%;"></div>
                   <h2><a href="property-detail.php?bu_id=<?php echo $bu['id'] ?>&view=<?php echo sha1($bu['title']) ?>" style="line-height: 1;"><?php echo $bu['num_rooms'];?> Bed Rooms and <?php echo $bu['num_kit'];?> Property <br/> on Sale</a></h2>
                   <blockquote>
                      <p class="location"><span class="glyphicon glyphicon-map-marker"></span> <?php echo $bu['address'];?></p>
@@ -91,7 +93,7 @@
 
                </div>
 
-               <h4><a href="property-detail.php"><?php echo $value['title']?></a></h4>
+               <h4><a href="property-detail.php?bu_id=<?php echo $value['id'] ?>&view=<?php echo sha1($value['title']) ?>"><?php echo $value['title']?></a></h4>
 
                <p class="price">Price: $<?php echo $value['price']?></p>
 
@@ -128,22 +130,12 @@
 					<div class="carousel-inner">
 
 
-                     <div class="item active">
-                        <div class="row">
-                           <div class="col-lg-4">
-                              <img alt="<?php echo $recommendedBullding['title']?>" class="img-responsive" src="<?php echo $recommendedBullding['image']?>" style="width: 132px; height: 75px;">
-                           </div>
-                           <div class="col-lg-8">
-                              <h5><a href="property-detail.php"><?php echo $recommendedBullding['title']?></a></h5>
-                              <p class="price">$<?php echo $recommendedBullding['price']?></p><a class="more" href="property-detail.php?bu_id=<?php echo $recommendedBullding['id'] ?>&view=<?php echo sha1($recommendedBullding['title']) ?>">More Detail</a>
-                           </div>
-                        </div>
-                     </div>
 
 
+                  <?php $i = 0; ?>
                   <?php foreach ($latestBullding as $bu): ?>
 
-                     <div class="item">
+                     <div class="item <?php echo  $i == 0 ? 'active' : '' ?>">
                         <div class="row">
                            <div class="col-lg-4">
                               <img alt="<?php echo $bu['title']?>" class="img-responsive" src="<?php echo $bu['image']?>" style="width: 132px; height: 75px;">
@@ -154,7 +146,7 @@
                            </div>
                         </div>
                      </div>
-
+                     <?php $i++ ?>
                   <?php endforeach; ?>
 
 					</div>

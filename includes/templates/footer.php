@@ -30,7 +30,7 @@
                   <span class="glyphicon glyphicon-earphone"></span> <?php echo getSetting('sitePhone');?></p>
                </div>
             </div>
-            <p class="copyright">Copyright 2013. All rights reserved <?php echo getSetting('copyright');?>.	</p>
+            <p class="copyright">Copyright 2017. All rights reserved <?php echo getSetting('copyright');?>.	</p>
 
 
          </div></div>

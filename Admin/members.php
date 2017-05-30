@@ -4,7 +4,7 @@
     session_start();
 
 
-    $pageTitle = 'Dshboard';
+    $pageTitle = 'Users';
 
     if (isset($_SESSION["admin_mail"])) {
 
@@ -463,7 +463,7 @@
                                echo alertStatus('success', $theMsg);
                             endif;
                          ?>
-                         
+
                        </div>
                    </div>
                </div>

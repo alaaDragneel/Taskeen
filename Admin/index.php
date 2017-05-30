@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    $pageTitle = 'Dshboard';
+    $pageTitle = 'Dashboard';
 
     if (isset($_SESSION["admin_mail"])) {
 
