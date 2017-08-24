@@ -23,7 +23,12 @@ if (isset($_SESSION["user_mail"])) {
    <div class="container">
       <div class="spacer">
          <div class="row">
-
+            <?php
+            /* if user is admin */
+            $ifUserAdmin = $conn->prepare("SELECT * FROM users where id = ? LIMIT 1");
+            $ifUserAdmin->execute([$_SESSION['id']]);
+            $AdminData = $ifUserAdmin->fetch();
+            ?>
             <div class="col-md-12">
                <div class="nav-tabs-custom">
                   <ul class="nav nav-tabs">
@@ -31,6 +36,9 @@ if (isset($_SESSION["user_mail"])) {
                      <li class=""><a href="#Approved" data-toggle="tab" aria-expanded="false">Approved Bullding</a></li>
                      <li class=""><a href="#UnApproved" data-toggle="tab" aria-expanded="false">UnApproved Bullding</a></li>
                      <li class=""><a href="#settings" data-toggle="tab" aria-expanded="false">Settings</a></li>
+                     <?php if ($AdminData['isadmin'] == 1): ?>
+                         <li class=""><a href="admin/index.php">Dashbord</a></li>
+                     <?php endif; ?>
                   </ul>
                   <div class="tab-content">
                      <div class="tab-pane active" id="all">
@@ -164,7 +172,6 @@ if (isset($_SESSION["user_mail"])) {
                         <!-- /.box-body -->
                      </div>
                      <!-- /.tab-pane -->
-
                      <div class="tab-pane" id="settings">
                         <?php
 

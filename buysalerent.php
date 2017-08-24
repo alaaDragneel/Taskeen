@@ -109,7 +109,7 @@
 					<div class="row">
 						<div class="col-lg-4 col-sm-5"><img alt="properties" class="img-responsive img-circle" src="<?php echo $bu['image'] ?>"></div>
 						<div class="col-lg-8 col-sm-7">
-							<h5><a href="property-detail.php?bu_id=<?php echo $bu['id'] ?>&view=<?php echo sha1($bu['title']) ?>"><?php echo $bu['title'] ?> Has <?php echo $bu['num_rooms'] ?> Rooms, <?php echo $bu['num_kit'] ?> Kitchens</a></h5>
+							<h5><a href="property-detail.php?bu_id=<?php echo $bu['id'] ?>&view=<?php echo $bu['title'] ?>"><?php echo $bu['title'] ?> Has <?php echo $bu['num_rooms'] ?> Rooms, <?php echo $bu['num_kit'] ?> Kitchens</a></h5>
 							<p class="price">$<?php echo $bu['price'] ?></p>
 						</div>
 					</div>
@@ -142,7 +142,7 @@
                            			<span data-original-title="Rooms" data-placement="bottom" data-toggle="tooltip"><?php echo $bu['num_rooms'] ?></span>
 									<span data-original-title="Path Room" data-placement="bottom" data-toggle="tooltip"><?php echo $bu['num_pr'] ?></span>
 									<span data-original-title="Kitchen" data-placement="bottom" data-toggle="tooltip"><?php echo $bu['num_kit'] ?></span>
-								</div><a class="btn btn-primary" href="property-detail.php?bu_id=<?php echo $bu['id'] ?>&view=<?php echo sha1($bu['title']) ?>">View Details</a>
+								</div><a class="btn btn-primary" href="property-detail.php?bu_id=<?php echo $bu['id'] ?>&view=<?php echo $bu['title'] ?>">View Details</a>
 							</div>
 						</div><!-- properties -->
 					<?php endforeach; ?>

@@ -58,6 +58,7 @@
                      <input class="form-control" name="email" type="email" placeholder="E-mail address">
                      <input class="form-control" name="password" type="password" placeholder="Password">
                      <button type="submit" class="btn btn-primary btn-block">Login</button>
+                     <a class="btn btn-link" href="../index.php">Go Back</a>
                   </form>
                </div>
             </div>

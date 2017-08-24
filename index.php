@@ -14,7 +14,7 @@
             <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice1-scale="2" data-slice2-rotation="-25" data-slice2-scale="2">
                <div class="sl-slide-inner">
                   <div class="bg-img" style="background-image: url(<?php echo $bu['image']?>); background-size: 77.3% 57%;"></div>
-                  <h2><a href="property-detail.php?bu_id=<?php echo $bu['id'] ?>&view=<?php echo sha1($bu['title']) ?>" style="line-height: 1;"><?php echo $bu['num_rooms'];?> Bed Rooms and <?php echo $bu['num_kit'];?> Property <br/> on Sale</a></h2>
+                  <h2><a href="property-detail.php?bu_id=<?php echo $bu['id'] ?>&view=<?php echo $bu['title'] ?>" style="line-height: 1;"><?php echo $bu['num_rooms'];?> Bed Rooms and <?php echo $bu['num_kit'];?> Property <br/> on Sale</a></h2>
                   <blockquote>
                      <p class="location"><span class="glyphicon glyphicon-map-marker"></span> <?php echo $bu['address'];?></p>
                      <p><?php echo substr($bu['description'], 0, 100).'...';?></p><cite>$ <?php echo $bu['price'];?></cite>
@@ -93,7 +93,7 @@
 
                </div>
 
-               <h4><a href="property-detail.php?bu_id=<?php echo $value['id'] ?>&view=<?php echo sha1($value['title']) ?>"><?php echo $value['title']?></a></h4>
+               <h4><a href="property-detail.php?bu_id=<?php echo $value['id'] ?>&view=<?php echo $value['title'] ?>"><?php echo $value['title']?></a></h4>
 
                <p class="price">Price: $<?php echo $value['price']?></p>
 
@@ -103,7 +103,7 @@
                   <span data-original-title="Kitchen" data-placement="bottom" data-toggle="tooltip"><?php echo $value['num_kit']?></span>
                </div>
 
-               <a class="btn btn-primary" href="property-detail.php?bu_id=<?php echo $value['id'] ?>&view=<?php echo sha1($value['title']) ?>">View Details</a>
+               <a class="btn btn-primary" href="property-detail.php?bu_id=<?php echo $value['id'] ?>&view=<?php echo $value['title'] ?>">View Details</a>
             </div>
          <?php endforeach; ?>
 
@@ -142,7 +142,7 @@
                            </div>
                            <div class="col-lg-8">
                               <h5><a href="property-detail.php"><?php echo $bu['title']?></a></h5>
-                              <p class="price">$<?php echo $bu['price']?></p><a class="more" href="property-detail.php?bu_id=<?php echo $bu['id'] ?>&view=<?php echo sha1($bu['title']) ?>">More Detail</a>
+                              <p class="price">$<?php echo $bu['price']?></p><a class="more" href="property-detail.php?bu_id=<?php echo $bu['id'] ?>&view=<?php echo $bu['title'] ?>">More Detail</a>
                            </div>
                         </div>
                      </div>
